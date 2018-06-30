@@ -1,0 +1,11 @@
+###                                                                   2017.12.01
+### gitignore for READMEs
+
+### glob
+## temporary files
+*.sw[poa]
+
+## private READMEs
+priv/
+show.d/dyceness.txt.sh
+show.d/todo.txt.sh
