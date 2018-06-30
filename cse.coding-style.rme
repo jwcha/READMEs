@@ -1,0 +1,72 @@
+#2017##12##02 #cse #coding##style #jwcha
+... . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ....
+..                                CODING STYLE                        2017.12.02
+.... . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ...
+
+*-*-* THE DIFFERENT STYLES *-*-*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ >  K&R (a.k.a. 'kernel style', or 'Kernigan & Ritchie')
+            if ( expression ) {
+               printf("\nHello World!\n");
+            }
+
+ >  Allman
+            if ( expression )
+            {
+               printf("\nHello World!\n");
+            }
+
+ >  Whitesmiths (variation on Allmans)
+            if ( expression )
+               {
+               printf("\nHello World!\n");
+               }
+
+ >  GNU
+            if ( expression )
+               {
+                  printf("\nHello World!\n");
+               }
+
+ >  Horstman
+            if ( expression )
+            {  printf("\nHello World!\n");
+            }
+
+ >  Pico
+            if ( expression ) {
+               printf("\nHello World!\n"); }
+
+ >  Banner
+            if ( expression ) {
+               printf("\nHello World!\n");
+               }
+
+ >  Other Variations
+ >+ half-indent
+            if ( expression )
+              {
+                printf("\nHello World!\n");
+              }
+
+*-*-* THE RULES *-*-*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Follow.
+   If you are working on a project with pre-defined code conventions, follow
+   the same coding style that the project uses (even if you dislike it).
+
+2. Consistency.
+   Do _not_ mix and match indenting styles or curly brace styles - pick one
+   and adhere to it throughout the entire projects life cycle. So if a change
+   in style is desired, all instances must be converted so as to stay
+   consistent and make code management easier for the next person.
+
+NOTE: Several UNIX programs are useful tools for dealing with sweeping style
+      changes, such as: sed, awk, tr, cut, fmt, fold, split, tac, tail, head.
+      The Perl programming language is also helpful; it is easy to write a
+      perl script and take advantage of Perl's powerful text manipulation.
+
+.. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ...
+..                                 ~ finis ~                                  ..
+... . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..

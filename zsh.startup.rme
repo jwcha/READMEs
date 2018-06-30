@@ -1,0 +1,33 @@
+#2018#02#16 #shell#zsh#startup #shell#zsh#shutdown #config
+                          ===========================
+                              zsh startup/shutdown
+                           procedure upon invocation
+                          ===========================
+
+   Taken from the zsh(1) ver 5.4.2 man page published 2017-09-27.
+
+
+                             STARTUP/SHUTDOWN FILES
+                            ------------------------
+   In order of execution:
+      1.  /etc/zshenv | /etc/zsh/zshenv
+      2.  $ZDOTDIR/.zshenv
+      3.  /etc/zprofile | /etc/zsh/zprofile          (if login shell)
+      4.  $ZDOTDIR/.zprofile     (if login shell)
+      5.  /etc/zshrc | /etc/zsh/zshrc             (if interactive shell)
+      6.  $ZDOTDIR/.zshrc        (if interactive shell)
+      7.  /etc/zlogin | /etc/zsh/zlogin            (if login shell)
+      8.  $ZDOTDIR/.zlogin       (if login shell)
+      9.  $ZDOTDIR/.zlogout
+      10. /etc/zlogout  | /etc/zsh/zlogout
+   (If ZDOTDIR is unset, HOME is used instead.)
+
+
+                                   CONCLUSION                                   
+                                   ==========                                   
+   The conclusion goes here, if there is one. Make sure it is extremely witty   
+  and outrageously good. Like this one.                                         
+
+-- 
+>                                  ~ finis ~                                   <
+>                                                                              <

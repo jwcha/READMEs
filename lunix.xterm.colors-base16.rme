@@ -1,0 +1,154 @@
+\\ -------------------------------------------------------------------------- //
+ |                            .Xresources - base16                            |
+// -------------------------------------------------------------------------- \\
+|                                 introduction                                 |
+\\ -------------------------------------------------------------------------- //
+
+ > Very interesting color scheme for Linux X11's xterm. Using the .Xresources
+   (or .Xdefaults, I usually symlink them together) file, you can specify 
+   16 colors for X to use, split up into 8 colors, each with a dark shade 
+   and a light shade. 
+
+ > Starting from color 0 to 7, the colors are, respectively: 
+      - [00] black,
+      - [01] dark red,
+      - [02] dark green,
+      - [03] dark yellow,
+      - [04] dark blue,
+      - [05] dark magenta,
+      - [06] dark cyan,
+      - [07] light grey
+      ..
+ > Colors 8 through 15 are, respectively:
+      - [08] dark grey,
+      - [09] red,
+      - [10] green,
+      - [11] yellow,
+      - [12] blue,
+      - [13] magenta,
+      - [14] cyan (both not tango, no idea what this means),
+      - [15] white
+
+// -------------------------------------------------------------------------- \\
+|                       current settings as of 2017-01-27                      |
+\\ -------------------------------------------------------------------------- //
+
+ > Currently, this is the color scheme I'm using in my .Xresources:
+
+      ! COLORS
+      *foreground:   #ddeedd
+      *background:   #131D24
+
+      !black
+      *color0:       #0B1C2C
+      *color8:       #BF8B56
+
+      !red
+      *color1:       #223B54
+      *color9:       #BFBF56
+
+      !green
+      *color2:       #405C79
+      *color10:      #8BBF56
+
+      !yellow
+      *color3:       #627E99
+      *color11:      #56BF8B
+
+      !blue
+      *color4:       #AABCCE
+      *color12:      #568BBF
+
+      !magenta
+      *color5:       #CBD6E2
+      *color13:      #8B56BF
+
+      !cyan
+      *color6:       #E5EBF1
+      *color14:      #BF568B
+
+      !white
+      *color7:       #F7F9FB
+      *color15:      #BF5656
+
+// -------------------------------------------------------------------------- \\
+|                                    base16                                    |
+\\ -------------------------------------------------------------------------- //
+
+ > Base16 is a modern take on this archaic color scheme. 
+   If it's still up, you can find it here- 
+      https://github.com/chriskempson/base16
+
+ > What Base16 aims to do is, "group similar language constructs with a 
+   single color, e.g. float, ints and doubles would belong to the same 
+   colour group. The colors chosen for the default theme were chosen to be 
+   easily separatable but scheme designer should pick whatever colours they 
+   desire e.g. Base0B (green by default) could be replaced with red. 
+   However, there are general guidelines below that stipulate what Base0B 
+   should be used to highlight when designing templates for editors."
+   ...
+ > "Colors base00 to base07 are typically variations of a shade and run 
+   from darkest to lightest. These colors are used for foreground and 
+   background, status bars, line highlighting and such. Colors base08 to 
+   base0F are typically individual colors used for types, operators, names, 
+   and variables. In order to create a dark theme, colors base00 to base07 
+   should span from dark to light. 
+   For a light theme these colors should span from light to dark."
+               
+// -------------------------------------------------------------------------- \\
+|                              styling guidelines                              |
+\\ -------------------------------------------------------------------------- //
+
+ > Cool, huh? Here is a general guideline of what that should look like:
+   - base00 - default background
+   - base01 - lighter background (used for status bars)
+   - base02 - selection background
+   - base03 - comments, invisibles, line highlighting
+   - base04 - dark foreground (used for status bars)
+   - base05 - default foreground, caret, delimiters, operators
+   - base06 - light foreground (not often used)
+   - base07 - light background (not often used)
+   - base08 - variables, XML tags, Markup Link Text, Markup Lists, Diff Deleted
+   - base09 - Integers, Booleans, Constants, XML attributes, markup link url
+   - base0A - classes, markup bold, search text background
+   - base0B - strings, inherited class, markup code, diff inserted
+   - base0C - support, regular expressions, escape characters, markup quotes
+   - base0D - functions, methods, attribute IDs, headings
+   - base0E - keywords, storage, selector, markup italic, diff changed
+   - base0F - deprecated, opening/closing embedded language tags e.g. <? php ?>
+               
+// -------------------------------------------------------------------------- \\
+|                               more resources                                 |
+\\ -------------------------------------------------------------------------- //
+
+ > Some links to get you started:
+ - main: https://github.com/chriskempson/base16
+ - Styling guidelines: 
+      https://github.com/chriskempson/base16/blob/master/styling.md
+ - Builder guidelines:
+      https://github.com/chriskempson/base16/blob/master/builder.md
+ - File guidelines: 
+      https://github.com/chriskempson/base16/blob/master/file.md
+
+ > Examples:
+ - https://github.com/chriskempson/base16-vim/
+ - https://github.com/chriskempson/base16-shell
+
+ - https://github.com/nanotech/jellybeans.vim#screenshots
+ - https://github.com/kkga/spacegray
+
+ - Base16 builder: http://janniks.github.io/harmonic16/
+ - A bunch of templates: https://chriskempson.github.io/base16/
+
+   ~~~---~~~---~~~
+
+ > And now just miscellaneous links about linux and coloring
+
+ - ANSI escape codes: https://en.wikipedia.org/wiki/ANSI_escape_code
+ - http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
+
+ > Happy coloring!
+
+// -------------------------------------------------------------------------- \\
+|                                  ~ finis ~                                   |
+\\ -------------------------------------------------------------------------- //

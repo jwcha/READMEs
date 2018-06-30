@@ -1,0 +1,27 @@
+#2018#01#31 #lunix #shell #scripting #security #secret
+=====-----+++++-----=====-----+++++----~~----+++++-----=====-----+++++-----=====
+|                                  Linux/UNIX                                  |
+|                          Executable yet Unreadable                           |
+=====-----+++++-----=====-----+++++----~~----+++++-----=====-----+++++-----=====
+
+                               ~-~-~-~-~-~-~-~-~
+                               ~> THE PROBLEM <~
+                               ~-~-~-~-~-~-~-~-~
+   Unfortunately, the UNIX (and its derivatives) file system has no direct way
+ of creating scripts which are executable but unreadable. As a result of this,
+ it becomes difficult and a security concern to embed sensitive data such as
+ passwords in a script.
+                                -~-~-~-~-~-~-~-~
+                                ~> A SOLUTION <~
+                                -~-~-~-~-~-~-~-~
+   On systems that support setgid shell scripts may indirectly simulate this by
+ setting the basic file permissions of a script to be 0750 (-rwxr-x---) and
+ owned by a trusted group (i.e. the group can read it; create a new group for
+ this purpose if necessary).
+   Next, create a /bin/sh script with basic file permissions 2751 (-rwxr-s--x)
+ and owned by the same group as before.
+   The result is a script which may be read and executed by anyone.
+
+=====-----+++++-----=====-----+++++----~~----+++++-----=====-----+++++-----=====
+|                                  ~ finis ~                                   |
+=====-----+++++-----=====-----+++++----~~----+++++-----=====-----+++++-----=====

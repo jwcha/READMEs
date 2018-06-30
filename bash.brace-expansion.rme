@@ -1,0 +1,42 @@
+################################################################################
+#                                                                              #
+#                             Bash Brace Expansion                             #
+#                                                                              #
+################################################################################
+#                                                                              #
+#   Brace operators:                                                           #
+#                                                                              #
+#     {aaa,bbb,zzz,...} - Simple Brace expansion                               #
+#       Will expand the braces into separate words.                            #
+#       Need at least two elements to expand to.                               #
+#                                                                              #
+#       Example:                                                               #
+#                 `cp file1.{txt,backup}`                                      #
+#                      will expand to                                          #
+#                 `cp file1.txt file1.backup`                                  #
+#                                                                              #
+#                                                                              #
+#     {a..z}            - Extended Brace expansion                             #
+#       Expands braces into a range between the two characters.                #
+#                                                                              #
+#       Example:                                                               #
+#                 `base64_charset=( {A..Z} {a..z} {0..9} + / = )`              #
+#                   will initialize an array using extended braces.            #
+#                                                                              #
+#                                                                              #
+#                                                                              #
+#   NOTES:                                                                     #
+#         -                                                                    #
+#         - You cannot nest Extended Braces.                                   #
+#           - {a..{c..{e..}}} will not expand                                  #
+#                                                                              #
+#         - You can nest Simple Braces.                                        #
+#           - \'{aaa,\'{bbb,ccc,ddd}\',eee}\' will expand to                   #
+#           'aaa' ''bbb'' ''ccc'' ''ddd'' 'eee'                                #
+#           Note the multiple literal (single!) quotes around bbb,ccc,ddd .    #
+#                                                                              #
+################################################################################
+#                                                                              #
+#                                  ~ finis ~                                   #
+#                                                                              #
+################################################################################

@@ -1,0 +1,9 @@
+#2018#05#27 #archlinux #pacman #usb #readme
+
+installing usbview...
+>>> Debugfs must be mounted in order to use usbview.
+>>> As root execute:
+>>> "mount -t debugfs none /sys/kernel/debug" or add
+>>> "none /sys/kernel/debug debugfs defaults 0 0"
+>>> to /etc/fstab
+

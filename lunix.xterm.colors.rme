@@ -1,0 +1,89 @@
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=..=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+|                                                                              |
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=..=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+|                                                                              |
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=..=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+|                             There shall be colours                           |
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=..=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+   From the "XFree86 xterm" man page 
+      <URL:http://www.in-ulm.de/~mascheck/X11/XTerm>
+
+#####
+#     !  There shall be colours
+#
+#     ! But first:
+#     !
+#     ! If the following is not explicitly set, then "*Foreground"
+#     ! (with uppercase F, by accident e.g.) will override all other colors.
+#     ! To take care of such an accident, use/modify the following table.
+#     !
+#     ! In other words: If you ever definitely wanted to avoid any colors,
+#     ! even those switched by raw escape sequences(!) then comment out
+#     ! the following and use the resource 'XTerm.VT100.Foreground'.
+#     !
+#     ! The 'original' colors:
+#     XTerm.VT100*color0  : black
+#     XTerm.VT100*color1  : red3
+#     XTerm.VT100*color2  : green3
+#     XTerm.VT100*color3  : yellow3
+#     XTerm.VT100*color4  : blue3
+#     XTerm.VT100*color5  : magenta3
+#     XTerm.VT100*color6  : cyan3
+#     XTerm.VT100*color7  : gray90
+#     XTerm.VT100*color8  : gray30
+#     XTerm.VT100*color9  : red
+#     XTerm.VT100*color10 : green
+#     XTerm.VT100*color11 : yellow
+#     XTerm.VT100*color12 : blue
+#     XTerm.VT100*color13 : magenta
+#     XTerm.VT100*color14 : cyan
+#     XTerm.VT100*color15 : white
+#
+#
+#     XTerm*background    : rgb:19/10/50
+#     XTerm*foreground    : rgb:ff/dd/70
+#     XTerm*cursorColor   : #ffdd70
+#####
+
+
+   And from the XTerm(1) man page:
+
+   color0-color7:
+      These specify the  colors  for  the  ISO-6429  extension.   The
+      defaults  are,  respectively,  black,  red3, green3, yellow3, a
+      customizable dark  blue,  magenta3,  cyan3,  and  gray90.   The
+      default  shades of color are chosen to allow the colors 8-15 to
+      be used as brighter versions.
+
+   color8-color15:
+		These specify the colors for the ISO-6429 extension if the bold
+		attribute  is  also  enabled.   The default resource values are
+		respectively, gray30, red, green, yellow, a customizable  light
+		blue, magenta, cyan, and white.
+
+ 
+
+	> So the final verdict is:
+	> > color0-color7 are for the regular color
+   > > color8-color15 are for BOLD.
+
+
+
+|                                                                              |
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=..=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+|                                                                              |
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=..=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+|                                                                              |
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=..=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+|                                                                              |
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=..=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+|                                                                              |
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=..=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+|                                                                              |
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=..=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+|                                                                              |
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=..=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+|                                                                              |
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=..=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+|                                                                              |
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=..=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

@@ -1,0 +1,21 @@
+#2017#12#15 #timestamp#PST#09#20#53 #meta #tags
+
+First line of file reserved for tags.
+
+a tag is defined as a string of characters beginning with an octothorpe or hash (#) and is white-space delimited.
+
+nest tags using '#'. tags may be nested as many times as desired.
+A common nested tag is #YYYY#MM#DD which is a date timestamp, which tags a file under #YYYY, #YYYY#MM, and #YYYY#MM#DD.
+
+another way to nest tags is with '/'.
+For instance, #a/b/c will tag a file as #a, #b, #c, #a#b, #b#c, and #a#b#c.
+
+# this doesn't really make sense. when would this be used?
+# they can be mixed.
+# e.g. #one#two/three#four, which tags a file under #one, #two, #four, #one#two, #one#two#three, #one#two#
+
+when representing a nested tag, it will be shown like #one#two#three regardless of how it is defined in a file.
+
+an alias file may be defined with the name '.meta.tag.aliases' and should be in the top directory. an alias, or pointer or link, identifies identical tags with different spellings to avoid tag fragmentation.
+
+Special characters in the tagline are '#', '/', and white-space (id est, the space character, tab character, or newline character).

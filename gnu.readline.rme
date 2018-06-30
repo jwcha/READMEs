@@ -1,0 +1,73 @@
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~==
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~= GNU READLINE ~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~==
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~==
+
+>>    The Readline library allows a user to manipulate the command line before
+>>+     hitting RETURN and passing the input to the shell for evaluation and
+>>+     execution. 
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~==
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~==
+
+>>    READLINE SHORTCUTS (C-_ means CTRL+_) (M-_ means META+_) Meta==ALT or ESC
+
+>>>   Note: Generally, CTRL operates on characters; META operates on words.
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~==
+
+>>    READLINE MOVEMENT SHORTCUTS
+>>+   - C-b       - Move back 1 character
+>>+   - C-f       - Move forward 1 character
+>>+   - C-a       - Move to beginning of the line
+>>+   - C-e       - Move to the end of the line
+>>+   - M-f       - Move forward a word (alphanumeric characters in sequence)
+>>+   - M-b       - Move backward a word
+>>+   - C-l       - clear the screen, reprint line with prompt at top.
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~==
+
+>>    READLINE KILLING COMMANDS
+>>+   - C-k       - Kill(cut) the text from current cursor pos to end of line
+>>+   - M-d       - Kill from cursor to end of current word (or next word)
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~==
+
+>>    READLINE HISTORY SHORTCUTS
+>>+   - \n,RETURN - accept the line
+>>+   - C-p       - Fetch the previous command from the history list.
+>>+   - C-n       - Fetch the next command from the history list.
+>>+   - M-<       - Move to the first line in the history.
+>>+   - M->       - Move to the end of the input history (current line).      
+>>+   - C-r       - Search (incrementally) backward(up) from current line.
+>>+   - C-s       - Search (incrementally) forward(down) from current line.
+>>+   - M-p       - Search (non-incrementally) backward(up) from current line.
+>>+   - M-n       - Search (non-incrementally) forward(down) from current line.
+>>+   - M-C-y     - yank first arg to prev cmd (nth word if n is given)
+>>+   - M-.,M-_   - yank last arg to prev cmd. successive calls go up history.
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~==
+
+>>    READLINE TEXT MANIPULATION
+>>+   - C-d       - Sends the End-Of-File character, if current line is empty.
+>>+   - C-d       - Delete the character under the cursor.
+>>+   - C-h       - (also rubout) delete char before the cursor. 
+>>+   - 
+>>+   - C-_       - Undo last edit. You can undo all the way to empty line.
+>>+   - C-x C-u   - Same as C-_ (undo)
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~==
+
+>>    READLINE ARGUMENTS
+>>+   >>  digit-argument (M-0, M-1, ..., M--)
+      >>+   Add this digit to the argument (create if new). M-- starts from end
+      >>  universal-argument
+      >>+   Alternative way to specify arguments. If a command is followed by
+      >>+   one or more digits (opt with leading '-' sign), those digits define
+      >>+   the arg.
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~==
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~==
+
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~==
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~==
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~==
+=                                  ~ finis ~                                   =

@@ -1,0 +1,75 @@
+################################################################################
+#                           Bash Parameter Expansion                           #
+################################################################################
+#                                                                              #
+#  Bash allows a lot of control and power for manipulating parameters. You can #
+#+ think of parameters as variables - it is an entity that stores values and is#
+#+ referenced by a name, number, or a special symbol.                          #
+#NOTE: name=variable, number=args to shell/process/command, symbol=special     #
+#                                                                              #
+#  Shell parameter expansion is the third in a nine step process that occurs   #
+#+ every time you type something into a terminal console or shell and hit the  #
+#+ ENTER/RETURN key.                                                           #
+#NOTE: keep in mind that the shell (e.g. Bash, sh, dash, fish, etc.) performs  #
+#+ all this and passes the result after all expansions to the command.         #
+#                                                                              #
+#*** OVERVIEW ***                                                              #
+#=--=--=--=--=--=                                                              #
+#                           Cheat Sheet Time!                                  #
+#> Simple Usage                                                                #
+#     * $PARAMETER   OR   ${PARAMETER}                                         #
+#                                                                              #
+#> Arrays                                                                      #
+#     * ${array[5]}   OR   ${array[*]}   OR   ${array[@]}                      #
+#                                                                              #
+#> Indirection (like pointers, reference the PARAMETER stored here)            #
+#     * ${!PARAMETER}                                                          #
+#                                                                              #
+#> Case Modification (Upper,Lower,Invert)                                      #
+#~> one means first char only, two means all chars                             #
+#     * ${PARAMETER^}   OR   ${PARAMETER,}   OR   ${PARAMETER~}                #
+#     * ${PARAMETER^^}  OR   ${PARAMETER,,}   OR   ${PARAMETER~~}              #
+#                                                                              #
+#> Variable Name Expansion                                                     #
+#     * ${!PREFIX*}   OR   ${!PREFIX@}                                         #
+#                                                                              #
+#> Substring Removal (works with filename expansion!) (beginning,end)          #
+#~> one means shortest match, two means longest match                          #
+#     * ${PARAMETER#PATTERN}   OR   ${PARAMETER%PATTERN}                       #
+#     * ${PARAMETER##PATTERN   OR   ${PARAMETER%%PATTERN}                      #
+#~> common usage: (filename with single extension, modify as needed)
+#     - filename sans extension: ${NAME%.*} (e.g. file[.txt])                  #
+#     - get extension: ${NAME##*.} (e.g. [file.]txt)
+#     - get dir name: ${PATH%/*} (e.g. /home/user[/file.txt])
+#     - get filename: ${PATH##*/} (e.g. [/home/user/]file.txt)
+#                                                                              #
+#> Search & Replace                                                            #
+#     * ${PARAMETER/PATTERN/STRING}   OR ${PARAMETER//PATTERN/STRING}          #
+#     * ${PARAMETER/PATTERN}   OR   ${PARAMETER//PATTERN}                      #
+#                                                                              #
+#> String Length                                                               #
+#     * ${#PARAMETER}                                                          #
+#                                                                              #
+#> Substring Expansion                                                         #
+#     * ${PARAMETER:OFFSET}   OR   ${PARAMETER:OFFSET:LENGTH}                  #
+#                                                                              #
+### If PARAMETER is unset (never defined) or null (empty), then the respective #
+### actions listed below will be performed. If the colon : is omitted, then the#
+### respective actions below will only be performed if PARAMETER is unset ONLY #
+### and not when it's empty.                                                   #
+#> Use Default Value                                                           #
+#     * ${PARAMETER:-WORD}   OR   ${PARAMETER-WORD}                            #
+#                                                                              #
+#> Assign & Use Default Value                                                  #
+#     * ${PARAMETER:=WORD}   OR   ${PARAMETER=WORD}                            #
+#                                                                              #
+#> Use Alternate Value                                                         #
+#     * ${PARAMETER:+WORD}   OR   ${PARAMETER+WORD}                            #
+#                                                                              #
+#> Display Error if NULL or unset                                              #
+#     * ${PARAMETER:?WORD}   OR   ${PARAMETER?WORD}                            #
+#                                                                              #
+#                                                                              #
+################################################################################
+#                                  ~ finis ~                                   #
+################################################################################

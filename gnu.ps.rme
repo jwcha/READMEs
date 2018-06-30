@@ -1,0 +1,32 @@
+################################################################################
+#                            Some Cool 'ps' options                            #
+################################################################################
+
+  PS is more than just a quick and dirty tool for you to see what PID is 
+  associated with a particular rogue process (or command).
+
+
+
+First the basics:
+To see every process using standard syntax:
+  ps -e
+  ps -ef      (adds PIDS)
+  ps -eF
+  ps -ely
+
+Same using BSD syntax:
+  ps ax
+  ps axu
+
+Print a process tree (similar to pstree but with more info)
+  ps -ejH
+  ps axjf
+
+
+
+
+
+
+################################################################################
+#                                  ~ finis ~                                   #
+################################################################################

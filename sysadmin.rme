@@ -1,0 +1,133 @@
+\\ -------------------------------------------------------------------------- //
+||                           System Administration                            ||
+// -------------------------------------------------------------------------- \\
+
+   Taken from the wonderful book 
+   "UNIX and Linux System Administration Handbook, fourth edition"
+   by Evi Nemeth, Garth Snyder, Trent R. Hein, and Ben Whaley
+ with Terry Morreale, Ned McClain, Ron Jachim, David Schweikert, & Tobi Oetiker
+   (wow I barely got that last line in)
+   (c) 2011, Pearson Education, Inc. , first printed June 2010.
+
+\\ -------------------------------------------------------------------------- //
+||                Essential Duties of the System Administrator                ||
+// -------------------------------------------------------------------------- \\
+=====-----+++++-----=====-----+++++----~~----+++++-----=====-----+++++-----=====
+
+   In no particular order:
+      - ACCOUNT PROVISIONING,
+         > The system administrator (sysadmin) adds new accounts for new
+           users, removes the accounts of users that are no longer active,
+           and handles all the account-related issues that come up in between
+           (e.g. forgotten passwords). The process of adding and removing 
+           users can be automated, but certain administrative decisions
+           (where to put a user's home directory, which machines to create
+           the account on, etc.) must still be made before a new user can
+           be added.
+         > When a user should no longer have access to the system, the user's
+           account must be disabled. All the files owned by the account should
+           be backed up and then disposed of so that the system does not
+           accumulate unwanted baggage over time.
+
+      - ADDING AND REMOVING HARDWARE,
+         > When new hardware is purchased or when hardware is moved from one
+           machine to another, the system must be configured to recognize
+           and use that hardware. Hardware-support chores can range from the
+           simple task of adding a printer to the more complex job of adding
+           a disk array.
+         > Now that virtualization has arrived in the enterprise computing
+           sphere, hardware configuration can be more complicated than ever.
+           Devices may need installation at several layers of the 
+           virtualization stack, and the sysadmin may need to formulate 
+           policies that allow the hardware to be shared securely and fairly.
+      
+      - PERFORMING BACKUPS,
+         > Performing backups is perhaps the most important job of the
+           sysadmin, and it is also the job that is most often ignored or 
+           sloppily done. Backups are time consuming and boring, but they are
+           absolutely necessary. Backups can be automated and delegated to 
+           an underling, but it is still the sysadmin's job to make sure
+           that backups are executed correctly and on schedule (and that
+           the resulting media can actually be used to restore files).
+
+      - INSTALLING AND UPGRADING SOFTWARE,
+         > When new software is acquired, it must be installed and tested,
+           often under several operating systsems and on several types of
+           hardware. Once the software is working correctly, users must
+           be informed of its availability and location. As patches and 
+           security updates are released, they must be incorporated 
+           smoothly into the local environment.
+         > Local software and administrative scripts should be 
+           properly packaged and managed in a fashion that's compatible
+           with the native upgrade procedures used on systems at your
+           site. As this software evolves, new releases should be staged
+           for testing before being deployed to the entire site.
+
+      - MONITORING THE SYSTEM,
+         > Large installations require vigilant supervision. Don't expect 
+           users to report problems to you unless the issues are severe.
+           Working around a problem is usually faster that taking the time
+           to document and report it, so users often follow the path of
+           least resistance.
+         > Regularly ensure that email and web services are working 
+           correctly, watch log files for early signs of trouble, make sure
+           that local networks are properly connected, and keep an eye on
+           the availability of system resources such as disk space. All of
+           these chores are excellent opportunities for automation, and a 
+           variety of off-the-shelf monitoring systems can help sysadmins
+           with this task.
+
+      - TROUBLESHOOTING,
+         > System failures are inevitable. It is the administrator's job to
+           play mechanic by diagnosing problems and calling in experts if
+           needed. Finding the problem is often harder than fixing it.
+
+      - MAINTAINING LOCAL DOCUMENTATION,
+         > As a system is changed to suit an organization's needs, it begins
+           to differ from the plain-vanilla system described by the doc. 
+           Since the sysadmin is responsible for making these customizations,
+           it's also the sysadmin's duty to document these changes. This chore
+           includes documenting where cables are run and how they are 
+           constructed, keeping maintenance records for all hardware, 
+           recording the status of backups, and documenting local procedures
+           and policies.
+
+      - VIGILANTLY MONITORING SECURITY,
+         > The sysadmin must implement a security policy and periodically 
+           check to be sure that the security of the system has not been
+           violated. On low-security systems, this chore might involve only
+           a few basic checks for unauthorized access. On a high-security
+           system, it can include an elaborate network of traps and 
+           auditing programs.
+
+      - FIRE FIGHTING
+         > Although helping users with their various problems is rarely 
+           included in a sysadmin's job description, it claims a 
+           significant portion of most administrators' workdays. 
+           Sysadmins are bombarded with problems ranging from "It worked
+           yesterday and now it doesn't! What did you change?" to
+           "I spilled coffee on my keyboard! Should I pour water on it
+           to wash it out?"
+         > In most cases, your response to these issues affects your
+           perceived value as an administrator for more than does any
+           actual technical skill you might possess. You can either
+           howl at the injustice of it all, or you can delight in the fact
+           that a single well-handled trouble ticket scores as many brownie
+           points as five hours of mid-night debugging. You pick!
+
+=====-----+++++-----=====-----+++++----~~----+++++-----=====-----+++++-----=====
+\\ -------------------------------------------------------------------------- //
+||                           System Administration                            ||
+// -------------------------------------------------------------------------- \\
+=====-----+++++-----=====-----+++++----~~----+++++-----=====-----+++++-----=====
+\\ -------------------------------------------------------------------------- //
+||                           System Administration                            ||
+// -------------------------------------------------------------------------- \\
+=====-----+++++-----=====-----+++++----~~----+++++-----=====-----+++++-----=====
+\\ -------------------------------------------------------------------------- //
+||                           System Administration                            ||
+// -------------------------------------------------------------------------- \\
+
+=====-----+++++-----=====-----+++++----~~----+++++-----=====-----+++++-----=====
+|                                  ~ finis ~                                   |
+=====-----+++++-----=====-----+++++----~~----+++++-----=====-----+++++-----=====

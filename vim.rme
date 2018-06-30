@@ -1,0 +1,288 @@
+#2018#01#19 #vim #plaintext #editor
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                     VIM                                      |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+
+   The eternal editor war. Do you prefer 'emacs' or 'vim'?
+      Upon which side does your loyalty lie?
+
+      It was dying out when I was going to school, but of course the old
+      knuckle-draggers who've been 'round the block never fail to pop the 
+      question (usually the last one). Always given with smiles as if to 
+      laugh at the silliness of it and how much this thing has blown out of 
+      proportion. But yet, with some people, you can give the wrong answer.
+
+      me? I picked the one I knew better, and have a comfort in knowing that
+      virtually any unix, linux, or such-variant will always have (except in 
+      very rare cases) 'vi' available. and if not, well ... shit I guess 'ed'.
+
+
+# ---------------------------------------------------------------------------- #
+# -------------------------------- NAVIGATION -------------------------------- #
+# ---------------------------------------------------------------------------- #
+
+** JUMPS
+--------
+   A "jump" is any command that makes the cursor "jump", that is, move the
+   cursor to another location in the document by skipping lines or characters.
+   They can be one of the following commands:
+      '    (apostrophe)             jump to mark (exact position, exclusive)
+      `    (backtick)               jump to mark (first non-blank char in line)
+      G    (uppercase g)            jump to end of current file
+      gg   (lowercase 'gg')         jump to start of current file
+      /    (forward slash)          search for term (forward motion)
+      ?    (question mark)          search for term (backward motion)
+      n    (lowercase n)            jump to next occurrence of search term
+      N    (uppercase n)            jump to previous occurrence of search term
+      %    (percent symbol)         jump to matching (), [], {}
+      (    (open parens)            jump to start of current sentence
+      )    (close parens)           jump to end of current sentence
+      {    (open curly brace)       jump to start of current paragraph
+      }    (close curly brace)      jump to end of current paragraph
+      :s   (colon lowercase s)      substitute pattern with replacement text
+      :tag (colon lowercase 'tag')  jump to a tag
+      L    (uppercase l)            jump to bottom of current screen (low)
+      M    (uppercase m)            jump to middle of current screen (mid)
+      H    (uppercase h)            jump to top of current screen (high)
+      ]]   (double close brackets)  jump forward to next '{' in first column
+      ][   (close open brackets)    jump forward to next '}' in first column
+      [[   (double open brackets)   jump backward to prev '{' in first column
+      []   (open close brackets)    jump backward to prev '}' in first column
+      [(   (open bracket & paren)   jump to [count] previous unmatched '('
+      [{   (open bracket & brace)   jump to [count] previous unmatched '{'
+      ])   (close bracket & paren)  jump to [count] next unmatched ')'
+      ]}   (close bracket & brace)  jump to [count] next unmatched '}'
+      (any command that starts editing a new file)
+
+   Any time a jump is made, the position of the cursor before the jump is saved
+   in history (in the ~/.viminfo file). To return to that position, use either
+   the '' (double apostrophe) command or the `` (double backtick) command. If
+   the line containing the position is changed or deleted, then it will jump
+   to the nearest line.
+
+"CTRL-O"            - jump backwards in jump history (works across files)
+"CTRL-I" or "<Tab>" - jump forwards in jump history (to most recent movement)
+
+                              ~-~-~-~ File ~-~-~-~
+            _G          Jump to line _ in current file.
+            _%          Jump to _ percent of current file.
+            G           Jump to end of current file.
+            gg          Jump to start of current file.
+            CTRL-G      Display cursor position relative to file length.
+            CTRL-^      Switch between latest two files open in buffer.
+                             ~-~-~-~ Lines ~-~-~-~
+         ^ , 0 , <HOME>    Jump to the start of the current line.
+           $ , <END>       Jump to the end of the current line.
+
+
+** MARKS
+--------
+ - Marks are invisible labels that vim keeps track of and allows easy movement
+   through a local file and multiple files in general. 
+ - To set a mark, use this syntax: m{a-zA-Z} , which stands for "press 'm' and
+   then '{a-zA-Z}'" where {a-zA-Z} includes any letter between 'a' and 'z', 
+   case-insensitive. Vim will remember the cursor position with that mark.
+ - The lowercase letters {a-z} are reserved for the local file, while the 
+   uppercase ones {A-Z} can save marks across different files.
+ - To jump back to any previously set mark, use either the ` (backtick) or the
+   ' (single quote) and use it exactly the same way as setting a mark.
+
+   SPECIAL MARKS:
+   --------------
+      There are marks which cannot be set, but are tracked and updated by vim,
+   and are extremely useful. They are as follows:
+   
+   [0-9]    (.viminfo req) '0 marks cursor when last exited vim. '1 (2nd last)
+   [        To the first character of the previously changed or yanked text.
+   ]        To the last character of the previously changed or yanked text.
+   <        To the first line or char of the last VISUAL buffer (current buf)
+   >        To the last line or char of the last VISUAL buffer (current buf)
+   ' or `   (single quote or backtick)To the last position before latest jump.
+   "        (double quote)To last cursor pos when exiting current buffer.
+   ^        To the pos where cursor was last when INSERT mode stopped.
+   .        (dot)To the cursor pos of last change made.
+
+
+                          ~-~-~-~ Word Movement ~-~-~-~
+      "w" - move forward 1 word (start)      "b" - move backward 1 word (start)
+      "e" - move forward 1 word (end)        "g"
+
+
+# ---------------------------------------------------------------------------- #
+# ------------------------------ CHANGING TEXT ------------------------------- #
+# ---------------------------------------------------------------------------- #
+   To change text in this context means to delete the text and replace it with
+   other text using one command. All of the commands described can be undone
+   with the 'u' command (and redone with the 'CTRL-r' command). Any non-Ex
+   command may be repeated with the '.' (dot) command. As with almost all
+   vim commands, an optional [count] and ["register] may be specified to
+   perform the command [count] times and/or to store the results into any
+   particular ["register]; similarly, in most cases the optional [count] may
+   be substituted with a {motion} or on a selection of text in {Visual} mode.
+
+DELETING TEXT
+-------------
+   'x' deletes characters ('X' deletes in opposite direction).
+   'd' deletes text (from words to lines to blocks of text). ('dd' does lines)
+   'D' deletes from cursor to end of line.
+   (all of the above work with: {Visual}, [count], and ["register])
+:[range]d[elete] [x] {count} is an Ex command that deletes chars.
+................................................................................
+   'gJ' joins lines (minimum two lines). Removes <EOL> between the lines.
+   'J' does the same as above except indents are removed and two spaces added.
+   (^^^ works with: {Visual} and [count] ^^^)
+:[range]j[oin][!] {count} [flags] (Ex version)
+................................................................................
+   '[g]r{char}' replaces char under cursor with {char}. g==screen space.
+   'R' enters Replace mode and text inserted will replace existing chars.
+   'gR' does the same but replaces chars in screen space. very interesting.
+   (^^^ works with: {Visual} and [count] ^^^)
+................................................................................
+   'c' changes text (delete text and enter Insert mode). ('cc' does lines)
+   'C' changes text from cursor to end of line.
+   's' (a.k.a. substitute) is synonym for 'cl' ('l' is {motion}).
+   'S' is a synonym for 'cc'.
+   (^^^ works with: {Visual}, [count], and ["register] ^^^)
+................................................................................
+CHANGING CASE
+-------------
+   '~' switch case of the char under cursor and move cursor to the right.
+   'g~' switch case of text. usually used with {motion}.
+   'g~~' or 'g~g~' switches case of the current line.
+   'U' changes char/line/text to uppercase. 'u' for lowercase.
+   (^^^ works with: {Visual}, [count], {motion} ^^^)
+................................................................................
+ADDING / SUBTRACTING
+--------------------
+   When dealing with numbers (signed and unsigned decimal numbers; unsigned
+   binary, octal, and hexadecimal numbers; alphabetic characters) use the
+   'CTRL-a' and 'CTRL-x' commands.
+   'CTRL-a'  will add [count] to the number or alphabetic char in text.
+   'CTRL-x' subtracts [count].
+   (^^^ works with: {Visual} and [count] ^^^)
+................................................................................
+SHIFTING LINES LEFT OR RIGHT
+----------------------------
+   '<[<]' shifts {motion}/[count] lines 'shiftwidth' leftwards.
+   '>[>]' does the same rightwards. '>' uses {motion}, '>>' uses [count].
+   (^^^ {Visual}[count] applies to '>' and '<' ^^^)
+:[range][<>] {count}   (Ex version)
+................................................................................
+ALIGNING TEXT
+-------------
+................................................................................
+COPYING AND MOVING TEXT
+-----------------------
+   'y' yanks(copies) text. 'yy' and 'Y' works linewise.
+   'p' puts(pastes) text after cursor. 'P' puts before cursor.
+   'gp' and 'gP' works the same but leaves cursor just after the new text.
+   (^^^ works with: {Visual}, [count], ["registers], and {motion} ^^^)
+:[range]y[ank] [x] {count}   (Ex version)
+:[range]pu[t] [x] {count}    (Ex version)
+# ---------------------------------------------------------------------------- #
+# -------------------------------- REGISTERS --------------------------------- #
+# ---------------------------------------------------------------------------- #
+   Registers are extremely handy. Know them and use them.
+   :reg[isters] and :di[splay] both show all numbered and named registers.
+
+   There are ten types of registers:
+   1. The unnamed register                 ""
+   2. 10 numbered registers                "0 to "9
+   3. The small delete register            "-
+   4. 26 named registers                   "a to "z or "A to "Z
+   5. three read-only registers            ":, "., "%
+   6. alternate buffer register            "#
+   7. the expression register              "=
+   8. the selection and drop registers     "*, "+ and "~
+   9. the black hole register              "_
+   10. the last search pattern register    "/
+
+   Here is a quick summary of what each one does.
+   1. is a pointer to last used register (for 'd', 'c', 's', 'x' or 'y').
+   2. "0 is most recent yank. "1 - "9 are 9 most recent deletes/changes.
+   3. contains text from commands that delete less than one line.
+   4. vim fills these registers when you say so. (a-z:replace) (A-Z:append)
+   5. (". last inserted text)("% current filename)(": last executed cmd-line)
+   6. contains name of alternate file for current window. CTRL-^
+   7. 
+
+
+# ---------------------------------------------------------------------------- #
+# ------------------------------- NORMAL MODE -------------------------------- #
+# ---------------------------------------------------------------------------- #
+
+   THE SUBSTITUTE COMMAND:   :s/old/new/g   
+      (substitute 'new' for 'old')
+      No need to highlight the entire line in Visual mode, this will work on
+      the entire line (trailing 'g' must be present) as long as the cursor is
+      on the line.
+
+      A range can also be specified (in line numbers): :#,#s/old/new/g
+      The entire file can be processed in one command: :%s/old/new/g[c]
+               (optional 'c' will prompt at each occurrence)
+ 'y'(yes); 'n'(no); 'a'(all); 'q'(quit); 'l'(line?); '^E'(move up); '^Y'(down)
+
+################################################################################
+
+   EXECUTING SHELL COMMANDS:   :!COMMAND ARGS
+      Sequence must terminate with the <RETURN> or <ENTER> key.
+
+################################################################################
+   
+   INSERT CONTENTS OF FILE:   :r FILENAME
+      You can also read the output of an external command, e.g. :r !ls
+
+################################################################################
+
+# ---------------------------------------------------------------------------- #
+# ------------------------------- VISUAL MODE -------------------------------- #
+# ---------------------------------------------------------------------------- #
+   
+   SAVE(WRITE) A PORTION OF A FILE
+      In VISUAL mode, select the desired text and use :w FILENAME to save.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+# ---------------------------------------------------------------------------- #
+# ------------------------------- INSERT MODE -------------------------------- #
+# ---------------------------------------------------------------------------- #
+
+                            ~-~-~-~ Pasting ~-~-~-~
+   To properly copypasta something into vim while maintaining proper 
+      indentation, do either of the following:
+   (1) :set paste 
+   (2) :set pastetoggle=<F5>    (then press <F5> in Insert mode and paste)
+
+
+# ---------------------------------------------------------------------------- #
+# ------------------------------ MULTIPLE FILES ------------------------------ #
+# ---------------------------------------------------------------------------- #
+      :edit
+
+# ---------------------------------------------------------------------------- #
+
+                ~-~-~-~ Copy/Pasta using system clipboard ~-~-~-~
+   By default, vim uses its own internal register when performing commands
+     like copy, cut, and paste. However, IFF vim is compiled with the correct
+     options, then it is possible to manipulate the system clipboard just
+     like most modern graphical applications that interact with the system
+     clipboard through keybindings such as C-C, C-X, C-V.
+
+   Vim offers the '+' and '*' registers to reference the system clipboard.
+     On Linux, '+' refers to the desktop clipboard (XA_SECONDARY), while the
+     '*' register refers to the X11 clip (XA_PRIMARY) which is generally used 
+     to store the mouse selection and pasted with the middle mouse button.
+
+   To yank(copy): "[*+]y    To kill(cut): "[*+]d      To paste:   "[*+]p
+
+   Other common commands:
+      - gg"+yG    -  copy the entire buffer into '+' (normal)
+      - "*dd      -  cut the current line into '*' (normal)
+      - "+p       -  paste from '+' after the cursor (normal/visual)
+      - :%y *     -  copy the entire buffer into '*' (ex)
+
+
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                  ~ finis ~                                   |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=

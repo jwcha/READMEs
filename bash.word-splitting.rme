@@ -1,0 +1,50 @@
+................................................................................
+..                                                                            ..
+..                               Word Splitting                               ..
+..                                                                            ..
+................................................................................
+
+# ------------------------------- INTRODUCTION ------------------------------- #
+
+   Word splitting only occurs if (and only if!) any of the following expansions
+   are performed: 
+      - Parameter expansion
+      - Command substitution
+      - Arithmetic expansion
+   
+   Bash will scan the results of the above expansions for special IFS chars
+   that mark word boundaries. This is only done on results that are
+   _NOT_ double-quoted!
+
+
+                 -> *> #>   INTERNAL FIELD SEPARATOR    <# <* <-
+
+   The IFS variable holds the characters that Bash regards as word boundaries.
+
+   The default characters are (in order): 
+      - <space>
+      - <tab>
+      - <newline>
+
+   The default characters are assumed when IFS is *unset*.
+   When IFS is *empty* (nullstring), no word splitting is performed at all.
+
+
+                 -> *> #>           BEHAVIOR           <# <* <-
+
+   The results of the expansions mentioned above are scanned for IFS
+   characters. If one or more (in a sequence) of them is found, the expansion
+   result is split at these positions into multiple words.
+
+   Again, this doesn't happen when expansion results are double-quoted.
+
+   When a null-string (e.g. something that expanded into nothing) is found,
+   it is removed unless it is quoted (' ' or " ").
+
+   Again note: Without any expansion beforehand, Bash won't perform word
+   splitting! In this case, the initial token parsing is soley responsible.
+
+
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                  ~ finis ~                                   |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=

@@ -1,0 +1,43 @@
+#### sciro's crontab                                                   2017.07.25
+### Syntax explanation:
+#     [1]   [2]   [3] [4]  [5]  [6]
+#      *     *     *   *    *    command to be executed
+#      -     -     -   -    -
+#      |     |     |   |    |
+#      |     |     |   |    +----- day of week  (0 - 6) (Sunday=0)
+#      |     |     |   +---------- month        (1 - 12)
+#      |     |     +-------------- day of month (1 - 31)
+#      |     +-------------------- hour         (0 - 23)
+#      +-------------------------- min          (0 - 59)
+#
+### A crontab is composed of at least six discrete elements, where the first
+##+ five fields ([1] through [5]) specify a time and the sixth field ([6])
+##+ is the command to run. Any additional fields are treated as arguments.
+##+ For fields [1] through [5], possible values are:
+##+   - an asterisk which is a wildcard for all possible values, (*)
+##+   - a list of numbers separated by commas,                   (0,15,30,60)
+##+   - a range of numbers separated by a hyphen.                (10-20)
+###
+### (Not supported by all systems) Repeat patterns can also be specified by
+##+   using a slash. For example, if field [1] has '/2', cron will execute
+##+   the command every two minutes.
+###
+### (Extensions)                                                      2017.08.07
+##+   The first five time and date fields can be replaced with the following
+##+   "nicknames", prefaced by the '@' character:
+##+      @reboot   : Run once after reboot.
+##+      @yearly   : Run once a year, i.e.  "0 0 1 1 *" .
+##+      @annually : Same as yearly.
+##+      @monthly  : Run once a month, i.e. "0 0 1 * *" .
+##+      @weekly   : Run once a week, i.e.  "0 0 * * 0" .
+##+      @daily    : Run once a day, i.e.   "0 0 * * *" .
+##+      @hourly   : Run once an hour, i.e. "0 * * * *" .
+###
+### NOTE: The specification of days can be made in two fields: month day ([3])
+##+   and week day ([5]). If both are specified in an entry, they are treated
+##+   cumulatively, meaning both of the entries will get executed.
+#+   cumulatively, meaning both of the entries will get executed.
+###
+###
+###                                ~ fin ~
+###

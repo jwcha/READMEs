@@ -1,0 +1,30 @@
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                     man                                      |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+
+# ------------------------------- INTRODUCTION ------------------------------- #
+
+   man (A.K.A. manual pager) is a wonderful tool that provides an interface
+  to the on-line reference manuals. Any manual page is usually the name of
+  a program, utility, or function, and are separated into different sections.
+
+                          when in doubt, RTF man pages!
+
+# ------------------------------- SAVING OUTPUT ------------------------------ #
+#                       -> *> #>      UTF8       <# <* <-                      #
+
+   Because man displays content through a pager, it's not obvious how to save
+  it to a text file. In order to do so, the page must be processed through a 
+  text formatting program like roff, groff, troff, etc.
+
+   $ man -Tutf8 <page>
+      the -T flag tells man to send the page through troff and format for 
+        a "device". Options are: dvi, latin1, utf8, ps, X75, and X100.
+
+   $ man -t <page>
+      the -t flag uses troff to format the page for stdout.
+
+
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                  ~ finis ~                                   |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=

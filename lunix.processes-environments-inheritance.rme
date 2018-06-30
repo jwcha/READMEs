@@ -1,0 +1,160 @@
+\\ -------------------------------------------------------------------------- //
+||                                   UNIX                                     ||
+// -------------------------------------------------------------------------- \\
+
+** On processes, environments, and inheritance
+----------------------------------------------
+   
+   Every process on a Unix system (except init) has a parent process from
+ which it inherits certain things. A process can change some of these things,
+ and not others. One cannot change things inside another process other than
+ by being its parent, or attaching (attacking?) it with a debugger.
+
+   The Unix process creation model revolves around two system calls:
+ fork() and exec(). 
+ 
+ (There is actually a family of related system calls that begin with exec 
+ which all behave in slightly different manners, but we'll treat them all 
+ equally for now.)
+   
+   fork() creates a child process which is a _duplicate_ of the parent who
+ called fork() (with a few exceptions). The parent receives the child 
+ processes' PID (Process ID) number as the return value of the fork() 
+ function, while the child gets a '0' to signify it is the child process.
+
+   exec() replaces the current process with a different program.
+
+
+** The Usual Sequence:
+----------------------
+
+   > A program calls fork() and checks the return value of the system call.
+   If the status is greater than 0, then it's the parent process, so it calls
+   wait() on the child process ID (unless we want it to continue running
+   while the child runs in the background).
+
+   > If the status is 0, then it's the child process, so it calls exec() to
+   do whatever it's supposed to be doing.
+
+   > But before that, the child might decide to close() some file descriptors,
+   open new ones, set environment variables, change resource limits, and so on.
+   All of these changes will remain in effect after the exec() and will affect
+   the task that is executed.
+
+   > If the return value of fork() is negative, something bad happened
+   (we ran out of memory, or the process table filled up, etc.).
+
+
+** A Simple Example:
+--------------------
+
+ $ echo hello world 1>&2
+
+ Assumptions: The process executing this is a shell, which reads commands
+   and executes them. For external commands, it uses the standard
+   fork()/exec() model.
+ 
+ 1) The parent shell calls fork().
+ 2) The parent gets the child's PID as the return value of fork() and waits
+    for it to terminate.
+ 3) The child gets a 0 from fork() so it knows it's the child.
+ 4) The child is supposed to redirect standard output (stdout) to standard 
+    error (stderr) due to the '1>&2' directive. It does this now.
+  4a) Close file descriptor 1.
+  4b) Duplicate file descriptor 2, and ensure the duplicate is FD 1.
+ 5) The child calls 'exec("echo", "echo", "hello", "world", (char *)NULL)' or
+    something similar to execute the command. (Here, we're assuming echo is
+    an external command.)
+ 6) Once the echo terminates, the parent's wait call also terminates, and the
+    parent resumes normal operation.
+
+
+** A Slightly Less Simple Example:
+----------------------------------
+
+ $ http_proxy=http://tempproxy:3128/ lynx http://someURL/
+
+ In this case, the child will set http_proxy with the value
+  http://tempproxy:3128/ in its environment before calling exec(). The 
+  parent's environment is unaffected.
+ 
+ A child process inherits many things from its parent:
+ -> OPEN FILE DESCRIPTORS:
+      The child gets copies of these, referring to the same files.
+ -> ENVIRONMENT VARIABLES:
+      The child gets copies of these, and changes made by the child 
+      do _not_ affect the parent's copy.
+ -> CURRENT WORKING DIRECTORY:
+      If this changes, the parent is unaware.
+ -> USER ID(UID), GROUP ID(GID) AND SUPPLEMENTARY GROUPS:
+      A child process is spawned with the same privileges as its parent. 
+      Unless the child process is running with superuser UID(UID 0), it 
+      cannot change these privileges.
+ -> SYSTEM RESOURCE LIMITS:
+      The child inherits the limits of its parent. While any process that runs
+      may lower its resource limits, only a process that runs as superuser UID
+      can raise its resource limits (setrlimit(2)).
+ -> UMASK:     (see ../READMEs/lunix/umask.rme)
+
+
+** A Graphical Tree Example:      
+----------------------------
+(a simplified model of an active Unix system, taken from [1])
+
+        (init)
+           |
+        (login)
+           |
+         startx
+           |
+         xinit
+           |
+     bash .xinitrc
+     /     |    \
+ rxvt    rxvt   fvwm2
+  |        |        \
+ bash   screen       \____________________
+       /   |  \              |      |     \
+    bash bash  bash        xclock  xload  firefox ...
+           |     |
+         mutt  rtorrent
+
+[1] http://mywiki.wooledge.org/ProcessManagement#On_processes.2C_environments_and_inheritance
+
+ Time for another play-by-play:
+ 1) The kernel (Linux in this case) is hard-coded to run /sbin/init as process
+    1 when it has finished its startup. init never dies; it is the ultimate
+    ancestor of every process on the system.
+ 2) init reads /etc/inittab which tells it to spawn some getty processes on
+    some of the linux virtual terminal devices (among other things).
+ 3) Each getty process presents a bit of information plus a login prompt.
+ 4) After reading a username, getty exec()s /bin/login to read the password.
+    (thus getty disappears from the tree because it replaces itself.)
+ 5) If the password is valid, login fork()s the user's login shell (usually
+    /bin/bash). It doesn't use exec() because it needs to clean up after the
+    shell process terminates.
+ 6) The user types startx at the bash shell prompt. This causes bash to exec()
+    startx (and therefore the login shell also disappears.)
+ 7) startx is a wrapper that launches an X session, which includes an X server
+    process (not shown -- runs as root), and a whole slew of client programs.
+    In this example, ~/.xinitrc has a list of X client programs to run.
+ 8) Two rxvt terminal emulators are launched from the ~/.xinitrc file (in the
+    background using &), and each of them runs a new copy of the user's shell,
+    bash.
+      a) In one of them, the user has typed exec screen to replace bash with
+         screen. Screen, in turn, has three bash child processes of its own,
+         two of which have terminal-based programs running in them
+         (mutt, rtorrent).
+ 9) The user's window manager, fvwm2, is run in the foreground by the 
+    ~/.xinitrc script. A Window Manager (WM) or Desktop Environment (DE) is
+    usually the last thing run by the ~/.xinitrc script; when the WM or DE
+    terminates, ~/.xinitrc also terminates and brings down the whole session.
+10) The WM runs several processes of its own (xclock, xload, firefox, ...). It
+    typically has a menu, or icons, or a control panel, or some other means of
+    launching new programs.
+
+
+
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                  ~ finis ~                                   |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=

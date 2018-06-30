@@ -1,0 +1,181 @@
+\\ -------------------------------------------------------------------------- //
+||                            INSTALL ARCH LINUX                              ||
+// -------------------------------------------------------------------------- \\
+
+** INTRODUCTION                                                       circa 2016
+----------------------------------------
+ - Arch Linux should run on any x86_64 compatible machine with a minimum of
+   512 MB of memory (RAM).
+ - A basic install with all packages from the 'base' group should take less
+   than 800 MB of storage (disk space). A working Internet connection is
+   required during the install process in order to retrieve packages from
+   a remote repository.
+ - Commands prefaced with a '#' require administrative privileges; commands
+   prefaced with a '$' can be executed with unprivileged shells.
+
+
+** GETTING STARTED
+----------------------------------------
+ - Go to the Arch Linux website and download the latest ISO. At time of
+   writing, located at https://archlinux.org/   (2017.05.22)
+ - Always remember to verify the download with the use of checksums or 
+   verifying a digital signature which should be with the ISO.
+
+
+** OUTLINE OF STEPS
+----------------------------------------
+   1. SET THE KEYBOARD LAYOUT [default: QWERTY]
+      - use 'loadkeys', pick from `ls /usr/share/kbd/keymaps/**/*.map.gz`
+         # loadkeys dvorak
+   
+   2. VERIFY THE BOOT MODE.
+      - If UEFI, Arch will boot via systemd-boot. Check to see if 
+        '/sys/firmware/efi/efivars' exists. If not, boot via BIOS/CSM.
+   
+   3. CONNECT TO THE INTERNET.
+      - The ISO will run DHCP on any connected wired interfaces.
+         /* quick steps */
+         # ip l
+         # ip set <INTERFACE> up
+         /* if on wifi network using WPA2 */
+         # wpa_supplicant -i <INTERFACE> -c <(wpa_passphrase 'SSID' 'PW')
+         # dhcpcd <INTERFACE>
+   
+   4. UPDATE THE SYSTEM CLOCK.
+         # timedatectl set-ntp true
+         # timedatectl status
+   
+   5. CONFIGURE THE DISKS. (LVM, RAID, ENCRYPTION IS DONE AT THIS TIME)
+      - use 'fdisk' or 'gparted' to create partitions.
+        If BIOS, use MBR. If UEFI, use GPT.
+      - - BIOS
+      - - - first partition must be a 200MB partition (W95 FAT32 (LBA))
+      - - - (this will be /boot)
+      - - GPT
+      - - - create a 512MB partition (EFI partition type)
+      - In either case, set the bootable flag to true
+   
+   6. FORMAT THE PARTITIONS.
+      - # mkfs.ext4 /dev/sdX#       (ext is a safe/reliable choice)
+        # mkswap /dev/sdX#          (if you have a swap partition)
+        # mkfs.fat -F32 /dev/sdX#   (for FAT32 - boot partitions)
+   
+   7. MOUNT THE FILESYSTEMS.
+      - This varies according to how you decided to partition the filesystem.
+        For each partition (except swap), create directories in the same
+        structure, then mount each partition there.
+        e.g. /dev/sda1 (/boot) ; /dev/sda2 (/) ; /dev/sda3 (/var)
+        # mkdir /mnt/
+        # mount /dev/sda2 /mnt
+        # mkdir /mnt/{boot,var}
+        # mount /dev/sda1 /mnt/boot
+        # mount /dev/sda3 /mnt/var
+   
+   8. SELECT THE MIRRORS.
+      - You probably don't need to fiddle with this. If you do though,
+        the mirrorlist is '/etc/pacman.d/mirrorlist' .
+      - - The mirrorlist is sorted by speed at time of snapshot.
+      - An easy way to filter mirrors:
+      $ egrep -A1 "United States" /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist.us
+      $ sed -e 's/^--$//g' < /etc/pacman.d/mirrorlist.us > /etc/pacman.d/mirrorlist
+   
+   9. INSTALL THE BASE PACKAGES.
+      - Use the pacstrap script to install the 'base' package. 
+        # pacstrap /mnt base [base-devel, other pkgs you want...]
+         (don't install all the pkgs you want here, just base
+          and you can install the rest after the chroot, I promise.)
+   
+   10. GENERATE AN /ETC/FSTAB (USE UUIDS OR LABELS PLEASE)
+      - # genfstab -U /mnt >> /mnt/etc/fstab
+        check for errors. use -L instead of -U for labels.
+   
+   11. CHANGE ROOT (CHROOT) INTO THE NEW SYSTEM.
+      - # arch-chroot /mnt
+   
+   12. SET THE TIME ZONE.
+      - # ln -sf /usr/share/zoneinfo/REGION/CITY /etc/localtime
+      - # hwclock --systohc      (this will generate /etc/adjtime)
+   
+   13. SET THE SYSTEM LOCALE.
+      - Uncomment en_US.UTF-8, UTF-8, and any other localizations in
+        /etc/locale.gen , then generate with the following command.
+      - # locale-gen
+      - Set LANG=en_US.UTF-8 in /etc/locale.conf
+      - Set KEYMAP=dvorak in /etc/vconsole.conf
+   
+   14. SET THE HOSTNAME UNDER /ETC/HOSTNAME.
+      - # echo 'HOSTNAME' > /etc/hostname
+      - # add yourself to /etc/hosts as well
+   
+   15. CONFIGURE THE NETWORK (AGAIN).
+      - If on a laptop, make sure to install basic wireless network pkgs
+      > iw wpa_supplicant wireless_tools iwlwifi
+   
+   16. (OPT) CREATE A NEW INITRAMFS - MKINITCPIO WILL TAKE CARE OF THIS.
+      -  The pacstrap script will take care it normally, but for special
+         situations, modify mkinitcpio.conf and run
+         # mkinitcpio -p linux
+   
+   17. SET THE ROOT PASSWORD TO A PASSPHRASE.
+      - # passwd
+   
+   18. INSTALL A BOOTLOADER
+      - If booting BIOS, then consider GRUB.
+   # pacman -S grub
+   # grub-install --target=i386-pc /dev/sdX   (NOTE WHOLE DISK, NOT PARTITION)
+   # grub-mkconfig -o /boot/grub/grub.cfg
+      - If EFI, systemd-boot is probably the way to go.
+
+   # systemd-boot (recommended)
+      # bootctl --path=/boot install
+      # bootctl --path=/boot update
+      # create pacman hook to auto update bootctl
+
+         /etc/pacman.d/hooks/systemd-boot.hook
+
+	    [Trigger]
+	    Type = Package
+	    Operation = Upgrade
+	    Target = systemd
+
+	    [Action]
+	    Description = Updating systemd-boot
+	    When = PostTransaction
+	    Exec = /usr/bin/bootctl --path=/boot update
+
+      # create arch entry
+
+	 /boot/loader/entries/arch.conf
+
+	    title	Arch Linux
+	    linux	/vmlinuz-linux
+	    initrd	/intel-ucode.img
+	    initrd	/initramfs-linux.img
+	    options	root=LABEL=archi rw
+
+      # ???
+      # profit I guess
+   
+   19. (OPT) IF YOU HAVE AN INTEL PROCESSOR (CPU), CONSIDER INSTALLING THE
+       'INTEL-UCODE' PACKAGE AND ENABLE MICROCODE UPDATES.
+      - This should automatically be done via the intel-ucode package.
+     BIOS/MASTER BOOT RECORD
+      - Basically, make sure /intel-ucode.img is in /boot and that it is 
+        loaded first before /initramfs-linux.img.
+   initrd   /intel-ucode.img /initramfs-linux.img
+     GNU PARTITION TABLE
+      - need to create a file somewhere for systemd-boot
+
+   20. reboot. "...i hope this works..."
+
+
+** POST-INSTALL GOTCHAS
+----------------------------------------
+   01. CREATE A USER
+      - create yourself a user with elevated privs
+      
+
+
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                  ~ finis ~                                   |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=

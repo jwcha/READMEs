@@ -1,0 +1,67 @@
+#2017#12#21 #TODO #list #network #tools
+
+# A list of network related packages available in the official repositories
+# for Arch Linux. There are many redundant packages, so find the ones you
+# like best and use those.
+
+*-*-* NETWORK TOOLS *-*-*
+dsniff
+kismet
+darkstat
+razor
+xabbix-server
+cacti
+arp-scan
+arpwatch
+boinc
+ckermit
+smska
+etherape
+ettercap
+gnunet
+gnurl
+hydra
+inn
+ipcalc
+iperf3
+jnettop
+libnids
+masscan
+mdk3
+medusa
+meshbird
+miniupnpc
+nbd
+ncrack
+ndisc6
+nemesis
+netactview
+netbrake
+netcount
+netdata
+nethogs
+netperf
+netstat-nat
+netselect
+netwatch
+ngrep
+nload
+ntop
+packeth
+sipcalc
+smokeping
+sslsplit
+ufw
+tor
+vnstat
+v2ray
+wavemon
+wifite
+wireguard-dkms
+wireguard-tools
+wireshark-cli
+wireshark-(gtk|qt)
+zaproxy
+zerotier-one
+zmap
+proxytunnel

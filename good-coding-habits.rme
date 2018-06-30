@@ -1,0 +1,84 @@
+\\ -------------------------------------------------------------------------- //
+||                          GOOD PROGRAMMING HABITS                           ||
+// -------------------------------------------------------------------------- \\
+
+--> Taken from <http://www.isthe.com/chongo/tech/comp/c/expert.html>
+
+~ ~ ~ ~ ~
+
+<~> Persistence and determination are important keys to success.
+
+<~> Write programs for others.
+
+<~> Whenever possible, openly publish your code. ***Support your code***
+
+<~> Start small and work you way up. (the most popular code are short&sweet)
+
+<~> Practice writing quality, well-commented code, and maintain it.
+
+<~> Always reuse your code when possible. In fact, write your code well (with
+    comments, etc.) the first time, no matter how trivial the program.
+
+<~> If a program is not worth writing well, perhaps because you think it is 
+    just a quick test code fragment, then don't write it.
+
+<~> Always, always, always write code as if it will last 30 years...some of
+    your code will. Don't write clever obscure twisted hacks (hard to maintain)
+
+<~> Keep a collection of programs and samples. The first time you write 
+    something, like a set of functions to manage a linked list, save that code
+    in your samples dir. Refer back to it when needed. If you find a bug or 
+    think of a better way to do something, update it.
+
+<~> Your speed will pick up with practice. Your speed will increase as you
+    build up a portfolio / collection of sample programs and code fragments.
+
+<~> Code like you are an artist ... even if you feel your initial programs 
+    are not very good. Make the effort to improve. All artists start out not
+    drawing very well. But their will to express themselves and PRACTICE helps
+    them improve and improve.
+
+<~> A good program or code fragment will want to be improved. You know you 
+    have done something well when others (or you) want you to add this feature
+    or improve it. It is okay if someone complains about bugs ... you will 
+    never be perfect anyway. But if someone complains about a bug, it is
+    because they WANT your program to work because they LIKE the idea that your
+    program is trying to express. At least they are paying attn to your code!
+
+<~> Writing games are sometimes a good way to get people to use your code.
+
+<~> If you find yourself doing the same thing repeatedly, write a tool to
+    automate the process or make it faster. Always optimize.
+
+<~> Learn other languages- each have their own strengths & weaknesses.
+
+<~> Interact with other programmers. Learn from them. Download their code and 
+    look at it. Learn from what they do well ... avoid what they do poorly. 
+    Talk with others about how they do their code.
+
+<~> Pay particular attention to open source code. Some of it is okay, most of 
+    it could be written better. Because it is open-source, you can borrow code
+    and code fragments and drop them into your sample code directory.
+
+<~> Find bugs in other people's code. If you find that a particular open source
+    program fails / has some sort of bug, try to fix it. Report the bug to the
+    author. If you fix it, send in a fix. Apply bug fixes and patches when the
+    author releases them.
+
+<~> Maintaining and fixing other people's code is an EXTREMELY important skill
+    to have. It is good practice for your own efforts. In the job world, most
+    of what you will do is to fix and improve code that already exists ... so
+    learning to do this early and well will make you a valuable employee.
+
+<~> Backup and protect your sample code directory. Hold onto it. Don't let a
+    disk crash, theft of a system, or other disaster wipe out your work. Always
+    plan to keep that code with you. Keep multiple copies in sync.
+
+<~> You are never too good to improve. When I look at code I wrote just a few
+    years ago, I still see code that can be improved. Even though that code 
+    had decades of experience behind it, I feel that I could do it better 
+    today ... and make the effort to do so.
+
+// -------------------------------------------------------------------------- \\
+||                                 ~ FINIS ~                                  ||
+\\ -------------------------------------------------------------------------- //

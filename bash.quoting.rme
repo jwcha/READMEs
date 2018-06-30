@@ -1,0 +1,146 @@
+\\ -------------------------------------------------------------------------- //
+||                                 BASH SHELL                                 ||
+||                                  QUOTING                                   ||
+// -------------------------------------------------------------------------- \\
+
+   What are quotes in a shell context and why do we need them?
+   Quotes remove the special meaning of certain characters or words to the
+   shell. There are three quoting mechanisms: the escape character, single
+   quotes, and double quotes.
+
+..__..--..__..--..__..--..__..--..__..++..__..--..__..--..__..--..__..--..__..--
+ \
+   A non-quoted backslash is the Bash escape character. It preserves the 
+   literal value of the next character that follows, except for a newline.
+   In the case of a \newline, and if the backslash itself isn't quoted, it 
+   is treated as a line continuation- it is removed from the input stream
+   and effectively ignored.
+
+..__..--..__..--..__..--..__..--..__..++..__..--..__..--..__..--..__..--..__..--
+ ''
+   Single quotes, or literal/strong quotes, tell the shell to preserve all
+   the characters in the string and to treat none of them specially. The only
+   character that is treated specially is the single quote, which ends the
+   string.
+ 
+..__..--..__..--..__..--..__..--..__..++..__..--..__..--..__..--..__..--..__..--
+ ""
+   Double quotes, or partial/weak quotes, allow for some characters to be
+   interpreted in special ways by the shell. Inside a weak-quoted string,
+   there is _no_ special interpretation of:
+      - spaces as word separators
+         (on initial commandline splitting and on word splitting!)
+      - single-quotes to introduce strong-quotes
+      - characters for pattern matching
+      - pathname expansion (globbing)
+      - process substitution
+   If a backslash occurs, there are two ways to deal with it: (1) if the
+   backslash is followed by a character with special meaning in the double-
+   quotes, the backslash is removed and the character loses its special 
+   meaning; or (2) if the backslash is followed by a character without special
+   meaning, the backslash is not removed.
+
+   e.g. "\$" will become $ , but "\x" will become \x .
+
+..__..--..__..--..__..--..__..--..__..++..__..--..__..--..__..--..__..--..__..--
+
+################################################################################
+#                             SOME QUOTING INFO                                #
+################################################################################
+#  If you MUST use literal quotes (single) in the outermost layer,             #
+#+ and must nest single quotes, you can use the following convention.          #
+#  If there are no whitespaces between the quotes, Bash will interpret it as   #
+#+ one string.                                                                 #
+#                                                                              #
+#  'Hey! Don'"'"'t look at me like that! Why I '"'"'oughta...'                 #
+#                                                                              #
+#  What's happening? It's 5 chars, single, double, single, double, single      #
+#  Here is the breakdown:                                                      #
+#  (1)  '   End of the first quotation, which uses single quotes.              #
+#  (2)  "   Start of the second quotation, using double quotes.                #
+#  (3)  '   A single quoted character, which is a single quote.                #
+#  (4)  "   End of the second quotation, using double quotes.                  #
+#  (5)  '   Start third quotation, using single quotes. Carry on as normal.    #
+################################################################################
+#                                                                              #
+# ORRR you can just do,                                                        #
+# 'blah blah blah don'\''t look here!'                                         #
+# end the first quote, escape the single quote, and continue on...             #
+# well, the first method is cool to know.                                      #
+#                                                                              #
+################################################################################
+
+..__..--..__..--..__..--..__..--..__..++..__..--..__..--..__..--..__..--..__..--
+                                 ANSI C Strings
+
+   Bash provides another quoting mechanism: Strings that contain ANSI C-like
+   escape sequences. The syntax is as follows:
+
+      $'string'
+
+   where the following escape sequences are decoded:
+
+      \"          double-quote
+      \'          single-quote
+      \\          backslash
+      \a          terminal alert character (bell)
+      \b          backspace
+      \e          escape (ASCII 033)
+      \E          escape (ASCII 033) \E IS NON STANDARD
+      \f          form feed
+      \n          newline
+      \r          carriage return
+      \t          horizontal tab
+      \v          vertical tab
+      \cx         a control-x character, e.g. $'\cZ' is CTRL-Z (^Z)
+      \uXXXX      interprets XXXX as a hexadecimal number (4 digits)
+      \UXXXXXXXX  interprets XXXX as a hexadecimal number (8 digits)
+      \nnn        eight-bit character whose value is octal nnn.
+      \xHH        eight-bit character whose value is hexadecimal HH.
+
+   This is useful for passing special characters (like newlines) as args.
+   The resulting text is treated as if it were single-quoted- no further
+   expansion occurs.
+
+..__..--..__..--..__..--..__..--..__..++..__..--..__..--..__..--..__..--..__..--
+                                   I18N/L10N
+
+   A dollar-sign followed by a double-quoted string means I18N.
+
+      $"generating database..."
+
+   I18N/L10N are lazy abbreviations for the words "internationalization" and
+   "localization" respectively; the former being "I eighteen-letters N" and
+   the latter "L ten-letters N".
+
+   Internationalization is the process of making software language-independent.
+   It's done by software developers and engineers who decouple natural language
+   messages, any sort of user readable text that the program may access at
+   runtime, from the code; instead of being compiled alongside the code, these
+   messages are referenced using unique keys which point to the necessary text.
+   
+   Localization is the process of adding support for a new language. Once a
+   program has been internationalized, localization can take place by simply
+   translating all of the user readable text and then replacing the messages
+   with their translations. In this way, the same unique key used to reference
+   the message previously will still point to the same message, only in a
+   different language. 
+
+   If there is a translation available for the string (depending on the
+   locale), it is used instead of the given text. If not, or if the locale is
+   C/POSIX, the dollar sign is ignored which results in a double-quoted string.
+
+   If the string was translated, the result is double-quoted (expansions!).
+
+   For the C programmers- you can think of $"..." as gettext() or _().
+   
+   As handy as this feature sounds, there is a moderate security risk using
+   this and therefore is not recommended to use. The security risk comes from
+   multi-byte Unicode characters with a specific second byte of 0x60 which can
+   trigger arbitrary code execution.
+
+..__..--..__..--..__..--..__..--..__..++..__..--..__..--..__..--..__..--..__..--
+
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                  ~ finis ~                                   |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=

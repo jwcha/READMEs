@@ -1,0 +1,58 @@
+................................................................................
+..                                                                            ..
+..                                 BLUETOOTH                                  ..
+..                                                                            ..
+................................................................................
+
+~> Dependencies
+===============
+> Headset via Bluez5/PulseAudio
+-------------------------------
+   + pulseaudio-also
+   + pulseaudio-bluetooth
+   + bluez
+   + bluez-libs
+   + bluez-utils
+
+
+~> Cheat Sheet
+==============
+(Prefix of '#' means root shell, ']' means bluetoothctl, '//' are for comments)
+   # systemctl [re]start bluetooth.service
+   # bluetoothctl
+ // use 'list' and 'show' to get controller info
+   ] list
+   ] show [CTRL]
+ // set default controller
+   ] select <CTRL>
+ // enable bluetooth controller, it is off by default
+   ] power on
+ // get MAC address of device to pair to
+   ] devices
+ // IF DEVICE IS NOT YET ON THE LIST
+   ] scan on
+   ] agent on
+ // If default agent is not already set (USUALLY ON FIRST USAGE)
+   ] default-agent
+   ] trust <MAC>
+ // Finally, establish a connection
+   ] pair <MAC>
+   ] connect <MAC>
+ 
+
+~> Troubleshooting
+==================
+ // You can also try blueman-applet or gnome-bluetooth
+ // If RFKILL error, make sure bluetooth isn't hard/soft blocked
+ // Perhaps the PulseAudio modules need to be [re]loaded
+   # pactl [un]load-module module-bluetooth-discover
+   # pactl [un]load-module module-bluetooth-policy
+   # pactl [un]load-module bluez5-device
+   # pactl [un]load-module bluez5-discover
+ // In order to pair with the bluetooth device, it may be necessary to put
+ // device in discoverable mode. After discovery and pairing, connect.
+
+
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                  ~ finis ~                                   |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=

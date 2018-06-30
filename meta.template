@@ -1,0 +1,39 @@
+#YYYY#MM#DD #topic#sub-topic #related-tags
+/*
+ * Multi     |    The character sequence '/*' starts a multi-line comment.
+ * Line      |    The character sequence '*/' terminates the comment.
+ * Comment   |    All characters between are taken literally with no escapes.
+ */
+// Single line comment. Comments are generally C-style.
+>                                                                              <
+>                                    TITLE                                     <
+>                                    =====                                     <
+>  An introduction could go here, but it's not required.                       <
+>                                                                              <
+>                                  HEADING 1                                   <
+>                                  ---------                                   <
+>  A standard paragraph body. Typically the first line of each paragraph is    <
+> indented (my personal tabstop is 3 spaces) and each following line is only   <
+> indented a single space. No line should have more than 80 characters, but    <
+> there are some special exceptions.                                           <
+>                                                                              <
+>              HEADING 2                                                       <
+>              ---------                                                       <
+>  A standard paragraph body.                                                  <
+>                                                                              <
+>  HEADING 3                                                                   <
+>  ---------                                                                   <
+>  A standard paragraph body.                                                  <
+>                                                                              <
+> Heading 4                                                                    <
+> ~~~~~~~~~                                                                    <
+>  A standard paragraph body.                                                  <
+>                                                                              <
+>                                  CONCLUSION                                  <
+>                                  ==========                                  <
+>  The conclusion goes here, if there is one. Make sure it is extremely witty  <
+> and outrageously good. Like this one.                                        <
+
+-- 
+>                                  ~ finis ~                                   <
+>                                                                              <

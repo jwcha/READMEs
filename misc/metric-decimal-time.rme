@@ -1,0 +1,206 @@
+................................................................................
+..                                                                            ..
+..                               METRIC TIME                                  ..
+..                            and decimal time                                ..
+..                                                                            ..
+................................................................................
+
+~> Metric time
+--------------
+   Metric time is, as defined by Wikipedia, 'the measure of time interval using
+ the metric system, which defines the second as the base unit of time, and 
+ multiple and submultiple units formed with metric prefixes, e.g. kiloseconds
+ and milliseconds'; the SI (International System of Units) definition of a
+ second is 'the duration of 9192631770 (nine billion, one hundred ninety-two
+ million, six hundred thirty-one thousand, seven hundred and seventy) periods
+ of the radiation corresponding to the transition between the two hyperfine
+ levels of the ground state of the caesium 133 atom'.
+
+~> Decimal time
+---------------
+   Decimal time, via Wikipedia, 'is the representation of the time of day
+ using units which are decimally related', which is a lot harder to define in
+ a precise language than you would think. In simpler terms, decmial time 
+ revolves around base 10; the UTC time standard, which most are familiar with,
+ revolves around base 60- 60 seconds make up 1 minute, 60 minutes make up 1
+ hour, and 24 hours make up a day.
+
+   The decimal time system, first adopted by the French for a few years during
+ the French Revolution in 1792 and referred to as 'French Revolutionary Time',
+ divides a day into 10 decimal hours with each decimal hour made up of 100
+ decimal minutes and each decimal minute broken into 100 decimal seconds.
+
+~> Metric vs Decimal time
+-------------------------
+   At first glance metric and decimal time seem equivalent- however the
+ definitions of both words carefully lay out the boundaries between the two
+ concepts.
+
+   By definition, units used in metric time _must_ contain metric prefixes,
+ such as kiloseconds or milliseconds. Decimal time has no such requirement
+ and so cannot be classified as a form of metric time.
+
+   Furthermore, metric time does not represent the time of day and is merely
+ the measure of time interval. Decimal time, on the other hand, _does_
+ represent the time of day and is a derivation of (or at least related to)
+ metric time.
+
+~> Fractional days
+------------------
+   First, let it be demonstrated the ease of converting between units of
+ decimal time. To start, let us examine the time/date string '1:23', which
+ is equivalent to '1 hour and 23 minutes' and can also be expressed as the
+ following: '1.23 hours' or '123 minutes' or '1230 seconds'.
+
+   Since the base of our time system is the same as the base used in the
+ standard (Arabic) number system, converting between units is as simple as
+ multiplying or dividing the time value by 10.
+   Simply put (as best I can), converting between time units is as simple as
+ shifting the decimal place to the left or right. The decimal place is the 
+ period that separates the digit in the 'tens' position (10^1) and the digit
+ in the 'tenths' position (10^-1). 
+   If a number is whole (i.e. an integer), the decimal place is after the 
+ rightmost digit of the integer with the digit of the 'tenths' position
+ implied as zero.
+
+Example: 1234.56 seconds == 123.456 minutes == 12.3456 hours == 1.23456 days
+Example: 1234 == 1234.0 == 1234.00 == 1234.000
+
+   Now onto fractional days.
+
+   A fractional day is the time of day expressed as a decimal fraction. They
+ can represent both an interval of time or the time of the day.
+
+
+
+._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~
+
+
+
+
+
+
+ASYMMETRIC:
+# ~ # ~ # ~ # ~ # ~ # ~ # ~ # ~ # ~ # ~ # ~ # ~ # ~ # ~ # ~ # ~ # ~ # ~ # ~ # ~
+
+% ~ % ~ % ~ % ~ % ~ % ~ % ~ % ~ % ~ % ~ % ~ % ~ % ~ % ~ % ~ % ~ % ~ % ~ % ~ % ~ 
+
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~
+
+._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~
+
+
+
+################################################################################
+################################################################################
+################################################################################
+###                                                                          ###
+###                               ~/.bashrc                                  ###
+###                                                                          ###
+################################################################################
+################################################################################
+################################################################################
+
+SYMMETRIC:
+#  ~  #  ~  #  ~  #  ~  #  ~  #  ~  #  ~~  #  ~  #  ~  #  ~  #  ~  #  ~  #  ~  #
+%  ~  %  ~  %  ~  %  ~  %  ~  %  ~  %  ~~  %  ~  %  ~  %  ~  %  ~  %  ~  %  ~  %
+
+## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ##
+%% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %%
+** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ **
+
+.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~..
+
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ---- . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ==== . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ++++ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . .... . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~--~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~..~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~**~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~``~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+
+
+
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#
+#                                                                              #
+#                           LOGIN SHELL STUFF HERE                             #
+#                                                                              #
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#
+
+._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~._.~
+
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~
+
+..__..~~..__..~~..__..~~..__..~~..__..~~..__..~~..__..~~..__..~~..__..~~..__..~~
+
+.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~..
+
+
+
+# ---------------------------------------------------------------------------- #
+# ----------------------------- USER VARIABLES ------------------------------- #
+# ---------------------------------------------------------------------------- #
+           
+
+o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~
+~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ oo ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o
+
+
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                    TITLE                                     |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+
+
+< o >< o >< o >< o >< o >< o >< o >< o >< o >< o >< o >< o >< o >< o >< o >< o >
+< * >< * >< * >< * >< * >< * >< * >< * >< * >< * >< * >< * >< * >< * >< * >< * >
+< # >< # >< # >< # >< # >< # >< # >< # >< # >< # >< # >< # >< # >< # >< # >< # >
+
+
+# ------------------------------- INTRODUCTION ------------------------------- #
+
+#                      -> *> #>      TOPIC      <# <* <-                       #
+
+                             ~-~-~-~ TOPIC ~-~-~-~
+
+
+<~>
+< o > < * > < @ > < # > < ~ >
+
+< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >
+
+
+// -------------------------------------------------------------------------- \\
+||                                   TITLE                                    ||
+\\ -------------------------------------------------------------------------- //
+
+
+=====-----+++++-----=====-----+++++----~~----+++++-----=====-----+++++-----=====
+
+
+** HEADING
+----------------------------------------
+
+*> HEADING
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-> HEADING
+~> HEADING
+========================================
+
+  (HEADING) 
+########################################
+
+  <HEADING>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+ ~ HEADING ~
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+ - HEADING -
+
+
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                  ~ finis ~                                   |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=

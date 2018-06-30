@@ -1,0 +1,95 @@
+################################################################################
+#                                Halfway There?                                #
+#                            my own humble application                         #
+#                       of the brilliantly genius mind of                      #
+#                                Isaac Asimov                                  #
+#                             date: 2017.05.30                                 #
+################################################################################
+
+  After reading Asimov's essay titled "The Slowly Moving Finger" (published in
+ February of 1964), it gave me a start about my own mortality.
+
+  If you haven't read the essay (provided at the very bottom of this file,
+ definitely undeserving for the quality of work), Asimov examines mortality for
+ not just humans but of 'all' life on Earth. I use quotations for 'all' because
+ he rightly excludes such things like prokaryotes and plant life, since, by 
+ virtue of their differing biology, their life span or life expectancy would
+ not give us much insight into our own.
+
+  After a long and winding logical (and reasonable!) path, Asimov makes his
+ point. Almost all mammailian life except humans, and it is to be believed that
+ if carried out his calculations with all species, can only live up to about
+ one billion heartbeats in total. I'll get to us in a moment.
+
+  It might seem like a morbid figure, and not that many if you think about it,
+ but there are many variables in play. The heart rate is the biggest one,
+ naturally, but there are others (like sleep) that are still significant.
+ So, even though different species show a vast range between their maximum
+ life age (the oldest any member of any given species can live to), it is 
+ their heart rate that determines the number of years on Earth.
+
+  I've just about spoiled the darned essay now, but I won't go further. I
+ highly suggest you go read his essay and then come back to this. I'll wait.
+
+ ...
+
+  Good? Okay, so now you should see why I left humans out in my earlier 
+ statement of the 1 billion heart beat deadline. Humans, as it turns out, 
+ have hearts that can withstand almost _four times_ as much punishment as any
+ other warm or cold blooded mammal, amphibian, or reptile.
+
+  What makes us so special? No clue, just like Asimov. That is a curious
+ thought, but another more important concern struck me as if hit by lightning.
+
+   how many beats has my heart gone? how many can I expect to have left?
+
+  So, you see, this is not a continuation of Asimov's witty observations.
+ Instead I am taking the liberty of being selfish and trying to calculate with
+ some kind of accuracy how many beats my heart has lost and how many more are
+ on the way.
+
+ ~ o ~
+
+  Okay, so let's define some variables (all variables will be capitalized).
+
+  BILLION = 1,000,000
+ 
+  MIN_IN_HOUR = 60
+  HOURS_IN_DAY = 24
+  HOURS_AWAKE_IN_DAY = HOURS_IN_DAY - HOURS_ASLEEP_IN_DAY == 17
+  DAYS_IN_WEEK = 7
+  WEEKS_IN_YEAR = 52.25 (leap?)
+
+  MY_AGE = 26.5 (my birthday is the 4th day of the year, so this is ok)
+  MY_REST_HEARTRATE_1MIN = 77 (another gross average, but also okay I think...)
+  
+  HOURS_ASLEEP_IN_DAY = 7 (a gross average, but okay)
+  SLEEP = NREM_SLEEP + REM_SLEEP + SLEEP_LOST == 100
+  REM_SLEEP_PERCENT = 23     (probably less due to bathroom trips, stubbing of the toe, etc.)
+  NREM_SLEEP_PERCENT = 77
+  REM_HEARTRATE_1M = MY_REST_HEARTRATE_1MIN (since this varies widely, stick with awake)
+  NREM_HEARTRATE_1M = 46ish?
+
+  HOURS_NREM_SLEEP = HOURS_ASLEEP_IN_1DAY (7) * NREM_SLEEP_PERCENT == 5.39 hours a day
+  HOURS_REM_SLEEP = HOURS_ASLEEP_IN_1DAY (7) * REM_SLEEP_PERCENT == 1.61 hours a day
+
+  
+
+  TOTAL_HEARTBEATS_IN_1DAY = (MY_REST_HEARTRATE_1MIN * MIN_IN_HOUR * HOURS_AWAKE_IN_DAY)
+                              + ( (HOURS_NREM_SLEEP * NREM_HEARTRATE_1M) +
+                                       (HOURS_REM_SLEEP + REM_HEARTRATE_1M) )
+                           == 78,911.91 heartbeats in one day * 7 days/week
+                           == 552,283.37 heartbeats in a week * 52.25 weeks/year
+                           == 28,862,031.0825 heartbeats a year, or
+  twenty-eight million, eight-hundred and sixty-two thousand, and thirty-one heartbeats in a single year.
+                              that * MY_AGE (26.5 in case you forgot)
+                           == 764,843,823.68625 heartbeats total
+
+                           wait... that's it? only about 750 million?
+                           I think I made an error somewhere..
+
+
+
+################################################################################
+#                                  ~ finis ~                                   #
+################################################################################

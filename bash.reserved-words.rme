@@ -1,0 +1,51 @@
+................................................................................
+..                                   BASH                                     ..
+..            reserved words, metacharacters, and control operators           ..
+................................................................................
+
+   When dealing with computers, specifically in programming languages or with
+ command language interpreters (i.e. shells), grammar and syntax are extremely
+ important and, as a result, are precisely defined and implemented.
+
+   Unlike natural language, computer programming languages are strict and leave
+ no room for interpretation, or misinterpretation, as the results could be
+ catastrophic or worse, unknown.
+
+   It follows, then, that jargon must be straightened out and some definitions
+ in order. The following definitions are used throughout the rest of this
+ document and (hopefully) the rest of the READMEs.
+   
+   blank    A space or tab.
+   word     A sequence of characters considered as a single unit by the shell.
+            Also known as a (token).
+   name     A (word) consisting only of alphanumeric characters and
+            underscores, and beginning with an alphabetic character or
+            underscore. Also referred to as an (identifier).
+   metacharacter
+            A character that, when unquoted, separates words.
+   control operator
+            A (token) that performs a control function.
+
+   And now with that out of the way, here are the list of metacharacters,
+ control operators, and reserved words which all carry a special meaning to
+ the shell when unquoted and either the first word of a simple command or
+ the third word of a (case) or (for) command. Each metacharacter, control
+ operator, and reserved word are separated by a single space.
+
+   METACHARACTERS:
+      | & ; ( ) < > space tab newline
+
+   CONTROL OPERATORS:
+      || & && ; ;; ;& ;;& ( ) | |& <newline>
+
+   RESERVED WORDS:
+      ! case coproc do done elif else esac fi for function if in select then
+      until while { } time [[ ]]
+
+   However reserved these reserved words are, Bash will not complain if an
+ alias or function is set with the same name.
+
+
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                  ~ finis ~                                   |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=

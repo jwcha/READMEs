@@ -1,0 +1,68 @@
+################################################################################
+
+                              Bash Subshells
+        
+        What is a subshell?
+          A subshell is a separate instance of the command processor, or the
+          parent shell that spawned the instance.
+
+          Subshells are denoted by parentheses; '(' starts a subshell and ')'
+          ends a subshell. Subshells can contain a single command or a 
+          command list.
+
+          ( command1; command2; command3; ... )
+
+          A subshell has an isolated scope from it's parent; the parent shell
+          does not have access to any variables in the subshell. ENVIRONMENT
+          VARIABLES do not carry over into subshells.
+
+          Directory changes made in a subshell do not carry over.
+
+          While the $BASH_SUBSHELL internal variable indicates the nesting lvl
+          of a subshell, the $SHLVL variable shows no change within subshells.
+
+            Example:
+            [sciro@dionysus ~]$ . READMEs/bash/bash.subshells_example.readme
+            $BASH_SUBSHELL
+            $BASH_SUBSHELL outside subshell       = 0
+
+            ( $BASH_SUBSHELL )
+            $BASH_SUBSHELL inside subshell        = 1
+
+            ( ( $BASH_SUBSHELL ) )
+            $BASH_SUBSHELL inside nested subshell = 2
+
+
+            $SHLVL
+            $SHLVL outside subshell = 2
+
+            ( $SHLVL )
+            $SHLVL inside subshell  = 2
+            [sciro@dionysus ~]$ 
+
+
+          Dedicated Environments:
+          Because of subshell isolation, a subshell can be used to set up a
+          "dedicated environment" for a command group.
+
+            Example:
+            COMMAND1; COMMAND2; COMMAND3
+            (
+              IFS=:
+              PATH=/bin
+              unset TERMINFO
+              set -C
+              shift 5
+              COMMAND4
+              COMMAND5
+              exit 3    # Only exits the subshell!
+            )
+            COMMAND6; COMMAND7
+            
+          In this example, the parent shell is not affected. 
+          Note that 'exit' only affects the subshell.
+
+
+################################################################################
+#                                  ~ finis ~                                   #
+################################################################################

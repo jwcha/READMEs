@@ -1,0 +1,158 @@
+\\ -------------------------------------------------------------------------- //
+||                                   UNIX                                     ||
+// -------------------------------------------------------------------------- \\
+
+~> umask  
+========
+
+   The umask is a number which tells the kernel the default permissions to set
+ whenever a new file is created. It does this by indicating which bits are 
+ _not_ desired to be enabled. Every process has a umask number (which is part
+ of its environment), and is handed down from parent to child. This means that
+ once you set a umask number in a shell, any program/process run from that
+ shell inherits it, and acts upon it.
+
+ NOTE: The concept here, as is with most subjects dealing with computers,
+       can be understood in much greater clarity and insight if the reader is
+       familiar with bitwise logic, boolean algebra, logic gates, or truth
+       tables. In particular, the AND (&) operation is the only one used.
+       A little knowledge with binary and octal numbering systems also helps.
+       (see ../READMEs/cse/binary.rme && ../READMEs/cse/octal.rme)
+
+   A typical umask number is 022, which is usually in octal form.
+
+
+// -------------------------------------------------------------------------- \\
+||                                   TITLE                                    ||
+\\ -------------------------------------------------------------------------- //
+
+o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~
+~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o 
+
+<~>
+<~><~><~><~><~><~><~><~><~><~><~><~><~><~><~><~><~><~><~><~><~><~><~><~><~><~><~>
+<~> <~> <~> <~> <~> <~> <~> <~> <~> <~> <~> <~> <~> <~> <~> <~> <~> <~> <~> <~> 
+
+< o > < * > < @ > < # >
+< ~ >
+< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >
+< ~ > < ~ > < ~ > < ~ > < ~ > < ~ > < ~ > < ~ > < ~ > < ~ > < ~ > < ~ > < ~ > 
+
+=====-----+++++-----=====-----+++++----~~----+++++-----=====-----+++++-----=====
+
+
+** HEADING
+----------------------------------------
+
+*> HEADING
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-> HEADING
+~> HEADING
+========================================
+
+  (HEADING) 
+########################################
+
+  <HEADING>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+ ~ HEADING ~
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+ - HEADING -
+
+
+################################################################################
+################################################################################
+#                                                                              #
+#                                 ~/.bashrc                                    #
+#                                                                              #
+################################################################################
+#  Bash sources ~/.bash_profile IFF it is BOTH an interactive and login shell. #
+#  Special variable '$-' will have an 'i' if interactive.                      #
+#                                                                              #
+################################################################################
+################################################################################
+
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#
+#                                                                              #
+#                           LOGIN SHELL STUFF HERE                             #
+#                                                                              #
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#
+
+
+################################################################################
+################################################################################
+################################################################################
+
+
+
+# ---------------------------------------------------------------------------- #
+# ----------------------------- USER VARIABLES ------------------------------- #
+# ---------------------------------------------------------------------------- #
+
+
+
+
+
+MAN PAGE FORMAT START
+--------------------------------------------------------------------------------
+LS(1)				    User Commands			       LS(1)
+
+NAME
+       ls - list directory contents
+
+SYNOPSIS
+       ls [OPTION]... [FILE]...
+
+DESCRIPTION
+       List  information  about	 the FILEs (the current directory by default).	Sort
+       entries alphabetically if none of -cftuvSUX nor --sort is specified.
+
+       Mandatory arguments to long options are mandatory for short options too.
+
+       -a, --all
+	      do not ignore entries starting with .
+
+       -A, --almost-all
+	      do not list implied . and ..
+
+       --author
+	      with -l, print the author of each file
+
+       -b, --escape
+	      print C-style escapes for nongraphic characters
+--------------------------------------------------------------------------------
+MAN PAGE FORMAT END
+
+
+
+           
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                    TITLE                                     |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+
+
+# ------------------------------- INTRODUCTION ------------------------------- #
+
+   text here
+
+#                       -> *> #>      TOPIC      <# <* <-                      #
+
+#                       -> *> #>      TOPIC      <# <* <-                      #
+
+
+                        ~-~-~-~ Default Behavior ~-~-~-~
+
+                           ~-~-~-~ True Sync ~-~-~-~
+
+                              ~-~-~-~ File ~-~-~-~
+
+                             ~-~-~-~ Lines ~-~-~-~
+
+
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                  ~ finis ~                                   |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=

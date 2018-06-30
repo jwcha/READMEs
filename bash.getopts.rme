@@ -1,0 +1,68 @@
+#!/bin/bash
+
+cat << 'EOF'
+
+my first attempts at getopts
+
+pacUsage () {
+  local PROGNAME='pac'
+  echo "Usage: $PROGNAME [-huw] [-iysr <package, ...>]"
+  echo -e "\t(options cannot be combined)"
+  echo -e "\t-h: print this message and exit"
+  echo -e "\t-u: pacman -Syu"
+  echo -e "\t-w: pacman -Syyu"
+  echo -e "\t-i: pacman -Syu <package, ...>"
+  echo -e "\t-y: pacman -Syyu <package, ...>"
+  echo -e "\t-s: pacman -S <package>, ..."
+  echo -e "\t-r: pacman -Runs <package, ...>"
+}
+
+pac() {
+  local E_OPT=2
+  local E_MISSINGOPT=3                                                                               
+  local E_NOPT=1
+  if (( $# == 0 )); then
+    pacUsage
+    return $E_NOPT
+  fi
+  debug_count=0
+  OPTIONS=':huwi:y:s:r:'
+  OPTIND=1
+  #getopts 'uwi:y:' VARNAME [ARGS...]
+  echo "\$# is: $#"
+  while getopts $OPTIONS OPTIONCHAR; 
+  do
+    (( debug_count +=1 ))
+    echo "loop #: $debug_count"
+    echo -e "OPTIND is: $OPTIND\nOPTARG is: $OPTARG"
+    case $OPTIONCHAR in
+      h) pacUsage;;
+      u) echo "you passed in the 'u' flag" ;;
+      w) echo "you passed in the 'w' flag" ;;
+      i) echo "you passed in the 'i' flag with option -$OPTARG" ;;
+      y) echo "you passed in the 'y' flag with option -$OPTARG" ;;
+      s) echo "you passed in the 's' flag with option -$OPTARG" ;;
+      r) echo "you passed in the 'r' flag with option -$OPTARG" ;;
+      \?) echo "Invalid option: -$OPTARG" >&2
+          #return $E_OPT
+          ;;
+      :) echo "Option -$OPTIONCHAR requires an argument." >&2
+         #return $E_MISSINGOPT
+         ;;
+      *) pacUsage
+         echo "\$# is: $#"
+         shift $((OPTIND -1))
+         echo "after shift \$# is: $#"
+         return $E_OPT
+         ;;
+    esac
+  done
+  echo "out of loop; loop count is: $debug_count"
+  shift $((OPTIND -1))
+  echo -e "OPTIND is: $OPTIND\nOPTARG is: $OPTARG"
+  echo "\$# is: $#"
+  
+  echo 'you made it!'
+}
+
+EOF

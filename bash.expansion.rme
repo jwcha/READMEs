@@ -1,0 +1,62 @@
+................................................................................
+..                                                                            ..
+..                     Bash Expansions and Substitutions                      ..
+..                                                                            ..
+................................................................................
+
+# ------------------------------- INTRODUCTION ------------------------------- #
+
+   Before executing each command, Bash checks the statement for any syntax
+   elements which should be interpreted rather than taken literally. To start,
+   Bash splits the statement into tokens (words) and scans them for any special
+   characters or reserved words; if any are encountered, the elements are 
+   expanded or substituted to new text (and possibly new tokens).
+
+   After all of the expansions/substitutions are done, all quotes that are not
+   meant literally (i.e. the quotes that mark contiguous words) are removed
+   from the command line text in a process called quote-removal.
+
+
+                        -> *> #>    OVERVIEW    <# <* <-                        
+
+   Here are the possible expansions/substitutions in order of execution:
+
+      ~> Brace Expansion
+         ~> {X,Y,Z}
+         ~> {X..Y}
+         ~> {X..Y..Z}
+
+      ~> Tilde Expansion
+         ~> ~ ; ~+ ; ~-
+
+      The following four expansions/substitutions have the same precedence,
+      and so are processed in a left-to-right fashion.
+      |---
+      |  ~> Parameter Expansion
+      |     ~> $WORD
+      |     ~> ${WORD:-char} ; ${WORD%%ext} ; ${WORD/pattern/string}
+      |
+      |  ~> Arithmetic Expansion
+      |     ~> $(( EXPRESSION ))
+      |     ~> $[ EXPRESSION ]
+      |
+      |  ~> Command Substitution
+      |     ~> $( COMMAND )
+      |     ~> ` COMMAND `
+      |
+      |  ~> Process Substitution
+      |     ~> <( COMMAND )
+      |     ~> >( COMMAND )
+      |---
+
+      ~> Word Splitting
+         ~> IFS=$' \t\n'  # <space>, <tab>, <newline>
+
+      ~> Pathname Expansion (a.k.a. globbing)
+         ~> *.txt
+         ~> page_1?.html
+
+
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                  ~ finis ~                                   |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=

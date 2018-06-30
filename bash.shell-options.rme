@@ -1,0 +1,268 @@
+#2018#02#01 #bash #shopts #shell-options #builtin
+,',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',','
+,',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',','
+,',                                                                          ,',
+,',                                   BASH                                   ,',
+,',                          SHell options (SHopts)                          ,',
+,',                                                                          ,',
+,',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',','
+,',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',','
+
+,',',',',',',',
+,~~> shopt <~~,
+',',',',',',','
+   The shopt shell builtin allows a user to set or unset additional, optional
+   behavior for the Bash shell. As the 'shopt' command name is a shell builtin
+   and not an external command, it does not have a man page or a help/usage
+   flag it can be called with. Instead, use the 'help' builtin -- `help shopt`.
+
+,',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',','
+
+,',',',',',',',',
+,~~> OPTIONS <~~,
+',',',',',',',','
+
+- autocd
+   If set, a command name that is the name of a directory is executed as if it
+   were the argument to the cd command. Only used with interactive shells.
+
+- cdable_vars
+   If set, an argument to the cd builtin command that is not a directory is
+   assumed to be the name of a variable whose value is the dir to change to.
+
+- cdspell
+   If set, minor spelling errors of a directory component in a cd command will
+   be corrected. Errors checked for are transposed characters, a single missing
+   character, and a single extra character. If a correction is found, the 
+   corrected path is printed, and the command proceeds. Interactive only.
+
+- checkhash
+   If set, Bash checks that a command found in the hash table exists before
+   trying to execute it. If a hashed command no longer exists, a normal path
+   search is performed.
+
+- checkjobs
+   If set, Bash lists the status of any stopped and running jobs before exiting
+   an interactive shell. If any jobs are running, this causes the exit to be
+   deferred until a second exit attempted without an intervening command. The
+   shell always postpones exiting if any jobs are stopped.
+
+- checkwinsize
+   If set, Bash checks the window size after each command and, if necessary,
+   updates the values of LINES and COLUMNS.
+
+- cmdhist
+   If set, Bash attempts to save all lines of a multiple-line command in the
+   same history entry. This allows easy re-editing of multi-line commands.
+
+- compat31
+   If set, Bash changes its behavior to that of version 3.1. The differences lie
+   with quoted arguments to the conditional command's '=~' operator and with
+   locale-specific string comparison when using the [[ conditional command's
+   '<' and '>' operators. Bash versions prior to bash-4.1 use ASCII collation
+   and strcmp(3); bash-4.1 and later use the current locale's collation sequence
+   and strcoll(3).
+
+- compat32
+   If set, Bash emulates version 3.2. Differences occur in locale-specific
+   string comparison when using the [[ conditional command's '<' and '>' ops
+   (see compat31) and the effect of interrupting a command list. Bash versions
+   bash-3.2 and earlier continue with the next command in the list after one
+   terminates due to an interrupt.
+
+- compat40
+   If set, Bash emulates bash-4.0 with respect to locale-specific str. comp.
+   when using the [[ conditional command's '<' and '>' operators (see compat31)
+   and the effect of interrupting a command list. Bash versions bash-4.0 and
+   later interrupt the list as if the shell received an interrupt; previous
+   versions continue with the next command in the list.
+
+- compat41
+   If both the compat41 option is set and Bash is running in POSIX mode, then
+   Bash will treat a single quote in a double-quoted parameter expansion as a
+   special character. The single quotes must match (an even number) and the
+   characters between the single quotes are considered quoted. This is the
+   behavior of POSIX mode through bash-4.1. The default Bash behavior remains
+   the same as in previous versions.
+
+- compat42
+   If set, Bash does not process the replacement string in the pattern
+   substitution word expansion using quote removal.
+
+- compat43
+   If set, Bash does not print a warning message if an attempt is made to use a
+   quoted compound array assignment as an argument to declare, makes word
+   expansion errors non-fatal errors that cause the current command to fail
+   (the default behavior is to make them fatal errors that cause the shell to
+   exit), and does not reset the loop state when a shell function is executed
+   (this allows break or continue in a shell function to affect loops in the
+   caller's context).
+
+- complete_fullquote
+   If set, Bash quotes all shell metacharacters in filenames and directory names
+   when performing completion. If unset, Bash removes metacharacters such as the
+   dollar sign ($) from the set of characters that will be quoted in completed
+   filenames when these metacharacters appear in shell variable references in
+   words to be completed. This means that dollar signs ($) in variable names
+   that expand to directories will not be quoted; however, any dollar signs ($)
+   appearing in filenames will not be quoted, either. This is active only when
+   Bash is using backslashes to quote completed filenames. This variable is set
+   by default, which is default behavior for versions up to bash-4.2.
+
+- direxpand
+   If set, Bash replaces directory names with the results of word expansion when
+   performing filename completion. This changes the contents of the readline
+   editing buffer. If unset, Bash attempts to preserve what the user typed.
+
+- dirspell
+   If set, Bash attempts spelling correction on directory names during word
+   completion if the directory name initially supplied does not exist.
+
+- dotglob
+   If set, Bash includes filenames beginning with a '.' in the results of
+   filename expansion.
+
+- execfail
+   If set, a non-interactive shell will _NOT_ exit if it cannot execute the file
+   specified as an argument to the exec builtin command. An interactive shell
+   does not exit if exec fails.
+
+- expand_aliases
+   If set, aliases are expanded as described below under Aliases. Default set.
+
+- extdebug
+   If set at shell invocation, arrange to execute the debugger profile before
+   the shell starts, identical to the --debugger option. If set after invocation,
+   behavior intended for use by debuggers is enabled:
+      1. The -F option to the declare builtin displays the source filename and
+         corresponding line number to each function name supplied as an arg.
+      2. If cmd run by the DEBUG trap returns non-zero, next cmd is skipped.
+      3. If cmd run by DEBUG trap returns 2, and the shell is executing in a 
+         subroutine, the shell simulates a call to return. A subroutine is a
+         shell func or shell script executed by the . or source builtins.
+      4. BASH_ARGC and BASH_ARGV are updated during subroutine call -- BASH_ARGC
+         pushes # of params to the top of stack; params are pushed to BASH_ARGV.
+      5. Function tracing is enabled: command substitution, shell functions, and
+         subshells invoked with ( command ) inherit the DEBUG and RETURN traps.
+      6. Error tracing is enabled: command substitution, shell functions, and
+         subshells invoked with ( command ) inherit the ERR trap.
+
+- extglob
+   If set, the extended pattern matching features are enabled; namely,
+   pattern-lists (patterns separated by '|'). They can be prefaced with any of:
+      _(pattern-list)   where _ is one of: ? * + @ ! (@==?) (!==^)
+
+- extquote
+   If set, $'string' and $"string" quoting is performed within ${parameter}
+   expansions enclosed in double quotes. This option is enabled by default.
+
+- failglob
+   If set, patterns which fail to match filenames during filename expansion
+   result in an expansion error.
+
+- force_fignore
+   If set, the suffixes specified by the FIGNORE shell variable cause words to
+   be ignored when performing word completion even if the ignored words are the
+   only possible completions. This option is enabled by default.
+
+- globalasciiranges
+   If set, range expressions used in pattern matching bracket expressions behave
+   as if in the traditional C locale when performing comparisons. id est, the
+   current locale's collating sequence is not taken into account, so 'b' will
+   not collate between 'A' and  'B', and upper-case and lower-case ASCII chars
+   will collate together.
+
+- globstar
+   If set, the pattern '**' used in a filename expansion context will match all
+   files and zero or more directories and subdirectories. If the pattern is 
+   followed by a '/', only directories and subdirectories match.
+
+- gnu_errfmt
+   If set, shell error messages are written in the standard GNU error msg fmt.
+
+- histappend
+   If set, the history list is appended to the file named by the value of the
+   HISTFILE variable when the shell exits, rather than overwriting the file.
+
+- histreedit
+   If set, and Readline is being used, a user is given the opportunity to
+   re-edit a failed history substitution.
+
+- histverify
+   If set, and Readline is being used, the results of history substitution are
+   not immediately passed to the shell parser. Instead, the resulting line is
+   loaded into the Readline editing buffer, allowing further modification.
+
+- hostcomplete
+   If set, and Readline is being used, Bash will attempt to perform hostname
+   completion when a word containing a '@' is being completed. Default set.
+
+- huponexit
+   If set, Bash sends SIGHUP to all jobs when an interactive login shell exits.
+
+- inherit_errexit
+   If set, command substitution inherits the value of the errexit option, 
+   instead of unsetting it in the subshell environment. Set if POSIX is set.
+
+- interactive_comments
+   Allow a word beginning with '#' to cause that word and all remaining chars
+   on that line to be ignored in an interactive shell. Set by default.
+
+- lastpipe
+   If set, and job control is not active, the shell runs the last command of a
+   pipeline not executed in the background in the current shell environment.
+
+- lithist
+   If enabled, and the cmdhist option is enabled, multi-line commands are saved
+   to the history with embedded newlines rather than using semicolons.
+
+- login_shell
+   The shell sets this option if it is started as a login shell. Read-only.
+
+- mailwarn
+   If set, and a file that Bash is checking for mail has been accessed since the
+   last time it was checked, "The mail in mailfile hsa been read" is shown.
+
+- no_empty_cmd_completion
+   If set, and Readline is being used, Bash will not attempt to search the PATH
+   for possible completions when completion is attempted on an empty line.
+
+- nocaseglab
+   If set, Bash matches filenames in a case-insensitive fashion (filename exp).
+
+- nocasematch
+   If set, Bash matches patterns in a case-insensitive fashion when performing
+   matching while executing case or [[ conditional commands, when performing 
+   pattern substitution word expansions, or when filtering possible completions
+   as a part of programmable completion.
+
+- nullglob
+   If set, Bash allows filename patterns which match no files to expand to a
+   null string, rather than themselves.
+
+- progcomp
+   If set, the programmable completion facilities are enabled. Set by default.
+
+- promptvars
+   If set, prompt strings undergo parameter expansion, command substitution,
+   arithmetic expansion, and quote removal after prompt expansion. Default set.
+
+- restricted_shell
+   The shell sets this option if it is started in restricted mode and is a
+   read-only option. This is not reset when the startup files are executed,
+   allowing the startup files to discover whether or not a shell is restricted.
+
+- shift_verbose
+   If this is set, the shift builtin prints an error message when the shift
+   count exceeds the number of positional parameters.
+
+- sourcepath
+   If set, the source path builtin uses the value of PATH to find the directory
+   containing the file supplied as an argument. Set by default.
+
+- xpg_echo
+   If set, the echo builtin expands backslash-escape sequences by default.
+
+,',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',','
+,'                                 ~ finis ~                                  ',
+,',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',','

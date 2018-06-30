@@ -1,0 +1,123 @@
+#2017##07##11 #bash #posix #tests
+\\ -------------------------------------------------------------------------- //
+||                             Bash Conditionals                              ||
+||  (See general README for markup guide)                                     ||
+// -------------------------------------------------------------------------- \\
+
+   One of the classic lines in Hollywood film:
+...
+ K    "I'll answer the question. You want answers?"
+ J    "I think I'm entitled to."
+ K    "You want answers?"
+ J    "I WANT THE TRUTH!"
+ J    "YOU CAN'T HANDLE THE TRUTH!"
+...
+  Verbal fencing between Lieutenant Daniel Kaffe (Tom Cruise) and Colonel
++ Nathan R. Jessup (Jack Nicholson) in the movie _A Few Good Men_ (1992).
+.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~..
+
+*-*-*-* TEST CONSTRUCTS *-*-*-*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   Bash, like any reasonably complete programming language, can test for a
+ condition and then act upon the result. Bash supports several constructs for
+ testing, some of which are POSIX compliant and others which are extensions.
+
+   The testing constructs which follow POSIX and should be portable with most
+ UNIX 'sh' shells in the field are the following: the 'test' command, the
+ if/then construct, and the single left bracket '[' shell builtin.
+
+   The Bash extension for the test construct (available only to specific
+ versions of Bash and some versions of ksh) is the double-bracket '[[' reserved
+ keyword. Arithmetic evaluation/expansion via the '((' compound command is
+ covered in 'bash.arithmetic-expansion.rme' and the 'let' builtin will not be
+ considered here since it is usually recommended to use '(('.
+.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~..
+
+*-*-*-* POSIX TEST *-*-*-*
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+ > An if/then construct tests whether the exit status (or return value) of a
+   list of commands is 0 (remember that 0 denotes success by UNIX convention),
+   and if so, executes one or more commands.
+
+ > There exists both a dedicated command called '[' (which is simply a synonym
+   for the 'test' command), as well as a shell built-in for efficiency. Both 
+   behave similarly by parsing its arguments as comparison expressions or file
+   tests and returns an exit status corresponding to the result of the
+   comparison (0 for true, 1 for false).
+
+NOTE: Always remember that 'test' and '[' perform standard word splitting and
+      globbing which means proper quoting must be observed!
+      This is likely because these are simple commands and are subject to the
+      typical expansion done by the shell. However, '[[' is considered a 
+      compound command and the shell changes its parsing depending on the
+      context of the command, which is done before any other processing.
+      Thus, the shell won't perform word splitting or globbing for '[['.
+
++.+.+ FILE TEST OPERATORS +.+.+
+-------------------------------
+   Returns true (0) if:
+   -e:   file exists
+   -a:   file exists (deprecated)
+   -f:   is regular file (not dir or device)
+   -s:   file is not zero size
+   -d:   file is a directory
+   -b:   file is a block device
+   -c:   file is a character device
+   -p:   file is a pipe
+   -h:   file is a symbolic link
+   -L:   file is a symbolic link
+   -S:   file is a socket
+   -t:   file (descriptor) is associated with a terminal device
+         (useful to check whether STDIN [ -t 0 ] or STDOUT [ -t 1 ] in a
+         given script is a terminal)
+   -r:   user running test has read permissions
+   -w:   user running test has write permissions
+   -x:   user running test has execute permissions
+   -g:   set-group-id (SGID) flag is set on file or directory
+   -u:   set-user-id (SUID) flag is set on file
+   -k:   sticky bit is set
+   -O:   user running test is owner of the file
+   -G:   user running test is a member of the group the file belongs to
+   -N:   file has been modified since it was last read
+    !:   NEGATION -- reverses the result of test
+ f1 -nt f2: file f1 is newer than file f2
+ f1 -ot f2: file f1 is older than file f2
+ f1 -ef f2: files f1 and f2 are hard links to the same file
+
+  -eq:   [integer] is equal to
+  -ne:   [integer] is not equal to
+  -gt:   [integer] is greater than
+  -ge:   [integer] is greater than or equal to
+  -lt:   [integer] is less than
+  -le:   [integer] is less than or equal to
+    =:   [string] is equal to
+   ==:   [string] is equal to (synonym for =)
+   !=:   [string] is not equal to
+    <:   [string] is less than (ASCII order), must be escaped in [ ]
+    >:   [string] is greater than (ASCII order), must be escaped in [ ]
+   -z:   [string] string is NULL, i.e. has zero length
+   -n:   [string] string is not NULL, i.e. has length > 0
+   -a:   [compound] logical AND
+   -o:   [compound] logical OR
+
++~+ WITHIN DOUBLE PARENTHESES ONLY +~+
+--------------------------------------
+    <:   [integer] is less than
+   <=:   [integer] is less than or equal to
+    >:   [integer] is greater than
+   >=:   [integer] is greater than or equal to
+   ==:   [string] is equal to (with pattern matching)
+   !=:   [string] is not equal to (with pattern matching)
+   &&:   [compound] logical AND
+   ||:   [compound] logical OR
+
+
+
+
+.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~..
+
+.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~..
+
+// -------------------------------------------------------------------------- \\
+||                                 ~ finis ~                                  ||
+\\ -------------------------------------------------------------------------- //

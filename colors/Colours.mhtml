@@ -1,0 +1,222 @@
+From: <Saved by Blink>
+Subject: Colours
+Date: Thu, 11 Jan 2017 09:54:29 -0000
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--zOE3pmeyl6Io99TRRQhI7O4QBT5OdtfKdiNzZgWwCg----"
+
+------MultipartBoundary--zOE3pmeyl6Io99TRRQhI7O4QBT5OdtfKdiNzZgWwCg----
+Content-Type: text/html
+Content-ID: <frame-21-0ec7a565-5547-41e7-a305-67042e1f2368@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3Dwindows-1252"><title>Colours</title><meta name=3D"GENERATOR" content=3D"=
+Modular DocBook HTML Stylesheet Version 1.7"><link rel=3D"HOME" title=3D"Ba=
+sh Prompt HOWTO" href=3D"http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/index.=
+html"><link rel=3D"UP" title=3D"ANSI Escape Sequences: Colours and Cursor M=
+ovement" href=3D"http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/c327.html"><li=
+nk rel=3D"PREVIOUS" title=3D"ANSI Escape Sequences: Colours and Cursor Move=
+ment" href=3D"http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/c327.html"><link =
+rel=3D"NEXT" title=3D"Cursor Movement" href=3D"http://www.tldp.org/HOWTO/Ba=
+sh-Prompt-HOWTO/x361.html"></head><body class=3D"SECT1" bgcolor=3D"#FFFFFF"=
+ text=3D"#000000" link=3D"#0000FF" vlink=3D"#840084" alink=3D"#0000FF"><div=
+ class=3D"NAVHEADER"><table summary=3D"Header navigation table" width=3D"10=
+0%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"><tbody><tr><th colspan=
+=3D"3" align=3D"center">Bash Prompt HOWTO: </th></tr><tr><td width=3D"10%" =
+align=3D"left" valign=3D"bottom"><a href=3D"http://www.tldp.org/HOWTO/Bash-=
+Prompt-HOWTO/c327.html" accesskey=3D"P">Prev</a></td><td width=3D"80%" alig=
+n=3D"center" valign=3D"bottom">Chapter 6. ANSI Escape Sequences: Colours an=
+d Cursor Movement</td><td width=3D"10%" align=3D"right" valign=3D"bottom"><=
+a href=3D"http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x361.html" accesskey=
+=3D"N">Next</a></td></tr></tbody></table><hr align=3D"LEFT" width=3D"100%">=
+</div><div class=3D"SECT1"><h1 class=3D"SECT1"><a name=3D"AEN329"></a>6.1. =
+Colours</h1><p>As mentioned before, non-printing escape sequences have to b=
+e enclosed in
+<tt class=3D"USERINPUT"><b>\[\033[</b></tt> and <tt class=3D"USERINPUT"><b>=
+\]</b></tt>.  For colour=20
+escape sequences, they should also be followed by a lowercase=20
+<tt class=3D"USERINPUT"><b>m</b></tt>. </p><p>If you try out the following =
+prompts in an xterm and find that you aren't
+seeing the colours named, check out your=20
+<tt class=3D"FILENAME">~/.Xdefaults</tt> file (and
+possibly its bretheren) for lines like=20
+<tt class=3D"COMPUTEROUTPUT">XTerm*Foreground: BlanchedAlmond</tt>.
+This can be commented out by placing an exclamation mark ("!") in front of
+it.  Of course, this will also be dependent on what terminal emulator
+you're using.  This is the likeliest place that your term foreground
+colours would be overridden.</p><p>To include blue text in the prompt:</p><=
+table border=3D"1" bgcolor=3D"#E0E0E0" width=3D"100%"><tbody><tr><td><font =
+color=3D"#000000"><pre class=3D"SCREEN">PS1=3D"\[\033[34m\][\$(date +%H%M)]=
+[\u@\h:\w]$ "</pre></font></td></tr></tbody></table><p>The problem with thi=
+s prompt is that the blue colour that starts with the
+34 colour code is never switched back to the regular colour, so any text
+you type after the prompt is still in the colour of the prompt.  This is
+also a dark shade of blue, so combining it with the
+<em>bold</em> code might help:</p><table border=3D"1" bgcolor=3D"#E0E0E0" w=
+idth=3D"100%"><tbody><tr><td><font color=3D"#000000"><pre class=3D"SCREEN">=
+PS1=3D"\[\033[1;34m\][\$(date +%H%M)][\u@\h:\w]$\[\033[0m\] "</pre></font><=
+/td></tr></tbody></table><p>The prompt is now in light blue, and it ends by=
+ switching the colour=20
+back to nothing (whatever foreground colour you had previously).</p><p>Here=
+ are the rest of the colour equivalences:</p><table border=3D"1" bgcolor=3D=
+"#E0E0E0" width=3D"100%"><tbody><tr><td><font color=3D"#000000"><pre class=
+=3D"SCREEN">Black       0;30     Dark Gray     1;30
+Blue        0;34     Light Blue    1;34
+Green       0;32     Light Green   1;32
+Cyan        0;36     Light Cyan    1;36
+Red         0;31     Light Red     1;31
+Purple      0;35     Light Purple  1;35
+Brown       0;33     Yellow        1;33
+Light Gray  0;37     White         1;37</pre></font></td></tr></tbody></tab=
+le><p>Daniel Dui (ddui@iee.org) points out that to be strictly accurate, we=
+ must
+mention that the list above is for colours at the console.  In an xterm,
+the code <tt class=3D"USERINPUT"><b>1;31</b></tt> isn't "Light Red," but "B=
+old Red." =20
+This is true of all the colours.</p><p>You can also set background colours =
+by using 44 for Blue background, 41 for
+a Red background, etc.  There are no bold background colours.  Combinations
+can be used, like Light Red text on a Blue background:
+<tt class=3D"USERINPUT"><b>\[\033[44;1;31m\]</b></tt>, although setting the=
+ colours=20
+separately seems to work better (ie.=20
+<tt class=3D"USERINPUT"><b>\[\033[44m\]\[\033[1;31m\]</b></tt>).  Other cod=
+es
+available include 4: Underscore, 5: Blink, 7: Inverse, and 8: Concealed.</p=
+><div class=3D"NOTE"><p></p><table class=3D"NOTE" width=3D"100%" border=3D"=
+0"><tbody><tr><td width=3D"25" align=3D"CENTER" valign=3D"TOP"><img src=3D"=
+http://www.tldp.org/HOWTO/images/note.gif" hspace=3D"5" alt=3D"Note"></td><=
+td align=3D"LEFT" valign=3D"TOP"><p>Many people (myself included) object st=
+rongly to the
+"blink" attribute because it's extremely distracting and irritating. =20
+Fortunately, it doesn't work in any terminal emulators
+that I'm aware of - but it will still work on the console.  </p></td></tr><=
+/tbody></table></div><div class=3D"NOTE"><p></p><table class=3D"NOTE" width=
+=3D"100%" border=3D"0"><tbody><tr><td width=3D"25" align=3D"CENTER" valign=
+=3D"TOP"><img src=3D"http://www.tldp.org/HOWTO/images/note.gif" hspace=3D"5=
+" alt=3D"Note"></td><td align=3D"LEFT" valign=3D"TOP"><p>If you were wonder=
+ing (as I did) "What use is a 'Concealed' attribute?!" -
+I saw it used in an example shell script (not a prompt) to allow someone to
+type in a password without it being echoed to the screen.  However, this
+attribute doesn't seem to be honoured by many terms other than "Xterm."
+</p></td></tr></tbody></table></div><p>Based on a prompt called "elite2" in=
+ the Bashprompt package (which I
+have modified to work better on a standard console, rather than with the
+special xterm fonts required to view the original properly), this is a
+prompt I've used a lot:</p><table border=3D"0" bgcolor=3D"#E0E0E0" width=3D=
+"100%"><tbody><tr><td><font color=3D"#000000"><pre class=3D"PROGRAMLISTING"=
+>=20
+function elite
+{
+
+local GRAY=3D"\[\033[1;30m\]"
+local LIGHT_GRAY=3D"\[\033[0;37m\]"
+local CYAN=3D"\[\033[0;36m\]"
+local LIGHT_CYAN=3D"\[\033[1;36m\]"
+local NO_COLOUR=3D"\[\033[0m\]"
+
+case $TERM in
+    xterm*|rxvt*)
+        local TITLEBAR=3D'\[\033]0;\u@\h:\w\007\]'
+        ;;
+    *)
+        local TITLEBAR=3D""
+        ;;
+esac
+
+local temp=3D$(tty)
+local GRAD1=3D${temp:5}
+PS1=3D"$TITLEBAR\
+$GRAY-$CYAN-$LIGHT_CYAN(\
+$CYAN\u$GRAY@$CYAN\h\
+$LIGHT_CYAN)$CYAN-$LIGHT_CYAN(\
+$CYAN\#$GRAY/$CYAN$GRAD1\
+$LIGHT_CYAN)$CYAN-$LIGHT_CYAN(\
+$CYAN\$(date +%H%M)$GRAY/$CYAN\$(date +%d-%b-%y)\
+$LIGHT_CYAN)$CYAN-$GRAY-\
+$LIGHT_GRAY\n\
+$GRAY-$CYAN-$LIGHT_CYAN(\
+$CYAN\$$GRAY:$CYAN\w\
+$LIGHT_CYAN)$CYAN-$GRAY-$LIGHT_GRAY "=20
+PS2=3D"$LIGHT_CYAN-$CYAN-$GRAY-$NO_COLOUR "
+}</pre></font></td></tr></tbody></table><p>I define the colours as temporar=
+y shell variables in the name of
+readability.  It's easier to work with.  The "GRAD1" variable is a check to
+determine what terminal you're on.  Like the test to determine if you're
+working in an Xterm, it only needs to be done once.  The prompt you see
+look like this, except in colour:</p><table border=3D"1" bgcolor=3D"#E0E0E0=
+" width=3D"100%"><tbody><tr><td><font color=3D"#000000"><pre class=3D"SCREE=
+N">--(giles@gcsu202014)-(30/pts/6)-(0816/01-Aug-01)--
+--($:~/tmp)--</pre></font></td></tr></tbody></table><p>To help myself remem=
+ber what colours are available, I wrote a script that
+output all the colours to the screen.  Daniel Crisman has supplied a much
+nicer version which I include below:</p><table border=3D"0" bgcolor=3D"#E0E=
+0E0" width=3D"100%"><tbody><tr><td><font color=3D"#000000"><pre class=3D"PR=
+OGRAMLISTING">#!/bin/bash
+#
+#   This file echoes a bunch of color codes to the=20
+#   terminal to demonstrate what's available.  Each=20
+#   line is the color code of one forground color,
+#   out of 17 (default + 16 escapes), followed by a=20
+#   test use of that color on all nine background=20
+#   colors (default + 8 escapes).
+#
+
+T=3D'gYw'   # The test text
+
+echo -e "\n                 40m     41m     42m     43m\
+     44m     45m     46m     47m";
+
+for FGs in '    m' '   1m' '  30m' '1;30m' '  31m' '1;31m' '  32m' \
+           '1;32m' '  33m' '1;33m' '  34m' '1;34m' '  35m' '1;35m' \
+           '  36m' '1;36m' '  37m' '1;37m';
+  do FG=3D${FGs// /}
+  echo -en " $FGs \033[$FG  $T  "
+  for BG in 40m 41m 42m 43m 44m 45m 46m 47m;
+    do echo -en "$EINS \033[$FG\033[$BG  $T  \033[0m";
+  done
+  echo;
+done
+echo
+</pre></font></td></tr></tbody></table></div><div class=3D"NAVFOOTER"><hr a=
+lign=3D"LEFT" width=3D"100%"><table summary=3D"Footer navigation table" wid=
+th=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"><tbody><tr><td=
+ width=3D"33%" align=3D"left" valign=3D"top"><a href=3D"http://www.tldp.org=
+/HOWTO/Bash-Prompt-HOWTO/c327.html" accesskey=3D"P">Prev</a></td><td width=
+=3D"34%" align=3D"center" valign=3D"top"><a href=3D"http://www.tldp.org/HOW=
+TO/Bash-Prompt-HOWTO/index.html" accesskey=3D"H">Home</a></td><td width=3D"=
+33%" align=3D"right" valign=3D"top"><a href=3D"http://www.tldp.org/HOWTO/Ba=
+sh-Prompt-HOWTO/x361.html" accesskey=3D"N">Next</a></td></tr><tr><td width=
+=3D"33%" align=3D"left" valign=3D"top">ANSI Escape Sequences: Colours and C=
+ursor Movement</td><td width=3D"34%" align=3D"center" valign=3D"top"><a hre=
+f=3D"http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/c327.html" accesskey=3D"U"=
+>Up</a></td><td width=3D"33%" align=3D"right" valign=3D"top">Cursor Movemen=
+t</td></tr></tbody></table></div></body></html>
+------MultipartBoundary--zOE3pmeyl6Io99TRRQhI7O4QBT5OdtfKdiNzZgWwCg----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.tldp.org/HOWTO/images/note.gif
+
+R0lGODdhGAAYAPcAAAAAAAEBAQICAgMDAwQEBAUFBQYGBgcHBwgICAkJCQoKCgsLCwwMDA0NDQ4O
+Dg8PDxAQEBERERISEhMTExQUFBUVFRYWFhcXFxgYGBkZGRoaGhsbGxwcHB0dHR4eHh8fHyAgICEh
+ISIiIiMjIyQkJCUlJSYmJicnJygoKCkpKSoqKisrKywsLC0tLS4uLi8vLzAwMDExMTIyMjMzMzQ0
+NDU1NTY2Njc3Nzg4ODk5OTo6Ojs7Ozw8PD09PT4+Pj8/P0BAQEFBQUJCQkNDQ0REREVFRUZGRkdH
+R0hISElJSUpKSktLS0xMTE1NTU5OTk9PT1BQUFFRUVJSUlNTU1RUVFVVVVZWVldXV1hYWFlZWVpa
+WltbW1xcXF1dXV5eXl9fX2BgYGFhYWJiYmNjY2RkZGVlZWZmZmdnZ2hoaGlpaWpqamtra2xsbG1t
+bW5ubm9vb3BwcHFxcXJycnNzc3R0dHV1dXZ2dnd3d3h4eHl5eXp6ent7e3x8fH19fX5+fn9/f4CA
+gIGBgYKCgoODg4SEhIWFhYaGhoeHh4iIiImJiYqKiouLi4yMjI2NjY6Ojo+Pj5CQkJGRkZKSkpOT
+k5SUlJWVlZaWlpeXl5iYmJmZmZqampubm5ycnJ2dnZ6enp+fn6CgoKGhoaKioqOjo6SkpKWlpaam
+pqenp6ioqKmpqaqqqqurq6ysrK2tra6urq+vr7CwsLGxsbKysrOzs7S0tLW1tba2tre3t7i4uLm5
+ubq6uru7u7y8vL29vb6+vr+/v8DAwMHBwcLCwsPDw8TExMXFxcbGxsfHx8jIyMnJycrKysvLy8zM
+zM3Nzc7Ozs/Pz9DQ0NHR0dLS0tPT09TU1NXV1dbW1tfX19jY2NnZ2dra2tvb29zc3N3d3d7e3t/f
+3+Dg4OHh4eLi4uPj4+Tk5OXl5ebm5ufn5+jo6Onp6erq6uvr6+zs7O3t7e7u7u/v7/Dw8PHx8fLy
+8vPz8/T09PX19fb29vf39/j4+Pn5+fr6+vv7+/z8/P39/f7+/v///ywAAAAAGAAYAAAI/gD/CRxI
+8JxBgwQTKhTYqxSlUhAfOluY8J0xRqWsnXvH8ZwxSpQmUjz30BvFf84o1Vr4rtTKkwJb9qpIaSZM
+gjUJOit1s2IpkwJ/9ky4U2BRgsZ61VLay9tBhP9KnYvq7Z01a6UY1XLmzZozRoQgRqR0bus5qSC3
+CjyX0pizOU29dQ3pjWxGsgPfURqjRYmUPTVrLTX2jqS3u1MZ7uF6mNK/d48H1j3rjVFivXNU9sK4
+kCRlSntKcVyzx6uxPUATnv1Xy5rAWiHXbJ4zxqbCUhOxxjwtJTMhYxRbQo4q8p/T4yd72caaeOjO
+4a95Dv3HqPjAXpSgU/xqnSBswp2/FMPEilHuOW87tTaHiR4kSNzaBwYEADs=
+------MultipartBoundary--zOE3pmeyl6Io99TRRQhI7O4QBT5OdtfKdiNzZgWwCg------

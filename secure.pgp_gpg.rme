@@ -1,0 +1,93 @@
+#guide #security #privacy #encryption #pgp #gpg
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=~~=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+################################################################################
+I'LL GPG YOUR PGP: A QUICK GUIDE ON SECURE OTR COMMUNICATION
+
+
+================
+ GLOSSARY 
+================
+Here's a quick list of terms and their definitions, because there's lots of computer jargon and almost always it is awfully specific.
+
+PGP: stands for Pretty Good Privacy, and is a family of software systems developed in 1991 by a smart fellow who was working for Symantec at the time. 
+
+OpenPGP software uses a combination of strong public-key and symmetric cryptography to provide security services for electronic communications and data storage. These services include confidentiality, key management, authentication, and digital signatures.
+
+
+GnuPG - GNU Privacy Guard, also called GPG.  GnuPG is an OpenPGP implementation that avoids all encumbered algorithms. Consequently, early versions of GnuPG did not include RSA public keys.  GnuPG may or may not have (depending on version) support for IDEA or other encumbered algorithms.
+
+
+
+
+   OpenPGP provides data integrity services for messages and data files
+   by using these core technologies:
+
+     - digital signatures
+
+     - encryption
+
+     - compression
+
+     - Radix-64 conversion
+
+   In addition, OpenPGP provides key management and certificate
+   services, but many of these are beyond the scope of this document.
+
+2.1.  Confidentiality via Encryption
+
+   OpenPGP combines symmetric-key encryption and public-key encryption
+   to provide confidentiality.  When made confidential, first the object
+   is encrypted using a symmetric encryption algorithm.  Each symmetric
+   key is used only once, for a single object.  A new "session key" is
+   generated as a random number for each object (sometimes referred to
+   as a session).  Since it is used only once, the session key is bound
+   to the message and transmitted with it.  To protect the key, it is
+   encrypted with the receiver's public key.  The sequence is as
+   follows:
+
+   1.  The sender creates a message.
+
+   2.  The sending OpenPGP generates a random number to be used as a
+       session key for this message only.
+
+   3.  The session key is encrypted using each recipient's public key.
+       These "encrypted session keys" start the message.
+
+
+
+
+
+
+Callas, et al               Standards Track                     [Page 6]
+ 
+RFC 4880                 OpenPGP Message Format            November 2007
+
+
+   4.  The sending OpenPGP encrypts the message using the session key,
+       which forms the remainder of the message.  Note that the message
+       is also usually compressed.
+
+   5.  The receiving OpenPGP decrypts the session key using the
+       recipient's private key.
+
+   6.  The receiving OpenPGP decrypts the message using the session key.
+       If the message was compressed, it will be decompressed.
+
+   With symmetric-key encryption, an object may be encrypted with a
+   symmetric key derived from a passphrase (or other shared secret), or
+   a two-stage mechanism similar to the public-key method described
+   above in which a session key is itself encrypted with a symmetric
+   algorithm keyed from a shared secret.
+
+   Both digital signature and confidentiality services may be applied to
+   the same message.  First, a signature is generated for the message
+   and attached to the message.  Then the message plus signature is
+   encrypted using a symmetric session key.  Finally, the session key is
+   encrypted using public-key encryption and prefixed to the encrypted
+   block.
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=~~=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                                    ~finis~
+                                    .finis.
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=~~=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

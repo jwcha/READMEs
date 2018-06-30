@@ -1,0 +1,210 @@
+#2018#02#01 #bash #shell #builtin-commands
+################################################################################
+
+                             Bash shell - builtins
+
+   What are shell builtins? These are reserved words (or commands) that are
+   contained within the Bash toolset, meaning they are literally built in
+   to the shell. When executing these builtins, the shell performs no
+   lookup for a command (in your PATH) and doesn't fork off a subshell to
+   execute the command. The builtin is executed right then and there.
+
+      There are a few builtins that MUST be implemented as a builtin
+      (cd, exit, pwd, exec, pushd, popd, dirs, and others), and those that
+      are implemented as a builtin either for performance issues or because
+      it makes things more convenient.
+        (why do you think 'kill' is convenient as a builtin? what if your 
+          system is out of resources and cannot create another process? it
+          would be difficult to spawn a /usr/bin/kill process, wouldn't it?)
+
+      In the bash shell, certain words are both a reserved word and a command.
+      Like echo:
+        echo is both a shell builtin which is different than /bin/echo.
+
+      Try it yourself.
+
+         [sciro@dionysus ~]$ type echo
+         echo is a shell builtin
+         echo is /usr/bin/echo
+         [sciro@dionysus ~]$ 
+
+
+    ----------------------------
+    2016-09-29 @ 22:55, Thursday
+    - From the POSIX Programmer's Manual
+        - IEEE Std 1003.1, 2013 Edition, Standard for Information Technology 
+          -- Portable Operating System Interface (POSIX), the Open Group Base 
+          Specifications Issue 7, copyright (C) 2013 by the Institute of 
+          Electrical and Electronics engineers, Inc and The Open group.
+        - This is POSIX.1-2008 with the 2013 Technical Corrigendum 1 applied.
+        - (URL) http://www.unix.org/online.html
+    
+    ::Environment::
+    - Arch Linux 4.7.4-1-ARCH x86_64
+      - Thu Sep 15 15:24:29 CEST 2016 GNU/Linux
+      (URL) https://www.archlinux.org/
+    
+
+    Since type must be aware of the contents of the current shell execution
+    environment  (such  as  the lists of commands, functions, and built-ins
+    processed by hash), it is always provided as a shell regular  built-in.
+    If  it  is  called in a separate utility execution environment, such as
+    one of the following:
+
+    $ nohup type writer
+    $ find . −type f | xargs type
+
+    it might not produce accurate results.
+
+
+################################################################################
+################################################################################
+      
+      Some shell builtins:
+      
+        - kill
+        - cd, pwd
+        - pushd, popd, dirs
+        - eval, exec
+        - true, false
+        - : (colon)
+        - . (a period)
+        - break, continue, return
+        - exit
+        - getopts, shift
+        - hash
+        - readonly
+        - test
+        - times
+        - trap
+        - umask
+        - unset
+
+
+      Some Bash builtins (all previous builtins included):
+
+        - echo
+        - printf
+        - alias
+        - bind
+        - builtin
+        - caller
+        - command
+        - declare
+        - enable
+        - help
+        - let
+        - local
+        - logout
+        - mapfile
+        - read
+        - readarray
+        - source
+        - type
+        - typeset
+        - ulimit
+        - unalias
+
+   *-*-* According to Bash *-*-*                                      2017.12.01
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   According to GNU Bash v4.4.12(1)-release (x86_64-unknown-linux-gnu),
+   the enable builtin has a POSIX flag which displays the set of POSIX shell
+   builtins only. Running a diff on both outputs yields the following:
+
+      $ diff -ywBW80 <(enable -a) <(enable -as)
+
+            enable .                enable .
+            enable :                enable :
+            enable [              <
+            enable alias          <
+            enable bg             <
+            enable bind           <
+            enable break            enable break
+            enable builtin        <
+            enable caller         <
+            enable cd             <
+            enable command        <
+            enable compgen        <
+            enable complete       <
+            enable compopt        <
+            enable continue         enable continue
+            enable declare        <
+            enable dirs           <
+            enable disown         <
+            enable echo           <
+            enable enable         <
+            enable eval             enable eval
+            enable exec             enable exec
+            enable exit             enable exit
+            enable export           enable export
+            enable false          <
+            enable fc             <
+            enable fg             <
+            enable getopts        <
+            enable hash           <
+            enable help           <
+            enable history        <
+            enable jobs           <
+            enable kill           <
+            enable let            <
+            enable local          <
+            enable logout         <
+            enable mapfile        <
+            enable popd           <
+            enable printf         <
+            enable pushd          <
+            enable pwd            <
+            enable read           <
+            enable readarray      <
+            enable readonly         enable readonly
+            enable return           enable return
+            enable set              enable set
+            enable shift            enable shift
+            enable shopt          <
+            enable source           enable source
+            enable suspend        <
+            enable test           <
+            enable times            enable times
+            enable trap             enable trap
+            enable true           <
+            enable type           <
+            enable typeset        <
+            enable ulimit         <
+            enable umask          <
+            enable unalias        <
+            enable unset            enable unset
+            enable wait           <
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+    *-*-* SPECIAL BUILTINS *-*-*                                      2018.02.01
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   For historical reasons, the POSIX standard has classified several builtin
+   commands as _special_. When Bash is executing in POSIX mode, the special
+   builtins differ from other builtin commands in three respects:
+
+ 1. Special builtins are found before shell functions during command lookup.
+ 2. If a special builtin returns an error status, a non-interactive shell exits.
+ 3. Assignment statements preceding the command stay in effect in the shell
+    environment after the command completes.
+
+   When Bash is not executing in POSIX mode, these builtins behave exactly the
+   same as the rest of the builtin commands. There are fourteen special builtin
+   commands -- they are:
+         - :         the null command (typed as colon), always returns true
+         - .         the source command (typed as dot), same as 'source'
+         - break     exit for, while, or until loops
+         - continue  resume for, while, or until loops
+         - eval      combine and execute arguments as a shell command
+         - exec      replace shell with the given command
+         - exit      exit the shell
+         - export    set export attribute for shell variables/functions
+         - readonly  mark shell variables/functions as read-only (unchangeable)
+         - return    return from a shell function
+         - set       set or unset values of shell options and positional params
+         - shift     shift positional parameters
+         - trap      trap signals and other events using handlers
+         - unset     unset values and attributes of shell variables/functions
+
+################################################################################
+#                                  ~ finis ~                                   #
+################################################################################

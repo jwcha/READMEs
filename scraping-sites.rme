@@ -1,0 +1,86 @@
+#2017##11##25 #wget #httrack #website #scraper #offline
+',',',',',',','
+,',                                                                   2017.09.20
+','   Scraping webSites: wget && httrack
+,',
+',',',',',',','
+
+*-*-*-* a small foreward *-*-*-*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   Scraping websites can be useful for a number of reasons, and I won't bother
+ to go over any of them here. I presume you are perusing this piece with a
+ perfectly good reason and hardly need any others pointed out.
+   At the moment we will examine two tools: 'wget' and 'httrack' - the former
+ is a staple in any Linux network toolkit and latter is slightly specialized
+ for scraping sites but both will work just fine.
+   In time, the nuances of each will be worked out and faithfully documented
+ here so that the greedy eyes of the future may be so satiated.
+   
+   For portability, however, 'wget' will serve thee well.
+
+*-*-*-* wget *-*-*-*
+~~~~~~~~~~~~~~~~~~~~
+### THE ESSENTIALS - OTHER OPTIONS ASIDE AS NEEDED BUT ALWAYS SPECIFY THESE
+-k(--convert-links) # change links to local relative URLs
+## use 'windows' for majority of cases. unix & windows are mutually exclusive
+## windows: the chars \, |, /, :, ?, ", *, <, >, and control characters in the
+#+          ranges [00--31] and [128--159] are escaped. A '+' replaces ':' to
+#+          separate host:port and '@' replaces '?' to separate queries.
+## unix: the / character and control chars [00--31] and [128--159] are escaped.
+## nocontrol: escaping of control chars is also switched off. useful when
+#+            downloading URLs with UTF-8 chars (assuming system can display)
+## ascii: any bytes > 127 (outside range of ASCII chars) is escaped
+--restrict-file-names=[unix|windows|nocontrol|ascii|lowercase|uppercase],...
+
+### THE OPTIONALS - use em or don't
+-p(--page-requisites) # grab everything to properly display a HTML page.
+                      #+ try this to grab all reqs (even if external)
+                      #+ $ wget -E -H -k -K -p http://<site>/<document>
+-r(--recursive)       # default max depth is 5
+-l(--level=depth)     # specify recursion max depth
+-np(--no-parent)      # never ascend to parent dir when recursively retrieving
+-H(--span-hosts)      # go to foreign hosts when recursive
+
+### HEY THERE FANCY PANTS - play the songs that make us dance
+--compression=auto    # both auto & gzip do the same thing
+--no-cache            # disable server-side cache - get uncached ver.
+-P(--directory-prefix=PREFIX) # set top of tree, default is .
+-N(--timestamping)    # don't re-retrieve files unless newer than local
+--show-progress       # force wget to display progress in any verbosity
+-nc(--no-clobber)     # only download a file once
+-O(--output-document=FILE) # concatenate all file(s) to FILE, - means stdout
+-b(--background)      # background immediately after invoke
+
+### LET'S DEBUG - when you're speeding and need to figure out HTTP
+-d(--debug)           # print lots of debugging info. duh.
+-v(--verbose)         # output more detail
+-a(--append-output=FILE) # append to logfile. use -o to overwrite
+-S(--server-response) # print server response
+--spider              # don't download anything. not perfect (yet)
+-w(--wait=SEC)        # wait SEC seconds between retrievals
+--random-wait         # wait from 0.5*WAIT to 1.5*WAIT secs between retrievals
+--no-dns-cache        # disable caching DNS lookups
+
+*-*-*-* httrack *-*-*-*
+~~~~~~~~~~~~~~~~~~~~~~~
+standard operation:
+
+### get all files starting from URL with a 6 link depth, no restrictions
+httrack URL +* -r6
+
+### expert options
+
+-rN   set the mirror depth to N (--depth[=N]) [DEFAULT 9999]
+      (depth of 1 means current page. depth of 2 will follow links once.)
+-g    just get files (saved in current dir) (--get-files)
+-S    stay on the same directory (--stay-on-same-dir)
+-D    can only go down into subdirs (--can-go-down) [DEFAULT]
+-U    can only go to upper directories (--can-go-up)
+-B    can both go up&down into the directory structure (--can-go-up-and-down)
+-a    stay on the same address (--stay-on-same-address) [DEFAULT]
+-d    stay on the same principal domain (--stay-on-same-domain)
+-l    stay on the same TLD (e.g. .com) (--stay-on-same-tld)
+-e    go everywhere on the web (--go-everywhere)
+-cN   number of connections (--sockets[=N]) [DEFAULT 8]
+
+*-*-* ~ fin ~ *-*-*

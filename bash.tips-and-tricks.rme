@@ -1,0 +1,82 @@
+................................................................................
+..                                                                            ..
+..                            BASH TIPS AND TRICKS                            ..
+..                                                                            ..
+................................................................................
+
+
+~> THE FABLED TABLE OF CONTENTS
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Search the index number '>>>NNN<<<' to jump to it.
+
+>>>001<<<   Oneliner
+   Given multiple lines of text from a file or standard input, concatenate
+   each line onto a single line and return to standard input. This assumes
+   that each field is delimited with a space character. Another way of
+   describing it is: replace all newline and tab characters with the space
+   character, and remove duplicate space characters between fields.
+
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~
+>>>002<<<   Standard File
+   If standard input must be used and storing the contents to a temporary
+   file is not feasible given available system resources, use a named pipe.
+   Two shell processes must be used to spawn a reader and writer for the pipe,
+   however, a single shell may be used if the reader process is backgrounded.
+
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~
+>>>003<<<   Remove Non-Printable Chars
+   Using tr, remove all non-printable characters from standard input and 
+   output it to standard out.
+
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~
+>>>004<<< 
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~
+>>>005<<< 
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~
+>>>006<<< 
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~
+>>>007<<< 
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~
+>>>008<<< 
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~
+>>>009<<< 
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~
+>>>010<<< 
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~
+
+
+# ---------------------------------------------------------------------------- #
+>>>001<<<   Oneliner
+# ---------------------------------------------------------------------------- #
+METHOD 1: using echo (file input). multiple files ok. if the input must be 
+   from standard input, used a named pipe- see >>>002<<< .
+$ echo $(<file1) [$(<file2) ...]
+
+METHOD 2: using tr (standard input). Leaves trailing delimiter character.
+$ grep PATTERN FILE | tr '\n' ' '
+$ tr '\n' ' ' <FILE
+
+METHOD 3: use awk (stdin).
+$ grep PATTERN FILE | awk '{print}' ORS=' '
+$ awk '{print}' ORS=' ' <FILE
+
+# ---------------------------------------------------------------------------- #
+>>>002<<<   Standard File
+# ---------------------------------------------------------------------------- #
+$ mkfifo mypipe1 [mypipe2 ...]
+$ cat $(<mypipe1) [$(<mypipe2) ...] &        # reader process
+$ echo file1 file2 file3 [...] > mypipe1     # example writer process
+$ echo ...                                   # repeat for all named pipes
+# each pipe must be written to before the reader will execute and unblock
+
+# ---------------------------------------------------------------------------- #
+>>>003<<<   Remove Non-Printable Chars
+# ---------------------------------------------------------------------------- #
+$ cat file1 [file2 ...] | tr -cd [:print:]
+$ tr -cd [:print:] <FILE
+
+
+
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                  ~ finis ~                                   |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=

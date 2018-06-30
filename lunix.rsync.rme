@@ -1,0 +1,38 @@
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                    rsync                                     |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+
+# ------------------------------- INTRODUCTION ------------------------------- #
+
+   rsync is a utility for efficiently transferring and synchronizing files
+      across computer systems.
+
+   In order to minimize network traffic and bandwidth usage, rsync transmits
+      only the differences (or deltas) between identical files/dirs at the
+      SOURCE and DESTINATION locations (both of which can be local or remote).
+   This is called "delta encoding", or "data differencing".
+
+   The "Zlib" library may be used for additional compression.
+   The "OpenSSL" library (typically as SSH or stunnel) is used for security.
+
+# ------------------------------- HOW IT WORKS ------------------------------- #
+
+                        -> *> #> ENTER TEXT HERE <# <* <-
+
+# --------------------------------- EXAMPLES --------------------------------- #
+
+                        ~-~-~-~ Default Behavior ~-~-~-~
+   The default behavior of rsync is to 
+                           ~-~-~-~ True Sync ~-~-~-~
+   A true sync is one where the files/dirs at DEST are synchronized with the
+      files/dirs at SRC and will be identical mirrors after the sync 
+      operation is complete.
+
+   The normal behavior for rsync is to transfer any new files or update old
+      ones but will not touch (read:delete) any old files that are no longer
+      in SRC but still remain in DEST.
+
+
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                  ~ finis ~                                   |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=

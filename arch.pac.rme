@@ -1,0 +1,563 @@
+#linux #arch #pacman #package-management #bash #functions
+################################################################################
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                 %%
+%%  You need to run this to have a local keyring.  %%
+%%  # pacman-key init                              %%
+%%  # pacman-key --populate archlinux              %%
+%%                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+################################################################################
+################################################################################
+#                                                                              #
+#  2016-10-01: My second draft of pac()                                        #
+#                                                                              #
+#  time to consolidate all the pacman stuff into one function                  #
+#  do some custom logging with command so we can see any output                #
+#  use cases:                                                                  #
+#  1. Update the package list and upgrade all packages afterwards.             #
+#  2. Force a refresh of all package databases (even if they are up to date)   #
+#     and upgrade all packages afterwards.                                     #
+#  3. Do #1 and #2 but install a new package afterwards (including deps).      #
+#                                                                              #
+#  getopts will look like                                                      #
+#  broken out:                               |   corresponding option:         #
+#  1. pacman -Syu                            |   -u                            #
+#  2. pacman -Syyu                           |   -w                            #
+#  3. pacman -Syu package [ package2 ...]    |   -i                            #
+#  4. pacman -Syyu package [ package2 ...]   |   -y                            #
+#  5. pacman -S package                      |   -s                            #
+#  6. pacman -Runs package                   |   -r                            #
+#  Usage: pac [-huw] [iysr <package, ...>]                                     #
+#          (options cannot be combined, only one at a time)                    #
+#          -h: print this message and exit                                     #
+#          -u: pacman -vSyu                                                    #
+#          -w: pacman -vSyuu                                                   #
+#          -i: pacman -vSyu <package, ...>                                     #
+#          -y: pacman -vSyuu <package, ...>                                    #
+#          -s: pacman -vS <package, ...>                                       #
+#          -r: pacman -vRus <package, ...>                                     #
+#                                                                              #
+################################################################################
+
+pacUsage () {
+  local PROGNAME='pac'
+  echo "Usage: $PROGNAME [-huw] [-iysr <package, ...>]"
+  echo -e "\t(options cannot be combined)"
+  echo -e "\t-h: print this message and exit"
+  echo -e "\t-u: pacman -Syu"
+  echo -e "\t-w: pacman -Syyu"
+  echo -e "\t-i: pacman -Syu <package, ...>"
+  echo -e "\t-y: pacman -Syyu <package, ...>"
+  echo -e "\t-s: pacman -S <package>, ..."
+  echo -e "\t-r: pacman -Runs <package, ...>"
+  shift $#
+}
+
+function paclog {
+  /usr/bin/script -c "sudo pacman --noprogressbar -v $*"\
+    "${HOME}/logs/pacman/pacman-$(date +%F_%H.%M.%S).log"
+  shift $#
+}
+
+pac() {
+  local E_OPT=2
+  local E_MISSINGOPT=3
+  local E_NOPT=1
+  
+  if (( $# == 0 )); then
+    pacUsage
+    return $E_NOPT
+  fi
+ 
+  #debug_count=0 # used for loop counting
+  
+  # I use getopts purely to set flags. Once I have them, I stop processing.
+  # At this point the package(s) should be starting at $1.
+  OPTIONS=':huwiysr'
+  #getopts 'uwi:y:' VARNAME [ARGS...]
+  
+  FLAG=''
+  echo "\$# is: $#"
+  
+  #  Actually, this while loop doesn't make sense. We should really only
+  #+ be looking for one option, so just call getopts once with case.
+  #while getopts $OPTIONS OPTIONCHAR; 
+  #do
+    #(( debug_count +=1 ))
+    #echo "loop #: $debug_count"
+    getopts $OPTIONS OPTIONCHAR
+    echo -e "OPTIND is: $OPTIND\nOPTARG is: $OPTARG"
+    case $OPTIONCHAR in
+      #h) FLAG='h'; pacUsage;; #;return;;
+      u) FLAG='u'; echo "you passed in the 'u' flag";;
+      w) FLAG='w'; echo "you passed in the 'w' flag";;
+      i) FLAG='i'; echo "you passed in the 'i' flag";;
+      y) FLAG='y'; echo "you passed in the 'y' flag";;
+      s) FLAG='s'; echo "you passed in the 's' flag";;
+      r) FLAG='r'; echo "you passed in the 'r' flag";;
+      #\?) echo "Invalid option: -$OPTARG" >&2 ;;
+            # we should never hit this
+            #return $E_OPT;;
+      #:) echo "Option -$OPTIONCHAR requires an argument." >&2 ;;
+            # or this
+            #return $E_MISSINGOPT;;
+      *) pacUsage
+            #shift $((OPTIND -1))
+            shift $#
+            echo "after shift \$# is: $#"
+            OPTIND=1
+            return $E_OPT ;;
+    esac
+  #done
+
+#echo "out of loop; loop count is: $debug_count"
+#shift $((OPTIND -1)) # don't do this yet, what if we have packages?
+echo -e "OPTIND is: $OPTIND\nOPTARG is: $OPTARG"
+echo "\$# is: $#"
+
+OPTIND=1
+
+[[ -z "$FLAG" ]] && return $E_NOPT ||\
+  [[ "$FLAG" = 'h'  ]] && return   ||\
+  [[ "$FLAG" = 'u' ]] && echo 'updating...'; paclog '-Syu' ||\
+  [[ "$FLAG" = 'w' ]] && echo 'refreshing...'; paclog '-Syuu' ||\
+  [[ "$FLAG" = 'i' ]] && echo 'update & install...'; paclog "-Syu $*" ||\
+  [[ "$FLAG" = 'y' ]] && echo 'refresh & install...'; paclog "-Syuu $*" ||\
+  [[ "$FLAG" = 's' ]] && echo 'sync package(s)...'; paclog "-S $*" ||\
+  [[ "$FLAG" = 'r' ]] && echo 'remove package(s)...'; paclog "-Rus $*" ||\
+  echo "FLAG='$FLAG'. Honestly, how did you even get here??" >&2
+
+echo 'you made it!'
+shift $#
+}
+
+
+################################################################################
+#                                                                              #
+#  2016-10-01 +1.5 hours: My third draft of pac()                              #
+#                                                                              #
+#  time to consolidate all the pacman stuff into one function                  #
+#  do some custom logging with command so we can see any output                #
+#  use cases:                                                                  #
+#  1. Update the package list and upgrade all packages afterwards.             #
+#  2. Force a refresh of all package databases (even if they are up to date)   #
+#     and upgrade all packages afterwards.                                     #
+#  3. Do #1 and #2 but install a new package afterwards (including deps).      #
+#                                                                              #
+#  getopts will look like                                                      #
+#  broken out:                               |   corresponding option:         #
+#  1. pacman -Syu                            |   -u                            #
+#  2. pacman -Syyu                           |   -w                            #
+#  3. pacman -Syu package [ package2 ...]    |   -i                            #
+#  4. pacman -Syyu package [ package2 ...]   |   -y                            #
+#  5. pacman -S package                      |   -s                            #
+#  6. pacman -Runs package                   |   -r                            #
+#  Usage: pac [-huw] [iysr <package, ...>]                                     #
+#          (options cannot be combined, only one at a time)                    #
+#          -h: print this message and exit                                     #
+#          -u: pacman -vSyu                                                    #
+#          -w: pacman -vSyuu                                                   #
+#          -i: pacman -vSyu <package, ...>                                     #
+#          -y: pacman -vSyuu <package, ...>                                    #
+#          -s: pacman -vS <package, ...>                                       #
+#          -r: pacman -vRus <package, ...>                                     #
+#                                                                              #
+################################################################################
+
+pacUsage () {
+    local PROGNAME='pac'
+    echo "Usage: $PROGNAME [-huw] [-iysr <package, ...>]"
+    echo -e "\t(options cannot be combined)"
+    echo -e "\t-h: print this message and exit"
+    echo -e "\t-u: pacman -Syu"
+    echo -e "\t-w: pacman -Syyu"
+    echo -e "\t-i: pacman -Syu <package, ...>"
+    echo -e "\t-y: pacman -Syyu <package, ...>"
+    echo -e "\t-s: pacman -S <package>, ..."
+    echo -e "\t-r: pacman -Runs <package, ...>"
+    shift $#
+}
+
+function paclog {
+  /usr/bin/script -c "sudo pacman --noprogressbar -v $*"\
+    "${HOME}/logs/pacman/pacman-$(date +%F_%H.%M.%S).log"
+  shift $#
+}
+
+pac() {
+  local E_OPT=2 E_MISSINGOPT=3 E_NOPT=1
+
+  # so the way bash interprets COMMAND1; COMMAND2 is...
+  # COMMAND1;
+  # COMMAND2;
+  # meaning, if you have something like,
+  # [[ test ]] && COMMAND1; [return/exit]
+  # then what comes out is:
+  # [[ test ]] && COMMAND1;
+  # [return/exit] 
+  # so nothing happens.
+  (( $# == 0 )) && pacUsage && return $E_NOPT
+  
+  # I use getopts purely to set flags. Once I have them, I stop processing.
+  # At this point the package(s) should be starting at $1.
+  OPTIONS=':huwiysr'
+  FLAG=''
+  #getopts 'uwi:y:' VARNAME [ARGS...]
+  #  Actually, this while loop doesn't make sense. We should really only
+  #+ be looking for one option, so just call getopts once with case.
+  #while getopts $OPTIONS OPTIONCHAR; 
+  #do
+    getopts $OPTIONS OPTIONCHAR
+    #(( debug_count +=1 ))
+    #echo "loop #: $debug_count"
+    #echo -e "OPTIND is: $OPTIND\nOPTARG is: $OPTARG"
+    #echo "\$# is: $#"
+    case $OPTIONCHAR in
+      h) FLAG='h'; pacUsage;;# return;;
+      u) FLAG='u'; echo "you passed in the 'u' flag";;
+      w) FLAG='w'; echo "you passed in the 'w' flag";;
+      i) FLAG='i'; echo "you passed in the 'i' flag";;
+      y) FLAG='y'; echo "you passed in the 'y' flag";;
+      s) FLAG='s'; echo "you passed in the 's' flag";;
+      r) FLAG='r'; echo "you passed in the 'r' flag";;
+      #\?) echo "Invalid option: -$OPTARG" >&2 ;;
+          # we should never hit this
+          #return $E_OPT;;
+      #:) echo "Option -$OPTIONCHAR requires an argument." >&2 ;;
+          # or this
+          #return $E_MISSINGOPT;;
+      *) pacUsage
+         #shift $((OPTIND -1))
+         shift $#
+         echo "after shift \$# is: $#"
+         OPTIND=1
+         return $E_OPT ;;
+    esac
+
+#echo "loop #: $debug_count"
+#echo -e "OPTIND is: $OPTIND\nOPTARG is: $OPTARG"
+#echo "\$# is: $#"
+#shift $((OPTIND -1)) # don't do this yet, what if we have packages?
+#echo "FLAG=$FLAG"
+
+OPTIND=1
+ 
+[[ -z "$FLAG" ]] && shift $# && return $E_NOPT
+
+case "$FLAG" in
+  h) shift $#; return ;;
+  u) echo 'update..'; paclog '-Syu' ;;
+  w) echo 'refesh..'; paclog '-Syuu' ;;
+  i) echo "update & install.. $*"; paclog "-Syu $*" ;;
+  y) echo "refresh & install.. $*"; paclog "-Syuu $*" ;;
+  s) echo "sync package(s).. $*"; paclog "-S $*" ;;
+  r) echo "remove package(s).. $*"; paclog "-Rus $*" ;;
+  *) echo "FLAG='$FLAG'. Honestly, how did you even get here??" >&2 ;;
+esac
+echo 'you made it!'
+shift $#
+}
+
+################################################################################
+#                                                                              #
+#  2017-12-12: annual dump of my pac()                                         #
+#                                                                              #
+#  A lot has changed in a little over a year. pac() looks much different now   #
+#  which is mostly due to my own growth with lunix and shell scripting.        #
+#  Below you will find a direct copypasta from my ~/.bashrc :                  #
+#                                                                              #
+################################################################################
+#                                                                              #
+#                                    PAC                                       #
+#        Function to take care of pacman transactions and log output.          #
+#                                                                              #
+################################################################################
+#  time to consolidate all the pacman stuff into one function                  #
+#  do some custom logging with command so we can see any output                #
+#  use cases:                                                                  #
+#  1. Update the package list and upgrade all packages afterwards.             #
+#  2. Force a refresh of all package databases (even if they are up to date)   #
+#     and upgrade all packages afterwards.                                     #
+#  3. Do #1 and #2 but install a new package afterwards (including deps).      #
+#                                                                              #
+#  look at pacUsage for details on arguments.                                  #
+################################################################################
+
+# functions to search official repos and AUR for pkgs                 2017.08.02
+#+ psearch will query the sync database with each argument it is given
+#+ asearch will query the AUR database with each argument it is given
+: << 'comment'
+_scirosearch () {
+   (( $# == 0 )) && echo 'what do you want to search?' && return $E_NOPT
+   case $1 in 
+      sync ) shift; while (($#)); do pacman -Ss "$1"; line; shift; done;;
+      query) shift; while (($#)); do pacman -Qs "$1"; line; shift; done;;
+      aur  ) shift; while (($#)); do pacaur -s "$1"; line; shift; done;;
+      *    ) ;;
+   esac
+}
+asearch () {
+   (( $# == 0 )) && echo 'what do you want to search?' && return $E_NOPT
+   local AUROPTS=''
+   while (( $# )); do
+      [[ $1 =~ ^--?.*$ ]] && AUROPTS="$AUROPTS $1" && shift && continue
+      pacaur -s $AUROPTS "$1"
+      line
+      shift
+   done
+}
+comment
+psearch () {
+   (( $# == 0 )) && echo 'what do you want to search?' && return $E_NOPT
+   local PACMAN_AUR_OPTIONS='' PACOPTS=''
+   while (( $# )); do
+      [[ $1 =~ ^--?.*$ ]] && PACOPTS="$PACMAN_AUR_OPTIONS $1" && shift && continue
+      pacman -Ss $PACOPTS "$1"
+      #pacaur -Ss $PACOPTS "$1"
+      line
+      read -rsn1 -p'>>>>>type [aA] to search AUR, type anything else to exit'
+      Newlines 2
+      [[ $REPLY =~ ^[aA]$ ]] && pacaur -s $PACMAN_AUR_OPTIONS "$1"
+      shift
+   done
+}
+# show pac usage
+pacUsage () {
+   local moreNotes=''
+   case $1 in 
+      -h) moreNotes='y';;
+  --help) moreNotes='y';;
+       *) moreNotes='n';;
+   esac
+   more << 'EOF'
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                   ~ pac ~                                    |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                       Usage: pac <OPTIONS> [PKGs, ...]                       |
+|------------------------------------------------------------------------------|
+|                               >>> OPTIONS <<<                                |
+|    -h: print this message with additional notes and exit                     |
+|    -u: Perform a system upgrade & sync any additional packages.              |
+|       >>> pacman --sync --refresh --sysupgrade                    [pkg, ...] |
+|------------------------------------------------------------------------------|
+|    -y: Refresh latest repo lists & execute '-u'.                             |
+|       >>> pacman --sync --refresh{,} --sysupgrade                 [pkg, ...] |
+|------------------------------------------------------------------------------|
+|    -s: Sync package(s) from enabled repositories.                            |
+|       >>> pacman --sync                                           <pkg, ...> |
+|------------------------------------------------------------------------------|
+|    -r: Remove pkg(s) and it's deps (not req'd by any installed pkg)          |
+|       >>> pacman --remove --recursive                             <pkg, ...> |
+|------------------------------------------------------------------------------|
+|    -R: Same as '-r' above except don't backup cfg files. (.pacsave files)    |
+|       >>> pacman --remove --recursive --nosave                    <pkg, ...> |
+|------------------------------------------------------------------------------|
+|    -q: List all explicitly installed packages that are unrequired.           |
+|       >>> pacman --query --explicit --unrequired                             |
+|------------------------------------------------------------------------------|
+|    -o: List all orphaned packages.                                           |
+|       >>> pacman --query --deps --unrequired                                 |
+|------------------------------------------------------------------------------|
+|    -a: Sync package(s) from Arch official repos & AUR.                       |
+|       >>> pacaur                                                  <pkg, ...> |
+|------------------------------------------------------------------------------|
+|    -A: Perform a system upgrade on all packages (AUR included).              |
+|       >>> pacaur -Syyu --aur                                                 |
+|------------------------------------------------------------------------------|
+|    --p: stop processing options and pass rest of command to pacman           |
+|       >>> pacman "$@"                                                        |
+|------------------------------------------------------------------------------|
+|    --a: stop processing options and pass rest of command to pacaur           |
+|       >>> pacaur "$@"                                                        |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+EOF
+   [ "$moreNotes" == 'y' ] && more << 'EOF'
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|                                   notes                                      |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+|        >>  Regarding package removal & optimization                          |
+|        >>+  Try the following:                                               |
+|        >>+   - pacman -Syy         (to refresh package lists)                |
+|        >>+   - pacman -Scc         (to clear out pacman's cache)             |
+|        >>+   - pacman -Suu         (to perform a full system upgrade)        |
+|        >>+   - pacman -Rscnd <pkg> (remove 'pkg' - reverse of 'sync')        |
+=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=~+~=
+EOF
+unset moreNotes
+return $E_OK
+}
+# pacSudo: variable to tell pkglog() whether sudo is needed or not.
+#+  0 == False, rePInt == True (any positive integer)
+#+  default is True. 
+#pacSudo=1;
+
+# 2017.04.29: switch from using typescript to tee with subshells
+pkglog () {
+  local pac_prog="/usr/bin/pacman" aur_prog="/usr/bin/pacaur"
+  case $1 in
+    p) shift; 
+       local teefile="${HOME}/sysadmin/logs/pacman/pac-$(date +%F_%H.%M.%S).log"
+       echo "\$ $pac_prog $*" | tee "$teefile"
+       ### set pacSudo if it's not set
+       #if ! isVariableSet pacSudo; then pacSudo=1; fi
+       #(( $pacSudo )) && \
+          (sudo bash -c "$pac_prog --color never --noprogressbar --verbose $*" 2>&1) | tee -a "$teefile" 
+       #    || \
+          #(sudo sh -c "command $pac_prog --color never --noprogressbar --verbose $*" 2>&1) | tee -a "$teefile" 
+       echo -e "\n>>> logfile >>> $teefile"
+       ;;
+    a) shift; 
+       local teefile="${HOME}/sysadmin/logs/aur/aur-$(date +%F_%H.%M.%S).log"
+       echo -e "\$ $aur_prog $*\n" | tee "$teefile"
+       (bash -c "$aur_prog $*" 2>&1) | tee -a "$teefile"
+       echo -e "\n>>> logfile >>> $teefile"
+       ;;
+    *) shift $#; return $E_BOPT;;
+  esac
+  shift $#; return $E_OK
+}
+pac () {
+  (( $# == 0 )) && pacUsage && return $E_NOPT
+  # getopts isn't necessary, since options cannot be combined.        2017.12.01
+  # I use getopts purely to set flags. Once I have them, I stop processing.
+  # At this point the package(s) should be starting at $1.
+  #OPTIONS=':huysrRaAqo-' FLAG=''
+  #getopts 'uwi:y:' VARNAME [ARGS...]
+  #getopts $OPTIONS OPTIONCHAR
+  #case $OPTIONCHAR in
+  case $1 in
+    -h) pacUsage "$@";; 
+    -u) shift; pacSudo=1; pkglog 'p' "-Syu $*"               ;;
+    -y) shift; pacSudo=1; pkglog 'p' "-Syyu $*"              ;;
+    -s) shift; pacSudo=1; pkglog 'p' "-S $*"                 ;;
+    ### added --unneeded to Remove operations                         2017.11.20
+    -r) shift; pacSudo=1; pkglog 'p' "-Rus $*"               ;;
+    -R) shift; pacSudo=1; pkglog 'p' "-Runs $*"              ;;
+    -q) shift; pacSudo=0; command pacman -v -Qet             ;;
+    -o) shift; pacSudo=0; command pacman -v -Qdt             ;;
+    -a) shift;            pkglog 'a' "-S $*"                 ;;
+    -A) shift;            pkglog 'a' "-Syyua $*"             ;;
+   --p) shift;            pkglog 'p' "$*"                    ;;      #2017.12.01
+       # added a flag for pacaur as well as pacman                    2017.12.02
+   --a) shift;            pkglog 'a' "$*"                    ;;
+    *) pacUsage "$@";;
+  esac
+              # pacSudo is useless for now, but I've kept the structure in case
+              # I do end up needing a sudo check.
+  OPTIND=1
+  shift $#; return $E_OK
+}
+################################################################################
+#                         PACKAGE MANAGEMENT - PACMAN                          #
+#                                (DEPRECATED)                                  #
+################################################################################
+#                                                                     2017.06.01
+# fixed pac, so no need for this anymore. Delete it entirely after a year.
+: << 'commentblock'
+# create a quick function for updating via pacman and logging output.
+# pacup: full system upgrade (-Syyu)
+# pacin: simple sync install (-S)
+pacup () {
+   local teefile="/home/sciro/sysadmin/logs/pacman/pac-$(date +%F_%H.%M.%S).log"
+   echo -e "\$ pacman -Syyuv $*\n" > "$teefile"
+   (sudo pacman --color never --noprogressbar -Syyuv $* 2>&1) | tee -a "$teefile"
+   echo -e "\n>>> logfile >>> $teefile"
+   shift $# && return
+}
+pacin () {
+   local teefile="/home/sciro/sysadmin/logs/pacman/pac-$(date +%F_%H.%M.%S).log"
+   echo -e "\$ pacman -Sv $*\n" > "$teefile"
+   (sudo pacman --color never --noprogressbar -Sv $* 2>&1) | tee -a "$teefile"
+   echo -e "\n>>> logfile >>> $teefile"
+   shift $# && return
+}
+aur () {
+   local teefile="/home/sciro/sysadmin/logs/pacaur/aur-$(date +%F_%H.%M.%S).log"
+   echo -e "\$ pacaur $*\n" > "$teefile"
+   (pacaur $* 2>&1) | tee -a "$teefile"
+   echo -e "\n>>> logfile >>> $teefile"
+   shift $# && return
+}
+commentblock
+         # update and log 
+         #alias update="sudo pacman -Syu | tee /home/sciro/logs/pacman/\
+         #pacman-$(date +%F-%H.%M).log"
+         #alias updatee="sudo pacman -Syyu | tee /home/sciro/logs/pacman/\
+         #pacman-$(date +%F-%H.%M).log"
+
+         #alias teepac="tee /home/sciro/logs/pacman/pacman-$(date +%F-%H.%M).log"
+
+         # use the script command instead
+         #alias update='script -c '\''sudo pacman -Syuv --noprogressbar'\''\
+           #/home/sciro/logs/pacman/pacman-$(date +%F_%H.%M.%S).log'
+         #alias updatee='script -c '\''sudo pacman -Syyuv --noprogressbar'\''\
+           #/home/sciro/logs/pacman/pacman-$(date +%F_%H.%M.%S).log'
+         #  The double quoted version. Note that you while you can nest single quotes, 
+
+         #+ you must escape the '$'.
+         #alias update="script -c 'sudo pacman -Syuv --noprogressbar'\
+         #  /home/sciro/logs/pacman/pacman-\$(date +%Y%m%d_%H.%M.%S).log"
+         #alias updatee="script -c 'sudo pacman -Syyuv --noprogressbar'\
+         #  /home/sciro/logs/pacman/pacman-\$(date +%Y%m%d_%H.%M.%S).log"
+
+         # done with aliases (update && updatee)
+         #pacup() {
+             
+             #  /home/sciro/logs/pacman/pacman-$(date +%F-%H.%M).log
+         #}
+         #
+         #pacupp() {
+             #command /usr/bin/script -c 'sudo pacman -Syyu'\
+             #  /home/sciro/logs/pacman/pacman-$(date +%F-%H.%M).log
+         #}
+       
+
+         # simple pacman sync install. deprecated into "pac". 
+         #pacinstall() {
+           #/usr/bin/script -c "sudo pacman -vS $*" "/home/sciro/logs/pacman/pacman-$(date +%F_%H.%M.%S).log"
+           #shift $#
+         #}
+# jwcha: 2016-11-08: consolidated pkglog functions
+#   previously was {aur,pac}log().
+#+   'p' for pacman;
+#+   'a' for aur
+: << 'commentblock'
+         pkglogScript () {
+           local pac_prog="$(command which pacman)" aur_prog="$(command which yaourt)"
+           case $1 in
+             p) shift; echo "$pac_prog --color never --verbose $*"
+                ### set pacSudo if it's not set
+                if ! isVariableSet pacSudo; then pacSudo=1; fi
+                (( $pacSudo )) && \
+                    command script -c "sudo $pac_prog --color never -v $*" "${HOME}/logs/pacman/pacman-$(date +%F_%H.%M.%S).log" || \
+                    command script -c "$pac_prog --color never -v $*" "${HOME}/logs/pacman/pacman-$(date +%F_%H.%M.%S).log"
+                ;;
+             a) shift; echo "$aur_prog $*"
+                command script -c "$aur_prog $*" "${HOME}/logs/yaourt/yaourt-$(date +%F_%H.%M.%S).log"
+                ;;
+             *) shift $#; return $E_BOPT;;
+           esac
+           shift $#
+         }
+         ########### OLD stuff ##########
+            # function aurlog {
+            #   local PROG="$(command which yaourt)"
+            #   echo "$PROG --noprogressbar --nocolor -v $* \
+            #     ${HOME}/logs/yaourt/yaourt-$(date +%F_%H.%M.%S).log"
+            #   /usr/bin/script -c "$PROG --noprogressbar --nocolor -v $*" "${HOME}/logs/yaourt/yaourt-$(date +%F_%H.%M.%S).log"
+            #   shift $#
+            # }
+
+            # function paclog {
+            #   local PROG="$(command which pacman)"
+            #   echo "sudo $PROG --noprogressbar --color never -v $* \
+            #     ${HOME}/logs/pacman/pacman-$(date +%F_%H.%M.%S).log"
+            #   /usr/bin/script -c "sudo $PROG --noprogressbar --color never -v $*" "${HOME}/logs/pacman/pacman-$(date +%F_%H.%M.%S).log"
+            #   shift $#
+            # }
+commentblock
+################################################################################
+################################################################################
+################################################################################
+~FIN~

@@ -1,0 +1,102 @@
+#2018#02#01 #gnu #find #lunix
+                                                                 dddddddd
+          ffffffffffffffff    iiii                               d::::::d
+         f::::::::::::::::f  i::::i                              d::::::d
+        f::::::::::::::::::f  iiii                               d::::::d
+        f::::::fffffff:::::f                                     d:::::d
+        f:::::f       ffffffiiiiiiinnnn  nnnnnnnn        ddddddddd:::::d
+        f:::::f             i:::::in:::nn::::::::nn    dd::::::::::::::d
+       f:::::::ffffff        i::::in::::::::::::::nn  d::::::::::::::::d
+       f::::::::::::f        i::::inn:::::::::::::::nd:::::::ddddd:::::d
+       f::::::::::::f        i::::i  n:::::nnnn:::::nd::::::d    d:::::d
+       f:::::::ffffff        i::::i  n::::n    n::::nd:::::d     d:::::d
+        f:::::f              i::::i  n::::n    n::::nd:::::d     d:::::d
+        f:::::f              i::::i  n::::n    n::::nd:::::d     d:::::d
+       f:::::::f            i::::::i n::::n    n::::nd::::::ddddd::::::dd
+       f:::::::f            i::::::i n::::n    n::::n d:::::::::::::::::d
+       f:::::::f            i::::::i n::::n    n::::n  d:::::::::ddd::::d
+       fffffffff            iiiiiiii nnnnnn    nnnnnn   ddddddddd   ddddd
+
+                                __ _           _
+                               / _(_)         | |
+                              | |_ _ _ __   __| |
+                              |  _| | '_ \ / _` |
+                              | | | | | | | (_| |
+                              |_| |_|_| |_|\__,_|
+
+                           __________________________
+                                 _                   
+                               /  `   ,             /
+                           --_/__---------__----__-/-
+                             /      /   /   ) /   /  
+                           _/______/___/___/_(___/___
+
+                                 _   _   _   _  
+                                / \ / \ / \ / \ 
+                               ( f | i | n | d )
+                                \_/ \_/ \_/ \_/ 
+
+=====-----+++++-----=====-----+++++----~~----+++++-----=====-----+++++-----=====
+=====-----+++++-----=====-----+++++----~~----+++++-----=====-----+++++-----=====
+=====-----+++++-----=====-----+++++----~~----+++++-----=====-----+++++-----=====
+
+ ~~> PROBLEMS WITH '-exec' AND FILENAMES <~~
+ ___________________________________________
+   It is generally always advised to use '-execdir' instead of '-exec' since
+   with the former 'find' will cd to a file's directory and prefix a dot-slash
+   to prevent a file from being mistaken as an argument.
+
+   And as safe as '-execdir' is, constructs of the form:
+      $ find -exec sh -c "something {}" \;
+      $ find -execdir sh -c "something {}" \;
+   are quite dangerous since the '{}' is expanded to a filename (which may have
+   special characters in them) and passed unquoted to an interpreter ('sh'). If
+   a malicious user decides to create a file named '/tmp/foo; rm -rf $HOME',
+   the above two find commands will unexpectedly delete a user's home dir.
+
+   If there is no way around it and a shell must be used, this workaround is
+   a better way of framing things (although it isn't perfect or foolproof):
+      $ find -exec sh -c 'something "$@"' sh {} \;
+      $ find -execdir sh -c 'something "$@"' sh {} \;
+
+SYMMETRIC:
+#  ~  #  ~  #  ~  #  ~  #  ~  #  ~  #  ~~  #  ~  #  ~  #  ~  #  ~  #  ~  #  ~  #
+%  ~  %  ~  %  ~  %  ~  %  ~  %  ~  %  ~~  %  ~  %  ~  %  ~  %  ~  %  ~  %  ~  %
+
+## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ## ~~ ##
+%% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %% ~~ %%
+** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ ** ~~ **
+
+.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~..
+
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ---- . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ==== . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ++++ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . .... . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~--~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~..~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~**~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~``~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ .
+
+. _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~ . _ . ~
+
+..__..~~..__..~~..__..~~..__..~~..__..~~..__..~~..__..~~..__..~~..__..~~..__..~~
+
+.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~.._..~..
+
+o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~
+~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ oo ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o ~ o
+
+< o >< o >< o >< o >< o >< o >< o >< o >< o >< o >< o >< o >< o >< o >< o >< o >
+< * >< * >< * >< * >< * >< * >< * >< * >< * >< * >< * >< * >< * >< * >< * >< * >
+< # >< # >< # >< # >< # >< # >< # >< # >< # >< # >< # >< # >< # >< # >< # >< # >
+
+
+<~>
+< o > < * > < @ > < # > < ~ >
+
+< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >< ~ >
+
+.. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ...
+..                                 ~ finis ~                                  ..
+... . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..

@@ -1,0 +1,66 @@
+#2018#02#03 #secret #codes #security #morse #communication #message #telegraph
+... . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ....
+..                                 MORSE CODE                                 ..
+.... . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ...
+
+>==================================
+"~~> WHO/WHAT/WHEN/WHERE/WHY/HOW ?"
+==================================<
+   Morse code is a method of transmitting text information as a series of on-off
+ tones, lights, or clicks that can be directly understood by a skilled person
+ receiving the transmission. It is named after Samuel F.B. Morse, the inventor
+ of the telegraph.
+
+
+>======================================
+"~~> INTERNATIONAL MORSE CODE ELEMENTS"
+======================================<
+ International Morse code is composed of five elements:
+   1. short mark, dot or 'dit' ( . ): 'dot duration' is one time unit long
+   2. longer mark, dash or 'dah' ( ... or - ): three time units long
+   3. inter-element gap between the dots and dashes within a character: one unit
+   4. short gap (between letters): three time units long
+   5. medium gap (between words): seven time units long
+
+ Since Morse code only requires two states (on/off), we can use binary:
+   1. short mark, dot or 'dit' ( . ): 1
+   2. longer mark, dash or 'dah' ( ... or - ): 111
+   3. intra-character gap (between dots and dashes within character): 0
+   4. short gap (between letters): 000
+   5. medium gap (between words): 0000000
+
+(Note that the structure dictates alternation because dits/dahs are always
+ separated by one of the gaps and gaps are always separated by a dit or dah.)
+
+   Morse messages are generally transmitted by a hand-operated device (e.g. a
+ telegraph key) so there are variations introduced by the skill of the sender &
+ receiver -- more experienced operators can send/receive at faster speeds. In
+ addition, individual operators differ slightly; for example, using slightly
+ longer or shorter dashes or gaps, perhaps only for certain characters. This is
+ called their "fist"(JARGON), and experienced operators can recognize specific
+ individuals by it alone. An operator with a "good fist" sends clearly and is
+ easy to copy; conversely those with a "bad fist" is sloppy and hard to copy.
+
+
+>===========
+"~~> TIMING"
+===========<
+   Here is an example transmission of the phrase "MORSE CODE":
+   ('-' represents dahs and '.' represents dits)
+
+      -- --- .-. ... .       -.-. --- -.. .
+      M   O   R   S  E        C    O   D  E
+
+   With exact conventional timing:
+   ('=' for 'signal on' and '.' for 'signal off'; ignore backslashes and spaces)
+
+      ===.===...===.===.===...=.===.=...=.=.=...=.......\
+      (  M  )   (    O    )   (  R  )   ( S )  (E)(SPACE)
+                                 ===.=.===.=...===.===.===...===.=.=...=
+                                 (    C    )   (    O    )   (  D  )  (E)
+
+
+
+.. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ...
+..                                 ~ finis ~                                  ..
+... . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
