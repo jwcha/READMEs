@@ -1,0 +1,487 @@
+#2018#07#06 #health #carpal-tunnel-syndrome #info #multi-series
+
+(This information culled from techinfo.mit.edu -- just telnet to it.
+A very spiffy service, I must say. -- dwallach)
+
+============================================================================
+
+After this message was sent out, I started having quite severe problems
+with my right wrist, and having seen this message, began to worry that
+it might be carpal tunnel.  I went to the med center and the doctor
+confirmed that it was in fact an early case of carpal tunnel.  He gave
+me a wrist brace to wear, and told me to take ibuprofen when I had
+problems.  Ibuprofen helps a lot.  If any of you have questions about
+this, please talk to me, as I've learned quite a bit about it (not by
+choice, though).
+                                                -MESSAGE FROM CHRIS VANHAREN.
+
+
+======================================================================
+
+The following message was sent out by a 6.170 student.  She makes some
+points that are generally valuable for all of us to know about.
+
+This message has very little to do with 6.170, but since you will all be
+doing intense ammounts of typing this term and probably in the future,
+you should know about Carpal Tunnel Syndrome.  I apologize to all those
+who already know about this.
+
+Carpal Tunnel Syndrome is an advanced form of Forearm Overuse Syndrome
+and tendonitis in the wrists.  Basically, the bones in your wrist form a
+3-sided tunnel (called the Carpal Tunnel).  Your tendons, blood vessels
+and nerves pass through this tunnel.  If your tendons swell up too much,
+it can pinch your blood vessels and nerves, causing numbness in the
+fingers.  If it is ignored, permanent damage can occur.  Even if it
+doesn't advance to the numbness stage, it is extremely painful and can
+render your hands prettyuseless.
+
+In the past, mostly factory workers were the victims of this type of
+injury, which is caused by repetitive motion (aka Reptitive Motion
+Syndrome.)  However, most cases now are related to computer use. I
+developed this infliction last year when i was taking 6.170.  I
+developed pain in my wrists, that sometimes ran from my fingers all the
+way to my elbow.  I was stupid and ignored it,thinking it would go away
+as soon as the  class was over and i got to take a rest from typing.  I
+rested it 3 weeks and it seemed fine until i started typing again at my
+job.  The pain got worse and worse until i could barely write, or even
+tie my shoes.  Then one day i woke up and i couldn't feel the tips of my
+fingers. I ran to the med center.
+
+I had both my hands in casts, and then splints for the remainder of the
+summer. Even though I've taken almost 6 mos. of rest from typing, i
+still experience severe pain whenever i type. (Not good news for a 6-3).
+Almost a year later, I am taking strong anti-inflamatory medication and
+pain killers (equal to 7 Advil) everyday.  I am in physical therapy 3
+times a week getting ultrasound treatment, and i ice my wrists all the
+time.  My orthropedic doctor has diagnosed it as chronic, although we
+are trying everything to correct it, possibly even surgery.  Basically,
+I'm trying to say that this is VERY SERIOUS.It can really interfere with
+your career...  And it CAN HAPPEN TO YOU!!!My doctor says he currently
+has 15 cases of students with chronic variations of Forearm Overuse
+Syndrome.
+
+I probably got this because I typed wrong.  Do the following to avoid
+developing CTS/Tendonitis:
+
+1) Keep your wrists UP while typing.  DO NOT PUT YOUR WRISTS ON THE
+TABLE!!! It might seem uncomfortable at first, but you'll get used to
+it.
+KEEP YOUR WRISTS UP!  KEEP YOUR WRISTS UP!  This is VERY important.
+
+2) If you feel your wrists might need support in the "up" position, put
+a pillow under them or something.
+
+3) Make sure you are using the Shift Keys properly.  Do not hit the
+shift key with the same hand you hit the other key.
+
+4) Try switching your mouse to the left side now and then if you are a
+righty,and viceversa for lefties.  There are lefty configured
+workstations in
+38-344.
+
+5) Make sure that the key board is low enough.  It should not be too
+high, so that you would have the temptation to rest your forearm on the
+table.If the keyboard is too high (as it often is in Athena clusters)
+put the keyboard in your lap.  Good posture while typing can make an
+amazing difference.
+
+6) If you experience any pain, ice it and Go to the Med Center.
+
+7) If it hurts too much to type, for God's sake, give your hands a rest.
+I worked through it last year, and I got a good grade in 6.170, but i'm
+not sure if that good grade was worth screwing up my hands for possibly
+the rest of my life (not very optimistic, i know.)  I'm currently
+looking into Law School since I don't know what else I'd be able to do
+if I can't get rid of this... :)
+
+Sue
+
+==================
+
+
+Date: Wed, 27 Jun 90 09:40:34 CDT
+From: meyering@cs.utexas.edu (Jim Meyering)
+Subject: info on carpal tunnel syndrome (CTS)
+    [Submitted via werner@cs.utexas.edu (Werner Uhrig)]
+
+A friend suggested I read the following message (once posted to the sci.med
+newsgroup).
+
+I think it should interest anyone who types a lot.
+
+One point the author does not mention is that the "force-depression curve" of
+your keyboard may also play a role.  It is better to have a linear relationship
+between force and depression.  But the keys on some keyboards require greater
+force to depress the first few millimeters than the last few.  This gives what
+is sometimes hyped as "positive-touch" or something similar.  The net result is
+that you have to press (relatively) hard to get over the "hump," then with the
+low resistance beyond it, your fingers bang into the base with more force than
+with "linear" keyboards.  People have suggested that this sort of dynamic may
+aggravate or even induce CTS.  Many of our HPs have this "nonlinear" keyboards.
+The keys on some Sun3 keyboards have become so sticky that they give the same
+effect.
+
+Jim Meyering    meyering@cs.utexas.edu    uunet!cs.utexas.edu!meyering
+
+=========
+
+From: Andrea Frankel <andrea@sdd.hp.com>
+
+Carpal Tunnel Syndrome:
+
+This is a slightly edited reposting; apologies if you've seen it before,
+but many people who read this on an internal HP notes group have found
+it useful and asked for it to be more widely distributed.
+
+Disclaimer:  I am not a doctor (but I sometimes play one on the Net ;@).
+This is from my own personal experience with the malady, supplemented by
+a little research and lots of talking to doctors and such.  Carpal
+Tunnel Syndrome is being seen more and more frequently among the
+computer set (my neurologist jokingly refers to it as "hacker's hand");
+when caught early, conservative treatment can completely cure it.
+However, if you let it go on long enough you can cause irreversible
+damage.  If you have any question at all, PLEASE SEE A DOCTOR!  Better
+safe than sorry.
+
+1.  The setup
+
+The bones in your wrist form a 3-sided tunnel, with the fourth side
+closed off by a very tough piece of cartilage.  In this carpal tunnel
+run the tendons of the muscles which flex your fingers, as well as the
+very important median nerve which ennervates the thumb and the first two
+fingers.
+
+If something happens to cause the contents of the tunnel to swell, or to
+cause the tunnel itself to get smaller, the pressure exerted on the
+median nerve results in carpal tunnel syndrome.  Pregnancy, sudden
+weight gain, drugs which cause water retention, and repetitive overuse
+(or abuse) which causes tendinitis in those flexor tendons, can all cause
+carpal tunnel syndrome.  (I recently learned that hypothyroid condition
+can also cause CTS.)
+
+Positions where the wrist is bent back while being used really
+exacerbate the problem (e.g. bicycling with drop handlebars, if you are
+not careful about hand positioning).
+
+Other things can contribute as well - if you are doing carpentry in your
+spare time and twisting many screws by hand, for example.  When you
+become aware of the problem, start becoming aware of both the wrist
+position and the stresses on it in various activities.
+
+The median nerve runs up the heel of the hand onto the palm, along the
+"life line".  Direct repeated blows to this area can mimic or add to the
+carpal tunnel syndrome, and are often lumped in with it.  Our HP
+keyboards are awful in this respect.  Kayaking, bicycling, gardening
+without heavy gloves, all sorts of things can bang on this exposed
+nerve.
+
+2.  The symptoms and diagnosis
+
+Any or all of the following:  pain, numbness, tingling, or sensations of
+fullness in the fingers, hands, or shooting up or down the arms.
+
+Quick test #1:  make an "O" with thumb and forefinger, insert the thumb
+and forefinger of the other hand, and resist while trying to force the
+"O" apart with the other hand.  The "O" should not come apart!
+
+Quick test #2 (Tinnel sign):  place the backs of your hands together,
+bend each hand 90 degrees towards the inner wrist, fingers pointing down
+(forearms parallel to the floor, held out in front of you).
+
+=======oo=========     key:  === forearms
+       ||                    o   wrists
+       ..                    |   metacarpals
+       ..                    .   fingers
+
+Press the backs of the hands together and hold for 30-60 seconds.  If
+you start getting some numbness or tingling or pain, this is suspicious.
+
+Loss of grip strength is a sign that you may have a more advanced case.
+(I finally sought help when I was unable to open a can of tuna fish with
+a standard Swingline manual can opener.)
+
+I believe the best specialist for diagnosis is a neurologist.  A
+neurologist will do nerve conduction studies, comparing rates of
+conduction above and below the wrist, and between hands.  A good one
+will also do electromyography, to see if the muscles enervated by the
+nerve are firing properly or not.  (As a techie, I was fascinated to
+watch the 'scopes while he poked me!)
+
+3.  The treatment
+
+Standard treatment is to start with the most conservative, least
+invasive approaches, and move up only if they don't help.  The old
+RICE formula - rest, ice, compression, and elevation - is the place
+to start, but omit the compression as this is not a muscle strain.
+
+A wrist splint (basically a velcro-and-ace-bandage type of thing with a
+bent metal strip in it to hold the wrist in the right position) is worn
+at night for a month to see if it helps; it can also be worn during the
+day for stretches.  (Do not make it tight - it is for positioning only.)
+In many cases, that plus correcting one's work habits is sufficient.
+Some people find that a month is all it takes; others use the splint at
+night for the rest of their lives, or off and on as needed.  I still use
+mine occasionally when I've been overdoing it.  It's also a good idea to
+wear it in situations where you might be tempted to do something silly
+(like lugging suitcases or lifting weights), both as protection and as a
+reminder to be careful.
+
+Non-steroidal anti-inflammatories (e.g. Motrin) are used, if it looks
+like inflammation is a major cause of the problem.
+
+Icing the wrist helps alot, both for the pain and the swelling.  (Be
+aware that over-icing has a rebound effect as the body attempts to warm
+the area by increasing circulation.  Best is to ice for 10-20 minutes
+max each time, leaving at least an hour between icings.)  I keep a
+couple of the soft gel-type blue ice packs in a little fridge near my
+desk, so that I can ice several times a day if I need to.  Bags of
+frozen peas work great (hit 'em a couple whacks on the counter to
+loosen them up, then pat the bag around your wrist so it conforms
+to the curves).  For obvious reasons, jacuzzis (especially if you
+leave your arms in) will tend to make things worse.
+
+If water retention is a problem, you might try a mild OTC diuretic.
+(Women:  it isn't uncommon for CTS symptoms to be worse during PMS
+time.)  Also, simply elevating the wrist (for example, resting it on the
+back of a padded chair or car seat, or sleeping with your splinted wrist
+wresting next to your head on the pillow) can help relieve some of the
+discomfort at least temporarily by reducing the swelling.
+
+As a long-time fan of vitamins, minerals, and Prevention magazine,
+I of course asked my doctors about B6 as a treatment for CTS.
+Unfortunately, the original article reporting success from B6 treatment
+was not reproducible by other experiments.  What's more, excessive doses
+of B6 (over 50 mg/day supplement to a normal diet) can actually cause
+peripheral neuropathy, mimicking some of the symptoms of CTS.  My doctor
+said it wouldn't hurt if I wanted to take up to 50 mg/day, but since I
+had been taking that amount for quite some time for other reasons, he
+advised against increasing it.
+
+Some doctors go for cortisone injections, although mine cautioned that
+the carrier substance is not well absorbed, and can actually make the
+problem worse by increasing the fluid pressure in the tunnel.  Your doctor
+will decide based on the type of CTS and how it is responding to other
+treatment (or not).
+
+The final stage is surgery.  I had mine a few years ago; if you're
+facing it, I'd be glad to chat with you about it.  The surgery itself
+was a piece of cake, taking maybe 10 minutes once I was fully prepped -
+very simply, they slit that piece of cartilage along the "life line" and
+onto the wrist, and it spreads apart before it heals up, making the
+tunnel larger.  Instant relief, although the recovery and rehab takes a
+couple months.  For those interested in such things, I talked them into
+skipping general anaesthesia in favor of a Bier Block, which worked
+splendidly - I was out of there and wolfing down antipasto and garlic
+bread an hour after surgery.
+
+A friend notes that not everybody who has had the surgery finds it a
+piece of cake.  His advice would be to make sure you have absolutely the
+best doctors when it come to surgery on one's hands, with which I heartily
+concur!  Hands are incredibly complex, considering all the different types
+of finely coordinated movement they are capable of (and all the muscles and
+nerves that requires).
+
+I would strongly recommend that you look for an orthopedic surgeon who
+is board certified in Hand Reconstruction Surgery - my scar is almost
+invisible, compared to some pretty horrific looking ones I've seen.  (I
+asked the neurologist, who was really top-notch, to look through my CCN
+[preferred provider] booklet and recommend someone to me.)  An
+orthopedic surgeon who handles a little bit of everything - shoulder
+tears, knee arthroscopy, back problems - probably won't be as good at
+carpal tunnel surgery as someone who spends their entire professional
+life specializing in the elbow down.  For example, my surgeon stopped
+the surface cut at the first wrist fold, lifted the skin, and continued
+the surgery under the skin to minimize the scarring; other surgeons (who
+don't specialize in hand reconstruction surgery) often don't think to do
+that.  It doesn't affect how effective the surgery is, but it sure makes
+a difference in how pretty your hand looks afterwards!
+
+4.  The progression
+
+The symptoms may come and go with heavy bouts of typing, bicycling, etc.
+When it gets really bad, it can hurt all the time or start aching
+spontaneously.
+
+In the early stages, relieving the pressure on the median nerve will
+quickly reverse the symptoms (in a matter of days to weeks).
+
+Untreated, the pressure on the nerve will eventually cause it to die
+back to the point of constriction.  When this happens, the muscles
+atrophy.  (The large adductor which forms the mound at the base of my
+thumb had shrunk to half its size by the time I was operated on.)
+
+If you don't catch it quickly at that point, the nerve sheaths (which
+the nerve had been inside before it died back) start to fray.  This is
+bad news.  If you have surgery while the sheaths are still intact, the
+nerve will grow back along the sheath (around 2 mm/day - you can
+actually track it!)  and pretty much recover all of its connections and
+functions.  I have a tiny patch less than 1/4" diameter on two finger
+tips which is numb, and otherwise have full function back.  If the nerve
+sheaths have frayed, however, the nerve can't find its way back to make
+the right connections, and you're screwed.
+
+IF YOU THINK YOU MIGHT HAVE CARPAL TUNNEL SYNDROME, GET IT LOOKED AT
+*NOW*!!!  Don't delay, or you might not make a full recovery.  Workman's
+comp studies looking at prognosis for recovery give very low odds,
+based on most factory workers (who used to account for most of the CTS
+claims before computeritis hit) being too macho or too scared of losing
+their jobs to file a claim before it was too late.
+
+5.  Prevention
+
+The optimal position for your wrist is with the hand bent back just
+20-30 degrees; you want the position where the front of your wrist
+makes a straight line with the first inch of the heel of the palm.
+Play with it a bit until you find the place where the wrist seems
+to be maximally "open", but without bending the hand back so far that
+you feel strain.
+
+Look down at your hands as you type - if you are dropping your wrists,
+you are at risk.  Think about how they used to teach piano technique:  an
+almost straight line along the back of the forearms, through the wrist, onto
+the back of the hand; fingers dropping down.  (My sister's piano teacher
+used to place pennies on the back of her hands while she played, to
+teach keeping it level.)  Practice typing that way, and instead of
+resting the heel of your hands on the edge of the keyboard when you're
+thinking or reading, rest them in your lap instead.
+
+I got a very nice padded wrist rest from a local office supply house,
+that allows me to rest my forearms or wrists while I type in this
+position; I have one under my 320 keyboard, and one for my Vectra.
+You can also improvise by taking a length of bubblewrap, rolling it up
+and securing the ends with rubber bands, then taping the roll to your
+desk in front of the keyboard.  Warning:  this padded wrist rest can
+actually make it worse for some people, if it distorts the normal typing
+motion or presses too hard against the wrist.
+
+I currently have a keyboard draw from Devoke (about $115) that has a
+full 6" height adjustment, slides in and out and swings to both sides.
+It mounts with two screws, and I have one in the "L" of my workstation
+table at work, and on the desk at home where I have my PC.  This has
+made the most difference when my CTS flared up again (along with rest
+and splinting).
+
+Wear padded gloves for anything which might bang on your hands.  Bicycling
+gloves with Spenco pads can be used for many things (I wear mine ice
+skating!).  The Spenco pads are definitely superior to leather or other
+types when it comes to cushioning that area against shocks.  (After the
+surgery, I was warned that the median nerve would always be a bit more
+exposed and sensitive, and it definitely made me a connoisseur of bicycling
+gloves!)
+
+Learn to back off when you realize you're about to lift or torque
+something heavy with your wrist bent.  If you can't rethink the movement
+so you can keep your wrist straight, get help (person or tool)!
+
+p.s.  Feel free to copy and distribute this to anyone who might be helped.
+I only request that you not delete anything, especially the disclaimer.
+
+Andrea Frankel, Hewlett-Packard (San Diego Division) (619) 592-4664
+UUCP     : {hplabs|nosc|hpfcla|ucsd}!hp-sdd!andrea
+USnail   : 16399 W. Bernardo Drive, San Diego CA 92127-1899 USA
+
+------------------------------
+
+End of RISKS-FORUM Digest 10.12
+************************
+
+Return-Path: <sollins@allspice.lcs.mit.edu>
+Date: Thu, 9 May 91 13:50:44 EDT
+From: Karen Rosin Sollins <sollins@lcs.mit.edu>
+Sender: sollins@allspice.lcs.mit.edu
+To: elias@theory.lcs.mit.edu
+Subject: carpal tunnel syndrome and tendonitis
+
+I have just gone through a bout of this.  I have chronic arthritis,
+but over the last few weeks, something different happened - a form of
+tendonitis in my wrists and hands.  It is much better now, but it
+brought home how incapacitating these problems can be.  The number of
+things I couldn't do was astounding - open doors, eat with a fork or
+spoon, it gets down to real basics.  As I'm sure you know from having
+gone through this, when it gets bad it just hurts all the time and we
+do a great deal with our hands.  The most well-known hacker in our
+community who has this problem is Richard Stallman, who no longer can
+type at all.  For at least a year or more, he has had hired typists to
+whom he dictates everything.  I've known other people who are in the
+same condition.
+
+Actually, I first learned of carpal tunnel syndrome because for some
+reason it is more common among women, especially as they reach 40 and
+older.  It is also common during and after pregnancy, so it is
+something that women should be especially aware about because they are
+more likely to get it later, if they don't get it as undergraduates.
+
+
+
+Date: Thu, 28 Jun 90 09:06:49 -0400
+From: Mike Tanner <tanner@cis.ohio-state.edu>
+Subject: Re: info on carpal tunnel syndrome (CTS) (RISKS-10.12)
+
+At the risk of turning this into a medical forum I wanted to add to the
+excellent summary on carpal tunnel syndrome that there is a related problem
+called ulnar nerve syndrome.  As with CTS, those of us who spend lots of time
+using keyboards are prone to ulnar nerve syndrome, too.  The main difference
+in the symptoms is that with CTS the numbness and tingling is in the thumb and
+first two fingers, with UNS it is in the other two fingers and along the
+outside of the forarm.  (When you "hit your funny bone", what you've done is
+bash your ulnar nerve.  The symptoms are similar to that feeling, but they
+don't go away.)
+
+My wife's neurologist (she's been going through a bout of it) said there are
+many causes, but a common one is some activity that constantly rubs the elbow.
+In her case it is almost certainly typing while resting her elbows on the arms
+of a chair.  One danger is that carpal tunnel syndrome is so hot, such a fad
+right now, that a physician might automatically connect "numbness" with
+"programmer" and say "carpal tunnel".  My wife's physician did this, and only
+changed his mind after we had looked in some medical books and found that CTS
+symptoms did not match hers.  (Physicians deny that they reason this way.
+Experience tells otherwise.)
+
+Treatment is basically like CTS:  ice, avoid bending the elbow as much as
+possible (not easy to do), don't do things that rub the elbow a lot,
+anti-inflammation drugs.  There is surgery, but unlike CTS, ulnar nerve
+surgery is not a good option.  Apparently it has about a 50% chance of making
+things worse, according to my wife's neurologist.  (That might have been an
+estimate that took the nature of her condition into account, i.e., there are
+cases where it has a high probability of success, but hers isn't one of them.)
+
+-- mike
+
+------------------------------
+
+Date: 29 Jun 90 19:36:47 GMT
+From: tok@stiatl.UUCP (Terry Kane)
+Subject: Re: info on carpal tunnel syndrome (CTS)
+
+I am a long time sufferer of CTS.  The first symptoms I recall were during
+high school, nearly twenty years ago, but it was not properly diagnosed
+until I was in excruciating pain, dropping things, not sleeping because
+my hand was burning at night and more, all about four years ago.
+
+Tests said that I had "a very mild case"!?  That reassuring info did not
+make my hand better.  I used splints, Motrin, ice until I finally insisted
+on the carpal tunnel relief operation.  That was two years ago, this month,
+but I still have recurrences - especially when I meet the same RISK which
+pushed my CTS over the edge: using a MOUSE.
+
+The typical mouse promotes all the bad habits that can result in CTS symptoms.
+One typically rests the heel of the palm on the mouse, and press the chord
+keys - frequently with constant pressure (on Apple's mice, the required
+pressure is substantial for me, and their new mouse reqlly aggravates the
+problem with its stylized, aerodynamic "look").  I cannot use a mouse to this
+day without suffering a "mouse hangover".
+
+Track balls are better for me, but I still would rather avoid them.
+
+I am really looking forward to _getting_my_hands_on_ ;-) a touch screen.
+I've seen some very nice ones with quite satisfactory resolution!
+
+And please - If you think that you might have CTS - don't waste time.
+                        See Your M.D.
+
+Terry Kane, Sales Technologies, Inc, Atlanta, GA  (404) 841-4000
+
+------------------------------
+
+End of RISKS-FORUM Digest 10.14
+************************

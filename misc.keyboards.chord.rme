@@ -1,0 +1,170 @@
+#2018#07#06 #misc #keyboards#chord
+
+Date:         22 Oct 1994 09:38:52 GMT
+From:         bob@bowman.dcs.qmw.ac.uk (Rosenberg)
+Subject:      Re: CHORDED KEYBOARDS
+Organization: Queen Mary & Westfield College, London, UK
+Newsgroups:   comp.human-factors
+NNTP-Posting-Host: bowman.dcs.qmw.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+
+
+Mgauf (mgauf@aol.com) wrote:
+: CTDNews is a monthly newsletter covering RSI in the workplace. For our
+: Nov. issue, we will be examining the health and safety aspects of split
+: keyboards vs. standard keyboards. Also we hope to examine chorded boards.
+: Does anyone know of any research  -- published or unpublished -- on
+: chorded keyboards? 
+
+
+I am doing some graduate work in chord keyboards. I can give you a
+list of articles and an preview from a paper on alternative text input
+devices, which should be ready for publication in a few months.
+
+
+If you have any questions, comments, or critiques contact me at
+bob@dcs.qmw.ac.uk
+
+----------------------------
+
+Chord Keyboards
+
+Most keyboard alternatives are just modified versions of the standard
+keyboard. A character is made by pressing one key, or one key and
+one shift key simultaneously. This layout allows any number of
+characters, as long as there is room on the keyboard. To reduce the
+number of keys, consequentially the size of the keyboard, there must
+be more shift keys. Using this method, each key would have several
+characters associated with it. A chord keyboard is the logical
+conclusion to this process. There is a limited number of keys, usually
+one for each finger. Pressing a key by itself makes one character, like
+a normal keyboard. Pressing two or more keys simultaneously also
+makes a character. Pressing combinations of keys in this way is called 
+_chording_.
+
+Chord keyboards were first used by the US Post Office in the 1960's
+for entering numbers for mail sorting. Most early research on chord
+keyboards concentrated on limited applications. In the 1980's chord
+keyboards were reevaluated and applied towards a general text
+keyboard. The major disadvantage to using a chord keyboard for
+general text entry is the limited number of keys. A one handed chord
+keyboard has only five keys. This translates to 31 possible
+combinations. This is enough for all the letters, with room for a few
+more characters, like space and return. There are numerous solutions
+to this problem. Below are just some of the possible solutions:
+
+Two handed chording 
+   A ten key chord keyboard has 1023 possible characters. This
+   more than enough. Most two-handed keyboards do not use all
+   combinations, but uses each hand separately to type faster.
+   This is done by overlap. Overlap is entering a chord with one
+   hand before the other hand is finished with the last chord. This
+   is what is usually done on a standard keyboard. Users of
+   two-handed chord keyboards tend to type 17% faster than
+   users of one-handed keyboards[Go88]. Most chord keyboards are
+   made for two hands. 
+Thumb keys 
+   One or more extra keys can be added in reach of the thumb.
+   Sixteen more characters are added per thumb key. More
+   combinations are possible if the thumb keys can be pressed
+   simultaneously. This is the a common solution and is often
+   used in addition to two-handed chording. 
+Sticky shift keys 
+   A sticky shift, when pressed once, acts on the next one chord
+   made. When double-pressed (like double-clicking a mouse) it
+   acts on all chords until the shift is hit again. For each shift, the
+   number of possible characters doubles. 
+Multiple state keys 
+   Instead of an on/off key like most keyboards, it is possible to
+   have a three or more state key. A three state keyboard uses
+   keys which can be pushed up, down, or not at all. This gives
+   243 combinations for one hand. 
+Additional finger keys 
+   It is possible to have more than one key per finger, such as an
+   extra row, above or below the base row. This is effectively the
+   same as having one multiple state key per finger. 
+
+By using one or more of these combinations it is possible to create all
+the same characters that can be made on a standard keyboard. With
+this problem removed, it is possible to use a chord keyboard as a
+general text input device.
+
+The following is how chord keyboards rate on the text input design
+criteria:
+
+[The text input design criteria are the 7 most important aspects of a
+text input which affect its usability. I based these criteria on those
+found in [Po88], with two extra added.]
+
+
+ 1. Input speed: beginner: 30-35wpm, novice: 60wpm[Go88],
+   disabled: 12wpm[Ki86] 
+ 2. Error rate: 9.88%[So62] or 1%-2%[Go88] 
+ 3. Learning rate:
+      normal use
+         chords: 1 hour[Ya93] 
+         typing: novice: 20h, expert: 60h[Go88] 
+      disabled use
+         chords: 5 hours[Ki86] 
+         typing: (novice) 11h 
+ 4. Fatigue: Low amounts of finger use. 
+ 5. Muscle strain: can rest the wrist on the keyboard. Arm can be
+   held comfortably. Hand is held flat causing shoulder stress. 
+ 6. Portability: one-handed is much smaller than a standard
+   keyboard, but it still needs a surface to rest on. 
+ 7. User preferences: no negative QWERTY transfer. Impossible to
+   use without some training/practice. 
+
+Given the above, how does a chord keyboard compare with a
+standard or alternative one? The expert typists can type faster on a
+standard keyboard, but, on a chord keyboard, novice typists can type
+faster with less training. It is not possible to type without training on a
+chord keyboard, like it is on a standard one. On the other hand,
+learning to type on a chord keyboard is easier because the chord
+shapes can have some physical correspondence to the letter being
+typed[Go88]. For example, holding out only the thumb and little finger
+makes a Y shape. If the chord for Y is made with the thumb and little
+finger, it becomes much easier to remember. In addition, learning to
+type on a chord keyboard does not have any effect on the ability to
+type on a standard one. A person can switch back and forth without
+any problem. This is an advantage over keyboards with different
+layouts.
+
+Touch-typing on a standard keyboard is difficult because the large
+number of keys and movements make it easy to miss. This is
+alleviated much by most alternative keyboards. With a chord keyboard
+it is impossible. Each finger uses only one key. since almost no
+movement is involved, it is impossible to miss, this is especially useful
+in blind, or otherwise disabled users. This is reflected in the smaller
+error rates for chord keyboards. Another problem with excessive hand
+motion is that with most normal keyboards, the hand must constantly
+move from the keyboard to the mouse. Since a one-handed chord
+keyboard is not much larger than a mouse, the entire device can be
+used as a pointing device. This would alleviate much unnecessary
+motion.
+
+
+-----------------------
+[Go88]
+Daniel Gopher and David Raij. "Typing With a Two-Hand Chord
+keyboard: Will the QWERTY Become Obsolete?" IEE Transactions on
+Systems, Man , and Cybernetcis. Vol 18, No 4. July/August 1988:
+601-609. 
+
+[Ki86]
+Alan Kirschenbaum, Zwi Friedman, and Arie Melnik. "Performance of
+Disabled People on a Chordic Keyboard" Human Factors. Vol 28, No
+2. March 1986: 187-194. 
+
+[So62]
+Sorbel, R. "Performance on a Five Finger Chord Keyboard". Journal of
+Applied Psychology. Vol 46, No 3. 1962: 165-169. 
+
+[Ya93]
+Wayne Yacco "The BAT: Infogrip's keyboard good pick for alternative
+input device". MacWEEK. Vol 6, No 27. 27 July, 1993: 71. 
+
+[Po88]
+Kathleen M. Potosnak. "Chapter 21: Keys and Keyboards" Handbook of
+Human-Computer Interaction. New York, NY: North-Holland, 1988.
+475-494. 
