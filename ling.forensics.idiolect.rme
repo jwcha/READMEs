@@ -1,0 +1,34 @@
+#2019#01#25 #linguistics #forensics #fingerprinting #idiolect
+--------------------------------------------------------------------------------
+idiolect(noun) /eye-DIO-lekt/:
+   (linguistics) The language variant used by a specific individual.
+   (etymology) from "idio-" + "-lect"
+--------------------------------------------------------------------------------
+From reddit post (by u/GreyFox9011) on 2015-03-15@15:06:23PDT(GMT-7):
+https://reddit.com/r/TOR/comments/2z60qz/am_i_still_anonymous_when_i_browse_clearnet_sites/
+! ---------------------------------------------------------------------------- !
+Three hours later (@18:07:46PDT same day), u/mspencer712 replied:
+
+>The answer depends on what your threat model is and how identifiable your
+>anonymized behavior might be.
+
+>If you are just clicking links on sites, the EFF's panopticlick site says what
+>servers can learn from your browser.
+
+>If you are uploading text which Must Not be linked back to you, be aware your
+>word choice and phrasing can be automatically correlated with other
+>automatically-ingested text you have written. Avoid typos, and try to
+>depersonalize your text using common words and phrases. Consider limiting word
+>choice to only the thousand most common words, plus subject matter specific
+>words where necessary.
+
+>If you are uploading files which Must Not be linked back to you, be aware many
+>file creation tools embed information about you or your system in some or all
+>created files. If your life depends on secrecy, take the time to understand
+>the file format of the file you are publishing, analyze the file you are about
+>to publish, and try to remove or zero-fill information that isn't necessary
+>for the file to be read by a recipient. Or use a file format that's easy to
+>understand: txt, bmp, rtf.
+
+>Excellent question.
+-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o~~o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-
