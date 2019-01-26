@@ -1,0 +1,96 @@
+#2018#12#19 #zsh #globs #filename-generation #patterns
+
+         ZZZZZZZZZZZZZZZZZZZ   SSSSSSSSSSSSSSS HHHHHHHHH     HHHHHHHHH
+         Z:::::::::::::::::Z SS:::::::::::::::SH:::::::H     H:::::::H
+         Z:::::::::::::::::ZS:::::SSSSSS::::::SH:::::::H     H:::::::H
+         Z:::ZZZZZZZZ:::::Z S:::::S     SSSSSSSHH::::::H     H::::::HH
+         ZZZZZ     Z:::::Z  S:::::S              H:::::H     H:::::H
+                 Z:::::Z    S:::::S              H:::::H     H:::::H
+                Z:::::Z      S::::SSSS           H::::::HHHHH::::::H
+               Z:::::Z        SS::::::SSSSS      H:::::::::::::::::H
+              Z:::::Z           SSS::::::::SS    H:::::::::::::::::H
+             Z:::::Z               SSSSSS::::S   H::::::HHHHH::::::H
+            Z:::::Z                     S:::::S  H:::::H     H:::::H
+         ZZZ:::::Z     ZZZZZ            S:::::S  H:::::H     H:::::H
+         Z::::::ZZZZZZZZ:::ZSSSSSSS     S:::::SHH::::::H     H::::::HH
+         Z:::::::::::::::::ZS::::::SSSSSS:::::SH:::::::H     H:::::::H
+         Z:::::::::::::::::ZS:::::::::::::::SS H:::::::H     H:::::::H
+         ZZZZZZZZZZZZZZZZZZZ SSSSSSSSSSSSSSS   HHHHHHHHH     HHHHHHHHH
+
+        <==============================================================>
+
+             ####### ### #      ###### #    #   ##   #    # ######
+              ##   #  #  #      #      ##   #  #  #  ##  ## #
+              ##      #  #      #      # #  # #    # # ## # #
+              ####    #  #      ####   #  # # ###### # ## # ####
+              ##      #  #      #      #   ## #    # #    # #
+              ##      #  #      #      #    # #    # #    # #
+             ####    ### ###### ###### #    # #    # #    # ######
+
+          ####  ###### #    # ###### #####    ## ##### ###  ##   #    #
+         ##  ## #      ##   # #      #    #  #  #  #    #  #  #  ##   #
+        ##      #      # #  # #      #    # #    # #    # #    # # #  #
+        ##  ### ####   #  # # ####   #####  ###### #    # #    # #  # #
+        ##   ## #      #   ## #      #  #   #    # #    # #    # #   ##
+         ## ### #      #    # #      #   #  #    # #    #  #  #  #    #
+          ### # ###### #    # ###### #    # #    # #   ###  ##   #    #
+
+~._.-'`~._.-'`~._.-'`~._.-'`~._.-'`~._.-'`~._.-'`~._.-'`~._.-'`~._.-'`~._.-'`~._
+
+~> Some tips:
+-------------
+   ~> You almost always want the EXTENDED_GLOB option set $(setopt extendedglob)
+   ~> If uncertain of file(s) existence, enable NULL_GLOB $(setopt nullglob)
+
+~> GLOB OPERATORS:
+==================
+   *
+         Matches any string, including the null string
+   ?
+         Matches any single character
+   [..]
+         Matches any of the enclosed characters. Use '-' for ranges. Use '-' or
+         ']' first to match it literally. Character classes:
+
+         [:alnum:]   - alphanumeric
+         [:alpha:]   - alphabetic
+         [:ascii:]   - 7-bit character
+         [:blank:]   - blank character
+         [:cntrl:]   - control character
+         [:digit:]   - decimal digit
+         [:graph:]   - printable character other than whitespace
+         [:lower:]   - lowercase letter
+         [:upper:]   - uppercase letter
+         [:print:]   - printable character
+         [:punct:]   - printable char but neither alphanumeric nor whitespace
+         [:space:]   - whitespace
+         [:xdigit:]  - hexadecimal digit
+
+   [^..]
+   [!..]
+         Negation of [..]
+   <X-Y>
+         Matches any number in the range of X to Y, inclusive. <-> matches any #
+   (..)
+         Matches enclosed pattern (grouping).
+
+         @(..) - Match the pattern once
+         *(..) - Match any number of occurrences
+         +(..) - Match at least one occurrence
+         ?(..) - Match zero or one occurrence
+         !(..) - Match anything but pattern
+
+    x|y
+         Matches either pattern x or pattern y. Must use within (..)
+    ^x
+         (requires extendedglob) matches anything except pattern x
+   x~y
+         (extendedglob) matches anything that matches x but not y
+    x#
+         (extendedglob) matches zero or more occurrences of x
+   x##
+         (extendedglob) matches one or more occurrences of x
+
+
+-- 
+>                                  ~ finis ~                                   <
