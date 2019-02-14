@@ -1,0 +1,14 @@
+#2019#02#11 #lunix #xmpp #profanity #client #cli
+
+When using the OMEMO plugin with Profanity...
+
+Load plugin with /plugins load prof_omemo_plugin.py
+/omemo (on|off)
+>>Turns on/off the usage of the plugin while it may be still loaded in profanity. (Default=ON)
+/omemo status
+>>Displays the current status in profanity's console window
+/omemo start [contact jid]
+>>Starts a new conversation with the given contact, if not given, the one in the current chat
+/omemo end [contact jid]
+>>Ends the conversation with the given contact jid or, if not given, the one in the current chat
+
