@@ -1,0 +1,24 @@
+#2019#04#15 #arch#linux #tips #python #pip #package#management
+
+              Python pip tips for the confused Arch Linux resident
+              ====================================================
+SOURCE:
+https://www.reddit.com/r/archlinux/comments/alyjkh/pip_is_a_nightmare/efj85zm/
+
+Friendly neighborhood Linuxadmin here. Here is how I direct my developers.
+    Do not depend at all on the system Python. That python is intended for use by the OS and only the OS. You don't know what options it was built with, you don't know what packages come with it, you don't know what patches your distro has backported. Now you could find all this out if you wanted but since you don't control anything about the system Python you aren't guaranteed that it will stay that way. And for that matter you aren't even guaranteed that any system in particular will have Python installed.
+    Don't compile your Python from source yourself. If you really want to just make sure to set --prefix to ~/.local but you're better off using pyenv (or asdf if you want other languages too) so you don't lose your sanity dealing with different versions.
+    Great! Now you have the version of Python you want installed in your home directory. I'm sure you have some cool CLI tools that say to install with pip install. Stop. Do not do this. No packages get installed into your installation of Python. It's a nightmare to debug. All packages are installed in a virtualenv only! Use pipx to manage your CLI tools (like Ansible).
+    Okay so you want to work on a Python project? More virtualenvs! This is the annoying but because I'm not going to recommend conda to you because it's bloated but it 1000% handles virtualenvs the right way and no other tool does it quite the same. But the short of it is use a virtualenv manager and DO NOT STORE YOUR VIRTUALENVS IN YOUR PROJECT. Please. You'll never find them again.
+        If you went with pyenv then use pyenv-virutalenv.
+        If you went with asdf then use virtualenvwrapper.
+        You can also manage them manually with vanilla virtualenv commands but it's more work.
+    Dependencies in your project? That one is up to you. Pipenv is the new kid on the block, requirements.txt is older, clunky, but is well supported.
+In summary:
+    You have a version of Python that is fixed and you control.
+    You have all of your personal Python programs and their dependencies isolated from your development environment(s).
+    You have your development environment(s) isolated from each other.
+    You have the packages in each environment recorded in a your project.
+-- 
+>                                  ~ finis ~                                   <
+>                                                                              <
